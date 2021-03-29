@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import UsersService from '../APIs/UsersService';
+import UsersService from '../APIs/UsersService'
 
 export default {
   name: 'LoginUser',
@@ -27,8 +27,7 @@ export default {
   },
   async created() {
     try {
-      this.users = await UsersService.getUsers();
-      console.log(this.users);
+      this.users = await UsersService.getUsers()
     } catch (err) {
       this.error = err
     }
