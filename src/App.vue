@@ -1,15 +1,18 @@
 <template>
   <div id="app">
+    <LoginUser/>
     <RegisterUser/>
   </div>
 </template>
 
 <script>
 import RegisterUser from './components/RegisterUser.vue'
+import LoginUser from "@/components/LoginUser";
 
 export default {
   name: 'App',
   components: {
+    LoginUser,
     RegisterUser
   }
 }
