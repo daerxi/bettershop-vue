@@ -1,49 +1,69 @@
 <template>
-  <div class="p-24 container mx-auto">
-    <div class="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-      <h1 class="block text-grey-darker text-lg font-bold mb-2">Sign Up</h1>
-      <br>
-      <div class="mb-4">
-        <label class="block text-grey-darker text-sm font-bold mb-2" for="firstName">
-          First Name
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="firstName"
-               type="text" v-model="firstName" placeholder="First Name">
-      </div>
-      <div class="mb-4">
-        <label class="block text-grey-darker text-sm font-bold mb-2" for="firstName">
-          Last Name
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="lastName" type="text"
-               v-model="lastName" placeholder="Last Name">
-      </div>
-      <div class="mb-4">
-        <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
-          Email
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="text"
-               v-model="email" placeholder="Email">
-      </div>
-      <div class="mb-6">
-        <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
-          Password
-        </label>
-        <input class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
-               id="password" type="password" placeholder="******************">
-        <p class="text-red text-xs italic">Make sure your password is long and crazy</p>
-      </div>
-      <div class="flex items-center justify-between">
-        <button type="submit" v-on:click="createUser"
-                class="bg-blue hover:bg-blue-dark font-bold py-2 px-4 rounded">
-          Sign In
+  <div class="bg-grey-lighter min-h-screen flex flex-col">
+    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+        <input
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4 required"
+            name="firstName"
+            placeholder="First Name"
+            v-model="firstName"/>
+
+        <input
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4 required"
+            name="lastName"
+            placeholder="Last Name"
+            v-model="lastName"/>
+
+        <input
+            type="email"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="email"
+            placeholder="Email"
+            v-model="email"/>
+
+        <input
+            type="password"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="password"
+            placeholder="Password"
+            v-model="password"/>
+        <input
+            required
+            type="password"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="confirm_password"
+            placeholder="Confirm Password"
+            v-model="password2"/>
+
+        <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
+
+        <button
+            type="submit" v-on:click="createUser"
+            class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded1"
+        >Create Account
         </button>
-        <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
-          Forgot Password?
-        </a>
+
+        <div class="text-center text-sm text-grey-dark mt-4">
+          By signing up, you agree to the
+          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+            Terms of Service
+          </a> and
+          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+            Privacy Policy
+          </a>
+        </div>
+      </div>
+
+      <div class="text-grey-dark mt-6">
+        Already have an account?
+        <a class="no-underline border-b border-blue text-blue" href="../login/">
+          Log in
+        </a>.
       </div>
     </div>
-    <hr>
-    <p class="error text-red-800" v-if="error">{{ error }}</p>
   </div>
 </template>
 
@@ -60,7 +80,8 @@ export default {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      password2: ''
     }
   },
   async created() {
@@ -73,7 +94,17 @@ export default {
   methods: {
     async createUser() {
       try {
-        this.user = await UsersService.createUser(this.firstName, this.lastName, this.email, this.password)
+        if (this.email.trim() === '' || this.firstName.trim() === '' || this.lastName.trim() === '' || this.password.trim() === '' || this.password2.trim() === '') {
+          this.error = "Please enter the required fields."
+        } else if (this.password !== this.password2) {
+          this.error = "The password is not same."
+          this.password = '';
+          this.password2 = '';
+        } else if (!this.email.includes("a")) {
+          this.error = "The email is invalid."
+        } else {
+          this.user = await UsersService.createUser(this.firstName, this.lastName, this.email, this.password)
+        }
       } catch (err) {
         this.error = err
       }

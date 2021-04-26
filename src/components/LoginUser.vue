@@ -1,27 +1,31 @@
 <template>
-  <div class="p-24 container mx-auto">
-    <div class="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-      <h1 class="block text-grey-darker text-lg font-bold mb-2">Log in</h1>
-      <div class="mb-4">
-        <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
-          Email
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="text"
-               placeholder="Email" v-model="email">
-      </div>
-      <div class="mb-6">
-        <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
-          Password
-        </label>
-        <input class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
-               id="password" type="password" placeholder="******************" v-model="password">
-        <p class="text-red text-xs italic"></p>
-      </div>
-      <div class="flex items-center justify-between">
-        <button class="bg-blue hover:bg-blue-dark font-bold py-2 px-4 rounded"
-                type="submit" v-on:click="login">
-          Log In
+  <div class="bg-grey-lighter min-h-screen flex flex-col">
+    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Log in</h1>
+        <input
+            type="email"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="email"
+            placeholder="Email"
+            v-model="email"/>
+
+        <input
+            type="password"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="password"
+            placeholder="Password"
+            v-model="password"/>
+
+        <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
+
+        <button
+            type="submit" v-on:click="login"
+            class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded1"
+        >Login
         </button>
+
+        <br>
         <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
           Forgot Password?
         </a>
@@ -46,16 +50,12 @@ export default {
       password: ''
     }
   },
-  async created() {
-    try {
-      this.users = await UsersService.getUsers()
-    } catch (err) {
-      this.error = err
-    }
-  },
   methods: {
-    async login(id) {
-      this.userToken = await UsersService.loginUser(id)
+    async login() {
+      if (this.email.trim() === '' || this.password.trim() === '')
+        this.error = "Please enter the required fields."
+      else
+        this.userToken = await UsersService.loginUser(this.email, this.password)
     }
   }
 }
