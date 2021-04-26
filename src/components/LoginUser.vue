@@ -24,15 +24,13 @@
             class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded1"
         >Login
         </button>
-
-        <br>
-        <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
-          Forgot Password?
-        </a>
+        <div class="text-center text-sm text-gray-800 mt-4">
+          <a class="no-underline border-b border-grey-dark text-gray-800" href="#">
+            Forgot Password?
+          </a>
+        </div>
       </div>
     </div>
-    <hr>
-    <p class="error text-red-800" v-if="error">{{ error }}</p>
   </div>
 </template>
 

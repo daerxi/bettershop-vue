@@ -46,20 +46,20 @@
         >Create Account
         </button>
 
-        <div class="text-center text-sm text-grey-dark mt-4">
+        <div class="text-center text-sm text-gray-800 mt-4">
           By signing up, you agree to the
-          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+          <a class="no-underline border-b border-grey-dark text-gray-800" href="#">
             Terms of Service
           </a> and
-          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+          <a class="no-underline border-b border-grey-dark text-gray-800" href="#">
             Privacy Policy
           </a>
         </div>
       </div>
 
-      <div class="text-grey-dark mt-6">
+      <div class="text-gray-800 mt-6">
         Already have an account?
-        <a class="no-underline border-b border-blue text-blue" href="../login/">
+        <a class="no-underline border-b border-grey-dark text-gray-800" href="../login/">
           Log in
         </a>.
       </div>
