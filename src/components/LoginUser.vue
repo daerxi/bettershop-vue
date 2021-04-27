@@ -29,6 +29,13 @@
             Forgot Password?
           </a>
         </div>
+
+        <div class="text-gray-800 mt-6">
+          Doesn't have an account?
+          <a class="no-underline border-b border-grey-dark text-gray-800" href="../signup/">
+            Sign up today!
+          </a>.
+        </div>
       </div>
     </div>
   </div>
