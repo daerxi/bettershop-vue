@@ -1,84 +1,70 @@
 <template>
-  <div class="bg-grey-lighter p-16 flex flex-col">
-    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-      <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-        <h1 class="mb-8 text-3xl text-center">Sign Up</h1>
-        <input
-            type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="firstName"
-            placeholder="First Name"
-            v-model="firstName"/>
+  <form-component title="Sign up">
+    <input-component
+        type="text"
+        name="firstName"
+        placeholder="First Name"
+        v-model="firstName"/>
 
-        <input
-            type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="lastName"
-            placeholder="Last Name"
-            v-model="lastName"/>
+    <input-component
+        type="text"
+        class="block border border-grey-light w-full p-3 rounded mb-4"
+        name="lastName"
+        placeholder="Last Name"
+        v-model="lastName"/>
 
-        <input
-            type="email"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="email"
-            placeholder="Email"
-            v-model="email"/>
+    <input-component
+        type="email"
+        name="email"
+        placeholder="Email"
+        v-model="email"/>
 
-        <input
-            type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="password"
-            placeholder="Password"
-            v-model="password"/>
-        <input
-            type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="confirm_password"
-            placeholder="Confirm Password"
-            v-model="password2"/>
+    <input-component
+        v-if="showCompany"
+        type="text"
+        name="company"
+        placeholder="Company Name"
+        v-model="company"/>
 
-        <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
+    <input-component
+        type="password"
+        name="password"
+        placeholder="Password"
+        v-model="password"/>
 
-        <button
-            type="submit" v-on:click="createUser"
-            class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Create Account
-        </button>
+    <input-component
+        type="password"
+        name="confirm_password"
+        placeholder="Confirm Password"
+        v-model="password2"/>
 
-        <div class="text-gray-800 mt-6">
-          Sign up for business?
-          <a class="no-underline border-b border-grey-dark text-gray-800" href="../business_signup">
-            Click here
-          </a>
-        </div>
+    <checkbox v-bind:check="check" label="Are you signing up as a business?"></checkbox>
 
-        <div class="text-center text-sm text-gray-800 mt-4">
-          By signing up, you agree to the
-          <a class="no-underline border-b border-grey-dark text-gray-800" href="#">
-            Terms of Service
-          </a> and
-          <a class="no-underline border-b border-grey-dark text-gray-800" href="#">
-            Privacy Policy
-          </a>
-        </div>
-      </div>
+    <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
 
-      <div class="text-gray-800 mt-6">
-        Already have an account?
-        <a class="no-underline border-b border-grey-dark text-gray-800" href="../login">
-          Login
-        </a>
-      </div>
+    <submit-button v-on:click="createUser" title="Create Account"></submit-button>
+    <t-c-p/>
+
+    <div class="text-gray-800 p-5">
+      Already have an account?
+      <a class="no-underline border-b border-grey-dark text-gray-800" href="../login">
+        Login
+      </a>
     </div>
-  </div>
+  </form-component>
 </template>
 
 <script>
 import UsersService from '../APIs/UsersService'
+import TCP from "@/components/TCP";
+import FormComponent from "@/components/Form";
+import InputComponent from "@/components/Input";
+import Checkbox from "@/components/Checkbox";
+import SubmitButton from "@/components/SubmitButton";
 
 export default {
   name: 'RegisterUser',
+  components: {SubmitButton, Checkbox, InputComponent, FormComponent, TCP},
   data() {
     return {
       users: [],
@@ -88,7 +74,9 @@ export default {
       lastName: '',
       email: '',
       password: '',
-      password2: ''
+      password2: '',
+      showCompany: true,
+      company: ''
     }
   },
   async created() {
@@ -99,6 +87,10 @@ export default {
     }
   },
   methods: {
+    async check() {
+      this.showCompany = !this.showCompany
+      console.log("lala",this.showCompany);
+    },
     async createUser() {
       try {
         if (this.email.trim() === '' || this.firstName.trim() === '' || this.lastName.trim() === '' || this.password.trim() === '' || this.password2.trim() === '') {

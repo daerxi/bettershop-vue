@@ -6,7 +6,6 @@ import RegisterUser from "@/views/RegisterUser";
 import ForgotPassword from "@/components/ForgotPassword";
 import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
-import RegisterBusiness from "@/views/RegisterBusiness";
 
 Vue.use(VueRouter)
 
@@ -55,12 +54,7 @@ export const router = new VueRouter({
           path: '/business_profile',
           name: 'Business Profile',
           component: BusinessProfile
-      },
-      {
-          path: '/business_signup',
-          name: 'Business Sign Up',
-          component: RegisterBusiness
-      },
+      }
   ]
 })
 
