@@ -4,7 +4,7 @@ import Home from "@/views/Home"
 import LoginUser from "@/components/LoginUser"
 import RegisterUser from "@/components/RegisterUser";
 import ForgotPassword from "@/components/ForgotPassword";
-import ProfilePage from "@/views/Profile";
+import ProfilePage from "@/views/UserProfile";
 
 Vue.use(VueRouter)
 

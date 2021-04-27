@@ -19,7 +19,7 @@
 import ProfileComponent from "@/components/Profile";
 import Review from "@/components/Review";
 export default {
-  name: "ProfilePage",
+  name: "UserProfile",
   components: {Review, ProfileComponent},
   data() {
     return {
