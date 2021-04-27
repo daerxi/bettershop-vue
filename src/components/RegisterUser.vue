@@ -60,7 +60,7 @@
       <div class="text-gray-800 mt-6">
         Already have an account?
         <a class="no-underline border-b border-grey-dark text-gray-800" href="../login">
-          Log in
+          Login
         </a>
       </div>
     </div>

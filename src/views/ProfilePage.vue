@@ -20,7 +20,15 @@ import ProfileButton from "@/components/ProfileButton";
 import Review from "@/components/Review";
 export default {
   name: "ProfilePage",
-  components: {Review, ProfileButton}
+  components: {Review, ProfileButton},
+  data() {
+    return {
+      reviews: []
+    }
+  },
+  async created() {
+    // get reviews
+  }
 }
 </script>
 

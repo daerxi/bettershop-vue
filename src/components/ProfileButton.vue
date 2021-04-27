@@ -2,7 +2,7 @@
   <div class="flex flex-wrap object-right-top">
     <div class="w-16 px-4 absolute top-0 right-0 px-12 py-12">
       <router-link to="/profile">
-        <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-3-800x800.jpg" alt="..."
+        <img v-bind:src="photo" alt=""
              class="shadow-lg rounded max-w-full h-auto align-middle border-none"/>
       </router-link>
       <div class="inline-flex py-4">
@@ -22,7 +22,8 @@ export default {
   name: "ProfileButton",
   data() {
     return {
-      authenticated: localStorage.getItem('authenticated') || false
+      authenticated: localStorage.getItem('authenticated') || false,
+      photo: this.authenticated ? "https://imgur.com/uF05hWw.png" : "https://imgur.com/uF05hWw.png"
     }
   },
   methods: {
