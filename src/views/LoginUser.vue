@@ -56,18 +56,14 @@ export default {
   },
   methods: {
     async login() {
-      if (this.email.trim() === '' || this.password.trim() === '')
-        this.error = "Please enter the required fields."
-      else {
-        await UsersService.loginUser(this.email, this.password).then( res => {
-          this.userToken= res.data;
-          localStorage.setItem('user-token', this.userToken.token)
-          localStorage.setItem('user-id', this.userToken.userId)
-          router.push('/')
-        }).catch(e => {
-          this.error = e.response.data.error
-        });
-      }
+      await UsersService.loginUser(this.email, this.password).then(res => {
+        this.userToken = res.data;
+        localStorage.setItem('user-token', this.userToken.token)
+        localStorage.setItem('user-id', this.userToken.userId)
+        router.push('/')
+      }).catch(e => {
+        this.error = e.response.data.error
+      });
     }
   }
 }
