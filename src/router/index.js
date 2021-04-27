@@ -4,7 +4,8 @@ import Home from "@/views/Home"
 import LoginUser from "@/components/LoginUser"
 import RegisterUser from "@/components/RegisterUser";
 import ForgotPassword from "@/components/ForgotPassword";
-import ProfilePage from "@/views/UserProfile";
+import BusinessProfile from "@/views/BusinessProfile";
+import UserProfile from "@/views/UserProfile";
 
 Vue.use(VueRouter)
 
@@ -46,8 +47,13 @@ const router = new VueRouter({
       {
           path: '/profile',
           name: 'Profile',
-          component: ProfilePage,
+          component: UserProfile,
           // beforeEnter: requireAuth
+      },
+      {
+          path: '/business_profile',
+          name: 'Profile',
+          component: BusinessProfile
       }
   ]
 })
