@@ -36,6 +36,7 @@
 import UsersService from '../APIs/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
+import {router} from "@/router";
 
 export default {
   name: 'LoginUser',
@@ -62,6 +63,7 @@ export default {
           this.userToken= res.data;
           localStorage.setItem('user-token', this.userToken.token)
           localStorage.setItem('user-id', this.userToken.userId)
+          router.push('/')
         }).catch(e => {
           this.error = e.response.data.error
         });

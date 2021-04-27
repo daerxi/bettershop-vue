@@ -61,6 +61,7 @@ import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import Checkbox from "@/components/Checkbox";
 import SubmitButton from "@/components/SubmitButton";
+import {router} from "@/router";
 
 export default {
   name: 'RegisterUser',
@@ -92,9 +93,7 @@ export default {
     },
     async createUser() {
       try {
-        if (this.email.trim() === '' || this.firstName.trim() === '' || this.lastName.trim() === '' || this.password.trim() === '' || this.password2.trim() === '') {
-          this.error = "Please enter the required fields."
-        } else if (this.password !== this.password2) {
+        if (this.password !== this.password2) {
           this.error = "The password is not same."
           this.password = '';
           this.password2 = '';
@@ -111,6 +110,7 @@ export default {
           }
           await UsersService.createUser(body).then(res => {
             this.user = res.data
+            router.push('login')
           }).catch(e => {
             const error = e.response.data.error.toString()
             console.log(error);
