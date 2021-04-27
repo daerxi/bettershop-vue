@@ -4,9 +4,9 @@
       <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-3-800x800.jpg" alt="..."
            class="shadow-lg rounded max-w-full h-auto align-middle border-none"/>
       <div class="inline-flex py-4">
-        <button v-on:click="navigateToLogin" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-1 rounded-l">
-          Login
-        </button>
+        <router-link class="no-underline" to="/login">
+          <button class="bg-gray-400 hover:bg-gray-400 text-gray-700 font-bold py-1 rounded">Login</button>
+        </router-link>
 <!--        <button class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-1 rounded-l">-->
 <!--          Logout-->
 <!--        </button>-->
@@ -24,9 +24,6 @@ export default {
     }
   },
   methods: {
-    navigateToLogin() {
-
-    }
   }
 }
 </script>

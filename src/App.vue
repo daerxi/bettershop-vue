@@ -1,15 +1,14 @@
 <template>
   <div id="app">
     <h1 class="bold text-5xl">BetterShop</h1>
-    <ProfileButton></ProfileButton>
-    <SearchBar></SearchBar>
+    <profile-button></profile-button>
+    <search-bar></search-bar>
   </div>
 </template>
 
 <script>
-
-import ProfileButton from "@/components/ProfileButton";
 import SearchBar from "@/components/SearchBar";
+import ProfileButton from "@/components/ProfileButton";
 
 export default {
   name: 'App',
@@ -48,6 +47,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
