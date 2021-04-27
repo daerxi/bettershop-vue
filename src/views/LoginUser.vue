@@ -46,7 +46,11 @@ export default {
   data() {
     return {
       users: [],
-      userToken: {},
+      userToken: {
+        id: Number,
+        userId: Number,
+        token: String
+      },
       error: '',
       email: '',
       password: ''
@@ -57,8 +61,20 @@ export default {
       if (this.email.trim() === '' || this.password.trim() === '')
         this.error = "Please enter the required fields."
       else {
-        this.userToken = await UsersService.loginUser(this.email, this.password)
-        localStorage.setItem('user-token', this.userToken)
+        this.userToken = await UsersService.loginUser(this.email, this.password).then( (res, err) => {
+          this.userToken= res.data;
+          console.log("res",res);
+          console.log('err',err)
+          localStorage.setItem('user-token', this.userToken.token)
+          localStorage.setItem('user-id', this.userToken.userId)
+        }).catch(e => {
+          if (e.response.status === 404) {
+            this.error = "This account does not exist.";
+          } else {
+            this.error = "This combination is not correct.";
+          }
+          console.log(e);
+        });
       }
     }
   }

@@ -43,19 +43,8 @@ class UsersService {
     }
 
     static loginUser(email, password) {
-        return new Promise( (resolve, reject) => {
-            try {
-                instance.post('/login', {
-                    email, password
-                }).then(res => {
-                    const data = res.data;
-                    resolve(
-                        data
-                    )
-                })
-            } catch (err) {
-                reject(err);
-            }
+        return instance.post('/login', {
+            email, password
         })
     }
 }
