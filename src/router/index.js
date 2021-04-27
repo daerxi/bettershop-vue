@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from "@/views/Home"
-import LoginUser from "@/components/LoginUser"
-import RegisterUser from "@/components/RegisterUser";
+import LoginUser from "@/views/LoginUser"
+import RegisterUser from "@/views/RegisterUser";
 import ForgotPassword from "@/components/ForgotPassword";
 import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
+import RegisterBusiness from "@/views/RegisterBusiness";
 
 Vue.use(VueRouter)
 
@@ -20,7 +21,7 @@ Vue.use(VueRouter)
 //     // }
 // }
 
-const router = new VueRouter({
+export const router = new VueRouter({
   mode: 'history',
   base: '',
   routes: [
@@ -52,10 +53,22 @@ const router = new VueRouter({
       },
       {
           path: '/business_profile',
-          name: 'Profile',
+          name: 'Business Profile',
           component: BusinessProfile
-      }
+      },
+      {
+          path: '/business_signup',
+          name: 'Business Sign Up',
+          component: RegisterBusiness
+      },
   ]
 })
 
-export default router
+export const businessRouter = {
+    mode: 'history',
+    base: '/business',
+    routes: [
+
+    ]
+}
+

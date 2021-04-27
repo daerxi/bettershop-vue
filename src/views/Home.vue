@@ -20,6 +20,7 @@ export default {
   },
   data() {
     return {
+      business: false,
       authenticated: false,
       user: {}
     }

@@ -1,49 +1,54 @@
 <template>
-  <div class="bg-grey-lighter p-16 flex flex-col">
+  <div class="bg-grey-lighter p-8 flex flex-col">
     <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-      <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-        <h1 class="mb-8 text-3xl text-center">Sign Up</h1>
-        <input
+      <div class="bg-white px-6 rounded shadow-md text-black w-full">
+        <h1 class="mb-5 text-3xl text-center">Register your business</h1>
+        <input-component
             type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="company"
+            placeholder="Company"
+            v-model="company"/>
+
+        <input-component
+            type="text"
             name="firstName"
             placeholder="First Name"
             v-model="firstName"/>
 
-        <input
+        <input-component
             type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
             name="lastName"
             placeholder="Last Name"
             v-model="lastName"/>
 
-        <input
+        <input-component
             type="email"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
             name="email"
             placeholder="Email"
             v-model="email"/>
 
-        <input
+        <input-component
             type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
             name="password"
             placeholder="Password"
             v-model="password"/>
-        <input
+
+        <input-component
             type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
             name="confirm_password"
             placeholder="Confirm Password"
             v-model="password2"/>
 
         <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
 
-        <button
-            type="submit" v-on:click="createUser"
-            class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >Create Account
-        </button>
+        <submit-button v-on:click="createUser" content="Create Account"></submit-button>
+
+        <div class="text-gray-800 mt-6">
+          Sign up as an individual?
+          <a class="no-underline border-b border-grey-dark text-gray-800" href="../signup">
+            Click here
+          </a>
+        </div>
 
         <div class="text-center text-sm text-gray-800 mt-4">
           By signing up, you agree to the
@@ -68,14 +73,18 @@
 
 <script>
 import UsersService from '../APIs/UsersService'
+import InputComponent from "@/components/Input";
+import SubmitButton from "@/components/SubmitButton";
 
 export default {
-  name: 'RegisterUser',
+  name: 'RegisterBusiness',
+  components: {SubmitButton, InputComponent},
   data() {
     return {
       users: [],
       user: {},
       error: '',
+      company: '',
       firstName: '',
       lastName: '',
       email: '',
