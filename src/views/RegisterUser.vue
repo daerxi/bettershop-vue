@@ -42,7 +42,7 @@
 
     <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
 
-    <submit-button v-on:click="createUser" title="Create Account"></submit-button>
+    <submit-button v-bind:fn="createUser" title="Create Account"></submit-button>
     <t-c-p/>
 
     <div class="text-gray-800 p-5">
@@ -89,7 +89,6 @@ export default {
   methods: {
     async check() {
       this.showCompany = !this.showCompany
-      console.log("lala",this.showCompany);
     },
     async createUser() {
       try {
@@ -99,10 +98,19 @@ export default {
           this.error = "The password is not same."
           this.password = '';
           this.password2 = '';
-        } else if (!this.email.includes("a")) {
+        } else if (!this.email.includes("@")) {
           this.error = "The email is invalid."
+        } else if (this.showCompany && this.company.trim() === '') {
+          this.error = "Company name is required."
         } else {
-          this.user = await UsersService.createUser(this.firstName, this.lastName, this.email, this.password)
+          const body = {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            password: this.password,
+            isBusiness: this.showCompany
+          }
+          this.user = await UsersService.createUser(body)
         }
       } catch (err) {
         this.error = err

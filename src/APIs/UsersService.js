@@ -1,17 +1,22 @@
 import axios from 'axios';
-const url = 'http://localhost:4040/users';
+const path = 'http://localhost:4040/users';
+
+var instance = axios.create({
+    baseURL: path,
+    timeout: 5000
+});
 
 class UsersService {
     static getUsers() {
         return new Promise( (resolve, reject) => {
             try {
-                axios.get(url, {
+                instance.get( '/',{
                     headers: {
                         'Access-Control-Allow-Origin' : '*',
                         'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                     }
                 }).then(res => {
-                    const data = res.data;
+                    const data = res.data
                     resolve(
                         data.map(users => ({
                             ...users
@@ -19,24 +24,20 @@ class UsersService {
                     )
                 })
             } catch (err) {
-                reject(err);
+                reject(err)
             }
         })
     }
 
-    static createUser(firstName, lastName, email, password) {
+    static createUser(body) {
         return new Promise( (resolve, reject) => {
             try {
-                axios.post(url, {
-                    firstName, lastName, email, password
-                }).then(res => {
-                    const data = res.data;
-                    resolve(
-                        data
-                    )
+                instance.post('/', body).then(res => {
+                    const data = res.data
+                    resolve(data)
                 })
             } catch (err) {
-                reject(err);
+                reject(err)
             }
         })
     }
@@ -44,7 +45,7 @@ class UsersService {
     static loginUser(email, password) {
         return new Promise( (resolve, reject) => {
             try {
-                axios.post(`${url}/login`, {
+                instance.post('/login', {
                     email, password
                 }).then(res => {
                     const data = res.data;

@@ -1,5 +1,6 @@
 <template>
   <button
+      v-on:click="fn"
       type="submit"
       class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
   >{{ title }}</button>
@@ -9,7 +10,8 @@
 export default {
   name: "SubmitButton",
   props: {
-    title: String
+    title: String,
+    fn: Function
   }
 }
 </script>
