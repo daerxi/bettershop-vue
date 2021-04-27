@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from "@/components/Home"
+import Home from "@/views/Home"
 import LoginUser from "@/components/LoginUser"
 import RegisterUser from "@/components/RegisterUser";
+import ForgotPassword from "@/components/ForgotPassword";
 
 Vue.use(VueRouter)
 
@@ -22,8 +23,13 @@ const router = new VueRouter({
       },
       {
           path: '/signup',
-          name: 'SignUp',
+          name: 'Sign Up',
           component: RegisterUser
+      },
+      {
+          path: '/forgotPassword',
+          name: 'Forgot Password',
+          component: ForgotPassword
       }
   ]
 })
