@@ -5,14 +5,14 @@
         <h1 class="mb-8 text-3xl text-center">Sign Up</h1>
         <input
             type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4 required"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
             name="firstName"
             placeholder="First Name"
             v-model="firstName"/>
 
         <input
             type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4 required"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
             name="lastName"
             placeholder="Last Name"
             v-model="lastName"/>
@@ -31,7 +31,6 @@
             placeholder="Password"
             v-model="password"/>
         <input
-            required
             type="password"
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="confirm_password"
