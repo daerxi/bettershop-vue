@@ -17,13 +17,15 @@ export default {
   },
   data() {
     return {
-      authenticated: false
+      authenticated: false,
+      user: {}
     }
   },
   async created() {
     try {
       // verify user token
       // const token = localStorage.getItem('user-token')
+      // if authenticated, get user -> profile photo
     } catch (err) {
       this.error = err
     }
