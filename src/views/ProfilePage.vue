@@ -1,7 +1,14 @@
 <template>
   <div>
     <profile-button></profile-button>
-    <review></review>
+    <div class="p-10">
+      <div class="flex flex-wrap content-start px-4">
+        <review></review>
+      </div>
+      <div class="flex flex-wrap content-start px-4">
+        <review></review>
+      </div>
+    </div>
   </div>
 </template>
 
