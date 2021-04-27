@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "ProfileButton",
+  name: "ProfileComponent",
   data() {
     return {
       authenticated: localStorage.getItem('authenticated') || false,

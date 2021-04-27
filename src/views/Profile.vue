@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile-button></profile-button>
+    <profile-component></profile-component>
     <div class="grid grid-cols-1 p-10">
       <div class="flex flex-wrap content-start px-12">
         <h3 class="p-4">My Review</h3>
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import ProfileButton from "@/components/ProfileButton";
+import ProfileComponent from "@/components/Profile";
 import Review from "@/components/Review";
 export default {
   name: "ProfilePage",
-  components: {Review, ProfileButton},
+  components: {Review, ProfileComponent},
   data() {
     return {
       reviews: []

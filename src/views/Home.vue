@@ -7,7 +7,7 @@
 
 <script>
 import SearchBar from "@/components/SearchBar";
-import ProfileButton from "@/components/ProfileButton";
+import ProfileButton from "@/components/Profile";
 
 export default {
   name: "Home.vue",
