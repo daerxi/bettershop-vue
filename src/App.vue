@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-    <LoginUser/>
-    <RegisterUser/>
+    <h1 class="bold text-5xl">BetterShop</h1>
+    <ProfileButton></ProfileButton>
+    <SearchBar></SearchBar>
   </div>
 </template>
 
 <script>
-import RegisterUser from './components/RegisterUser.vue'
-import LoginUser from "@/components/LoginUser";
+// import RegisterUser from './components/RegisterUser.vue'
+// import LoginUser from "@/components/LoginUser";
 
+import ProfileButton from "@/components/ProfileButton";
+import SearchBar from "@/components/SearchBar";
 export default {
   name: 'App',
   components: {
-    LoginUser,
-    RegisterUser
+    SearchBar,
+    ProfileButton
+    // LoginUser,
+    // RegisterUser
   }
 }
 </script>
