@@ -20,7 +20,7 @@
         </button>
         <div class="text-gray-800 mt-6">
           Remember the password now?
-          <a class="no-underline border-b border-grey-dark text-gray-800" href="../login/">
+          <a class="no-underline border-b border-grey-dark text-gray-800" href="../login">
             Login here
           </a>.
         </div>
