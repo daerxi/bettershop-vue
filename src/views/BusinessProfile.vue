@@ -1,14 +1,18 @@
 <template>
-  <div class="flex flex-wrap">
-    <round-image v-bind:photo="photo" v-bind:redirect-link="redirectLink"></round-image>
+  <div>
+    <search-bar></search-bar>
+    <div class="flex flex-wrap p-8">
+      <round-image v-bind:photo="photo" v-bind:redirect-link="redirectLink"></round-image>
+    </div>
   </div>
 </template>
 
 <script>
 import RoundImage from "@/components/RoundImage";
+import SearchBar from "@/components/SearchBar";
 export default {
   name: "BusinessProfile",
-  components: {RoundImage},
+  components: {SearchBar, RoundImage},
   data() {
     return {
       redirectLink: '/',

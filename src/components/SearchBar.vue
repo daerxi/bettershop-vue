@@ -1,46 +1,8 @@
 <template>
-  <div class="container mx-auto py-20">
+  <div class="container px-16 py-12">
     <input
-        class="w-7/12 h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-base px-8 shadow-lg placeholder-gray-500"
+        class="w-7/12 h-12 px-3 rounded focus:outline-none focus:shadow-outline text-base shadow-lg placeholder-gray-500"
         type="search" placeholder="Search...">
-
-    <!--for loop-->
-    <div class="grid xl:grid-cols-10 2xl:grid-cols-10 lg:grid-cols-10 md:grid-cols-5 sm:grid-cols-5 grid-cols-2 gap-4">
-      <router-link class="no-underline" to="food">
-        <div
-            class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-          <a class="text-white no-underline" href="#">Food</a></div>
-      </router-link>
-
-      <!--      demo-->
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Shop</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Tech</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Auto</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Show</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Pets</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Home</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Outdoor</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Hotel</a></div>
-      <div
-          class="h-12 rounded-md flex items-center justify-center text-black text-base font-extrabold bg-blue-700 hover:bg-blue-800">
-        <a class="text-white no-underline" href="#">Entertainment</a></div>
-    </div>
   </div>
 </template>
 
