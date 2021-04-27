@@ -52,8 +52,10 @@ export default {
     async login() {
       if (this.email.trim() === '' || this.password.trim() === '')
         this.error = "Please enter the required fields."
-      else
+      else {
         this.userToken = await UsersService.loginUser(this.email, this.password)
+        localStorage.setItem('user-token', this.userToken)
+      }
     }
   }
 }

@@ -7,18 +7,36 @@
 </template>
 
 <script>
-// import RegisterUser from './components/RegisterUser.vue'
-// import LoginUser from "@/components/LoginUser";
 
 import ProfileButton from "@/components/ProfileButton";
 import SearchBar from "@/components/SearchBar";
+
 export default {
   name: 'App',
   components: {
     SearchBar,
     ProfileButton
-    // LoginUser,
-    // RegisterUser
+  },
+  data() {
+    return {
+      authenticated: false
+    }
+  },
+  async created() {
+    try {
+      // verify user token
+      // const token = localStorage.getItem('user-token')
+    } catch (err) {
+      this.error = err
+    }
+  },
+  async updated() {
+    try {
+      localStorage.getItem('')
+      //
+    } catch (err) {
+      //
+    }
   }
 }
 </script>
