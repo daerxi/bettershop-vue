@@ -24,7 +24,7 @@
             class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >Login
         </button>
-        <div class="text-center text-sm text-gray-800 mt-4">
+        <div class="text-right text-sm text-gray-800 mt-4">
           <a class="no-underline border-b border-grey-dark text-gray-800" href="../forgotPassword">
             Forgot Password?
           </a>
