@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="bold text-5xl">BetterShop</h1>
     <profile-button></profile-button>
     <search-bar></search-bar>
   </div>
