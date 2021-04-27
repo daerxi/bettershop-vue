@@ -1,17 +1,13 @@
 <template>
   <form-component title="Login">
-    <input
+    <input-component
         type="email"
-        class="block border border-grey-light w-full p-3 rounded mb-4"
-        name="email"
-        placeholder="Email"
+        name="Email"
         v-model="email"/>
 
-    <input
+    <input-component
         type="password"
-        class="block border border-grey-light w-full p-3 rounded mb-4"
-        name="password"
-        placeholder="Password"
+        name="Password"
         v-model="password"/>
 
     <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
@@ -39,10 +35,11 @@
 <script>
 import UsersService from '../APIs/UsersService'
 import FormComponent from "@/components/Form";
+import InputComponent from "@/components/Input";
 
 export default {
   name: 'LoginUser',
-  components: {FormComponent},
+  components: {InputComponent, FormComponent},
   data() {
     return {
       users: [],
@@ -61,19 +58,12 @@ export default {
       if (this.email.trim() === '' || this.password.trim() === '')
         this.error = "Please enter the required fields."
       else {
-        this.userToken = await UsersService.loginUser(this.email, this.password).then( (res, err) => {
+        await UsersService.loginUser(this.email, this.password).then( res => {
           this.userToken= res.data;
-          console.log("res",res);
-          console.log('err',err)
           localStorage.setItem('user-token', this.userToken.token)
           localStorage.setItem('user-id', this.userToken.userId)
         }).catch(e => {
-          if (e.response.status === 404) {
-            this.error = "This account does not exist.";
-          } else {
-            this.error = "This combination is not correct.";
-          }
-          console.log(e);
+          this.error = e.response.data.error
         });
       }
     }

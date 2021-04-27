@@ -1,12 +1,16 @@
 <template>
   <input
       class="block border border-grey-light w-full p-3 rounded mb-4"
+      :name="name"
+      :placeholder="name"
+      :value="value" @input="$emit('input', $event.target.value)"
   />
 </template>
 
 <script>
 export default {
-  name: "InputComponent"
+  name: "InputComponent",
+  props: ["value","name"]
 }
 </script>
 

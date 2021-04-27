@@ -100,17 +100,24 @@ export default {
           this.password2 = '';
         } else if (!this.email.includes("@")) {
           this.error = "The email is invalid."
-        } else if (this.showCompany && this.company.trim() === '') {
-          this.error = "Company name is required."
         } else {
           const body = {
             firstName: this.firstName,
             lastName: this.lastName,
             email: this.email,
             password: this.password,
-            isBusiness: this.showCompany
+            isBusiness: this.showCompany,
+            name: this.company
           }
-          this.user = await UsersService.createUser(body)
+          await UsersService.createUser(body).then(res => {
+            this.user = res.data
+          }).catch(e => {
+            const error = e.response.data.error.toString()
+            console.log(error);
+            if (error === "email must be unique")
+              this.error = "Account exists."
+            else this.error = error
+          })
         }
       } catch (err) {
         this.error = err

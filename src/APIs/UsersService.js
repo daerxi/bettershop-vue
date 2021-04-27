@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const path = 'http://localhost:4040/users';
 
 var instance = axios.create({
@@ -8,12 +9,12 @@ var instance = axios.create({
 
 class UsersService {
     static getUsers() {
-        return new Promise( (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             try {
-                instance.get( '/',{
+                instance.get('/', {
                     headers: {
-                        'Access-Control-Allow-Origin' : '*',
-                        'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                     }
                 }).then(res => {
                     const data = res.data
@@ -30,17 +31,9 @@ class UsersService {
     }
 
     static createUser(body) {
-        return new Promise( (resolve, reject) => {
-            try {
-                instance.post('/', body).then(res => {
-                    const data = res.data
-                    resolve(data)
-                })
-            } catch (err) {
-                reject(err)
-            }
-        })
+        return instance.post('/', body)
     }
+
 
     static loginUser(email, password) {
         return instance.post('/login', {
