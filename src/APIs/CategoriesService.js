@@ -1,11 +1,6 @@
-import axios from 'axios';
+import {API} from "@/utils/helper";
 
-const path = 'http://localhost:4040/categories';
-
-const instance = axios.create({
-    baseURL: path,
-    timeout: 5000
-});
+const instance = API('http://localhost:4040/categories')
 
 class CategoriesService {
     static getCategories() {

@@ -33,14 +33,6 @@ export default {
     } catch (err) {
       this.error = err
     }
-  },
-  async updated() {
-    try {
-      localStorage.getItem('')
-      //
-    } catch (err) {
-      //
-    }
   }
 }
 </script>
