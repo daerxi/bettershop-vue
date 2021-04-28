@@ -6,9 +6,6 @@
         <router-link class="no-underline" to="/login">
           <button class="bg-gray-300 hover:bg-gray-500 text-blue-700 font-bold py-1 rounded">Login</button>
         </router-link>
-        <!--        <button class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-1 rounded-l">-->
-        <!--          Logout-->
-        <!--        </button>-->
       </div>
     </div>
   </div>

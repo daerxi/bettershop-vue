@@ -23,7 +23,6 @@ export default {
   async created() {
     try {
       this.categories = await CategoriesService.getCategories()
-      console.log(this.categories);
     } catch (err) {
       this.error = err
     }

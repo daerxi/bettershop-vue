@@ -6,19 +6,21 @@ import RegisterUser from "@/views/RegisterUser";
 import ForgotPassword from "@/components/ForgotPassword";
 import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
+import {verifyAuth, isAuthenticated} from "@/utils/validation";
 
 Vue.use(VueRouter)
 
-// function requireAuth (to, from, next) {
-//     // if (!auth.loggedIn()) {
-//     //     next({
-//     //         path: '/login',
-//     //         query: { redirect: to.fullPath }
-//     //     })
-//     // } else {
-//     //     next()
-//     // }
-// }
+function requireAuth (to, from, next) {
+    verifyAuth();
+    if (!isAuthenticated) {
+        next({
+            path: '/login',
+            query: { redirect: to.fullPath }
+        })
+    } else {
+        next()
+    }
+}
 
 export const router = new VueRouter({
   mode: 'history',
@@ -48,21 +50,14 @@ export const router = new VueRouter({
           path: '/profile',
           name: 'Profile',
           component: UserProfile,
-          // beforeEnter: requireAuth
+          beforeEnter: requireAuth
       },
       {
           path: '/business_profile',
           name: 'Business Profile',
-          component: BusinessProfile
+          component: BusinessProfile,
+          beforeEnter: requireAuth
       }
   ]
 })
-
-export const businessRouter = {
-    mode: 'history',
-    base: '/business',
-    routes: [
-
-    ]
-}
 

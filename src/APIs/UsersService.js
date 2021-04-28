@@ -40,6 +40,14 @@ class UsersService {
             email, password
         })
     }
+
+    static getMe(token) {
+        return instance.get('/me', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
 }
 
 export default UsersService;
