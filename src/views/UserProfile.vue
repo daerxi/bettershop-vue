@@ -18,7 +18,6 @@
 <script>
 import ProfileComponent from "@/components/Profile";
 import Review from "@/components/Review";
-import {router} from "@/router";
 import {userId, userToken} from "@/utils/validation";
 import UsersService from "@/APIs/UsersService";
 
@@ -38,8 +37,12 @@ export default {
   },
   methods: {
     async getUserById() {
-      if (router.params.id) {
-        await UsersService.getUser(userToken(), userId()).then(async res => {
+      if (this.$route.params.userId) {
+        await UsersService.getUser(userToken(), this.$route.params.userId).then(async res => {
+          this.user = res.data
+        })
+      } else {
+        await UsersService.getMe(userToken()).then(async res => {
           this.user = res.data
         })
       }
