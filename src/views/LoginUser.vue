@@ -60,6 +60,7 @@ export default {
         this.userToken = res.data;
         localStorage.setItem('user-token', this.userToken.token)
         localStorage.setItem('user-id', this.userToken.userId)
+        localStorage.setItem('authenticated', "true")
         router.push('/')
       }).catch(e => {
         this.error = e.response.data.error

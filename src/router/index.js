@@ -12,7 +12,7 @@ Vue.use(VueRouter)
 
 function requireAuth (to, from, next) {
     verifyAuth();
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
         next({
             path: '/login',
             query: { redirect: to.fullPath }
