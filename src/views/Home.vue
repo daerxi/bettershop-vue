@@ -3,6 +3,7 @@
     <profile-button></profile-button>
     <search-bar></search-bar>
     <categories></categories>
+    <business></business>
   </div>
 </template>
 
@@ -12,10 +13,12 @@ import ProfileButton from "@/components/Profile";
 import Categories from "@/components/Categories";
 import BusinessService from "@/APIs/BusinessService";
 import {router} from "@/router";
+import Business from "@/components/Business";
 
 export default {
   name: "Home.vue",
   components: {
+    Business,
     Categories,
     SearchBar,
     ProfileButton
