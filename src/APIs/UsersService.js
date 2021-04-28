@@ -49,6 +49,14 @@ class UsersService {
         })
     }
 
+    static getUser(token, id) {
+        return instance.get('/' + id, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
     static logoutUser(token) {
         return instance.delete('/logout', {
             headers: {

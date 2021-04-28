@@ -10,12 +10,12 @@ import {verifyAuth, isAuthenticated} from "@/utils/validation";
 
 Vue.use(VueRouter)
 
-function requireAuth (to, from, next) {
+function requireAuth(to, from, next) {
     verifyAuth();
     if (!isAuthenticated()) {
         next({
             path: '/login',
-            query: { redirect: to.fullPath }
+            query: {redirect: to.fullPath}
         })
     } else {
         next()
@@ -23,41 +23,46 @@ function requireAuth (to, from, next) {
 }
 
 export const router = new VueRouter({
-  mode: 'history',
-  base: '',
-  routes: [
-      {
-          path: '/',
-          name: 'Home',
-          component: Home
-      },
-      {
-          path: '/login',
-          name: 'Login',
-          component: LoginUser
-      },
-      {
-          path: '/signup',
-          name: 'Sign Up',
-          component: RegisterUser
-      },
-      {
-          path: '/forgotPassword',
-          name: 'Forgot Password',
-          component: ForgotPassword
-      },
-      {
-          path: '/profile',
-          name: 'Profile',
-          component: UserProfile,
-          beforeEnter: requireAuth
-      },
-      {
-          path: '/business_profile',
-          name: 'Business Profile',
-          component: BusinessProfile,
-          beforeEnter: requireAuth
-      }
-  ]
+    mode: 'history',
+    base: '',
+    routes: [
+        {
+            path: '/',
+            name: 'Home',
+            component: Home
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: LoginUser
+        },
+        {
+            path: '/signup',
+            name: 'Sign Up',
+            component: RegisterUser
+        },
+        {
+            path: '/forgotPassword',
+            name: 'Forgot Password',
+            component: ForgotPassword
+        },
+        {
+            path: '/profile',
+            name: 'Profile',
+            component: UserProfile,
+            beforeEnter: requireAuth
+        },
+        {   path: '/profile/:id',
+            name: 'Profile',
+            component: UserProfile,
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/business_profile',
+            name: 'Business Profile',
+            component: BusinessProfile,
+            beforeEnter: requireAuth
+        }
+    ]
 })
 

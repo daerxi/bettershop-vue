@@ -18,16 +18,32 @@
 <script>
 import ProfileComponent from "@/components/Profile";
 import Review from "@/components/Review";
+import {router} from "@/router";
+import {userId, userToken} from "@/utils/validation";
+import UsersService from "@/APIs/UsersService";
+
 export default {
   name: "UserProfile",
   components: {Review, ProfileComponent},
   data() {
     return {
-      reviews: []
+      reviews: [],
+      user: {}
     }
   },
   async created() {
+    // get user info
+    await this.getUserById()
     // get reviews
+  },
+  methods: {
+    async getUserById() {
+      if (router.params.id) {
+        await UsersService.getUser(userToken(), userId()).then(async res => {
+          this.user = res.data
+        })
+      }
+    }
   }
 }
 </script>
