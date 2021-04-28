@@ -80,13 +80,6 @@ export default {
       company: ''
     }
   },
-  async created() {
-    try {
-      this.users = await UsersService.getUsers()
-    } catch (err) {
-      this.error = err
-    }
-  },
   methods: {
     async check() {
       this.showCompany = !this.showCompany
@@ -122,7 +115,6 @@ export default {
       } catch (err) {
         this.error = err
       }
-      this.users = await UsersService.getUsers()
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span v-for="star in stars" :key="star">
+    <span v-for="(star,i) in stars" :key="i">
       <span v-if="star">★</span>
       <span v-else>☆</span>
     </span>

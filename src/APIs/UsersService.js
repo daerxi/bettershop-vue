@@ -48,6 +48,14 @@ class UsersService {
             }
         })
     }
+
+    static logoutUser(token) {
+        return instance.delete('/logout', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
 }
 
 export default UsersService;
