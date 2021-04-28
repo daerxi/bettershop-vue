@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const path = 'http://localhost:4040/users';
 
-var instance = axios.create({
+const instance = axios.create({
     baseURL: path,
     timeout: 5000
 });
