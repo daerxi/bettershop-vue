@@ -10,6 +10,8 @@
 import SearchBar from "@/components/SearchBar";
 import ProfileButton from "@/components/Profile";
 import Categories from "@/components/Categories";
+import BusinessService from "@/APIs/BusinessService";
+import {router} from "@/router";
 
 export default {
   name: "Home.vue",
@@ -22,16 +24,30 @@ export default {
     return {
       business: false,
       authenticated: false,
-      user: {}
+      user: {},
+      wholeLists: [],
+      lists: []
     }
   },
   async created() {
     try {
+      await this.getLists()
+      console.log("***", this.lists, this.wholeLists)
       // verify user token
       // const token = localStorage.getItem('user-token')
       // if authenticated, get user -> profile photo
     } catch (err) {
       this.error = err
+    }
+  },
+  methods: {
+    async getWholeLists() {
+      return await BusinessService.getBusinesses()
+    },
+    async getLists() {
+      if (router.params.type)
+        this.lists = await BusinessService.getBusinessByType(router.params.type)
+      else this.list = this.getWholeLists()
     }
   }
 }
