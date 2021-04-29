@@ -36,7 +36,7 @@
 import UsersService from '../APIs/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
-import {router} from "@/router";
+import { router } from "@/router";
 
 export default {
   name: 'LoginUser',

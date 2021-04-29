@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {userToken} from "@/utils/validation";
+import { userToken } from "@/utils/validation";
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import DropdownComponent from "@/components/Dropdown";

@@ -10,6 +10,7 @@
 <script>
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
+
 export default {
   name: "Review",
   components: {RoundImage, Rate},

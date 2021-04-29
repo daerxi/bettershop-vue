@@ -1,8 +1,13 @@
 <template>
   <div class="h-16">
     <select class="block border border-gray-300 w-full p-3 rounded mb-4 h-12" :name="id" :id="id" required>
-      <option disabled class="rounded bg-transparent text-gray-300 p-2 w-full h-6 mb-4" value="">{{ placeholder }}</option>
-      <option v-for="(option,id) in options" :key="id" class="rounded bg-transparent text-gray-300 p-2 w-full h-6 mb-4" value=11>{{ option.type }}</option>
+      <option disabled class="rounded bg-transparent text-gray-300 p-2 w-full h-6 mb-4" value="">{{
+          placeholder
+        }}
+      </option>
+      <option v-for="(option,id) in options" :key="id" class="rounded bg-transparent text-gray-300 p-2 w-full h-6 mb-4"
+              value=11>{{ option.type }}
+      </option>
     </select>
   </div>
 </template>

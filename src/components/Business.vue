@@ -12,6 +12,7 @@
 <script>
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
+
 export default {
   name: "Business",
   components: {RoundImage, Rate},

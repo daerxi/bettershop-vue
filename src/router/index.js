@@ -8,7 +8,7 @@ import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
 import CompanyInfoForm from "@/views/CompanyInfoForm";
 
-import {verifyAuth, isAuthenticated, isBusiness} from "@/utils/validation";
+import { verifyAuth, isAuthenticated, isBusiness } from "@/utils/validation";
 
 Vue.use(VueRouter)
 
@@ -70,7 +70,8 @@ export const router = new VueRouter({
             component: UserProfile,
             beforeEnter: requireAuth
         },
-        {   path: '/profile/:userId',
+        {
+            path: '/profile/:userId',
             name: 'User Profile',
             component: UserProfile,
             beforeEnter: requireAuth

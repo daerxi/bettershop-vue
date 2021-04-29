@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "InputComponent",
-  props: ["value","name"]
+  props: ["value", "name"]
 }
 </script>
 

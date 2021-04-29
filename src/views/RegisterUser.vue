@@ -61,7 +61,7 @@ import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import Checkbox from "@/components/Checkbox";
 import SubmitButton from "@/components/SubmitButton";
-import {router} from "@/router";
+import { router } from "@/router";
 
 export default {
   name: 'RegisterUser',

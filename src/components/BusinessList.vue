@@ -9,6 +9,7 @@
 
 <script>
 import Business from "@/components/Business";
+
 export default {
   name: "BusinessList",
   components: {Business},

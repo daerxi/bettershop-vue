@@ -18,7 +18,7 @@
 <script>
 import ProfileComponent from "@/components/Profile";
 import Review from "@/components/Review";
-import {userToken} from "@/utils/validation";
+import { userToken } from "@/utils/validation";
 import UsersService from "@/APIs/UsersService";
 
 export default {

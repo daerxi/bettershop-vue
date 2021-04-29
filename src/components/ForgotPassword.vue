@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async forgot() {
-        //TODO
+      //TODO
     }
   }
 }

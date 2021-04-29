@@ -4,7 +4,7 @@
       <span class="text-xl inline-block mr-5 align-middle">
         <i class="fas fa-bell"/>
       </span>
-        <span class="inline-block align-middle mr-8">
+      <span class="inline-block align-middle mr-8">
         <b class="capitalize">Oops!</b> {{ message }}
       </span>
       <close-icon :close="close"></close-icon>
@@ -23,6 +23,7 @@
 
 <script>
 import CloseIcon from "@/components/CloseIcon";
+
 export default {
   name: "AlertComponent",
   components: {CloseIcon},

@@ -12,6 +12,7 @@
 
 <script>
 import AlertComponent from "@/components/Alert";
+
 export default {
   name: "FormComponent",
   components: {AlertComponent},
