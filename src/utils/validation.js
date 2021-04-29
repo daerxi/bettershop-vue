@@ -28,9 +28,11 @@ export const userId = () => {
 
 export const userAvatar = () => {
     const localAvatar = localStorage.getItem('user-avatar')
-    if (localAvatar === 'null' || localAvatar === null) return "https://imgur.com/uF05hWw.png"
+    if (localAvatar === 'null' || localAvatar === null) return emptyAvatar
     else return localStorage.getItem('user-avatar')
 }
+
+export const emptyAvatar = "https://imgur.com/uF05hWw.png"
 
 export const userToken = () => {
     return localStorage.getItem('user-token')

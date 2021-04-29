@@ -47,6 +47,7 @@ export default {
       this.authenticated = isAuthenticated()
       this.photo = userAvatar()
       this.userId = userId()
+      console.log(this.photo);
     }
   }
 }

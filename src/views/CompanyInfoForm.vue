@@ -24,7 +24,7 @@ import DropdownComponent from "@/components/Dropdown";
 import CategoriesService from "@/APIs/CategoriesService";
 import SubmitButton from "@/components/SubmitButton";
 import BusinessService from "@/APIs/BusinessService";
-import { openErrorAlert, openSuccessAlert } from "@/utils/helper";
+import { openAlert } from "@/utils/helper";
 import ProfileComponent from "@/components/Profile";
 
 export default {
@@ -59,10 +59,10 @@ export default {
     async updateInfo() {
       this.alertOpen = false
       await BusinessService.updateInfo(userToken(), this.business).then(async res => {
-        openSuccessAlert(this, "Updated successfully")
+        openAlert(this, "success", "Updated successfully")
         console.log(res)
       }).catch(e => {
-        openErrorAlert(this, "Update failed.")
+        openAlert(this, "error", "Update failed.")
         console.error(e)
       })
     },

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap p-8">
-    <round-image v-bind:photo="photo" v-bind:redirect-link="redirectLink"></round-image>
-    <div class="block">{{ companyName }}</div>
+    <round-image v-bind:photo="businessUser.avatar" v-bind:redirect-link="redirectLink"></round-image>
+    <div class="block">{{ business.name }}</div>
     <br>
     <div class="block">
       <rate v-bind:rateValue="rateValue"></rate>
@@ -12,13 +12,46 @@
 <script>
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
+import UsersService from "@/APIs/UsersService";
+import { emptyAvatar, userToken } from "@/utils/validation";
 
 export default {
   name: "Business",
   components: {RoundImage, Rate},
-  props: ['photo', 'redirectLink', 'rateValue', 'companyName'],
+  props: {
+    business: {
+      userId: '',
+      name: '',
+      category: '',
+      website: '',
+      description: '',
+      country: '',
+      province: '',
+      city: '',
+      address: ''
+    },
+    rateValue: Number
+  },
   data() {
-    return {}
+    return {
+      redirectLink: "/",
+      businessUser: {
+        avatar: ''
+      }
+    }
+  },
+  async created() {
+    await this.getBusinessUser();
+  },
+  methods: {
+    async getBusinessUser() {
+      if (this.business.userId > 0) {
+        await UsersService.getUser(userToken(),this.business.userId).then(res => {
+          this.businessUser = res.data
+          if (!this.businessUser.avatar) this.businessUser.avatar = emptyAvatar
+        })
+      }
+    }
   }
 }
 </script>

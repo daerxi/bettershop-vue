@@ -1,5 +1,5 @@
 <template>
-  <form-component title="Login">
+  <form-component :alert-open="alertOpen" type="error" :message="message" title="Login">
     <input-component
         type="email"
         name="Email"
@@ -9,9 +9,6 @@
         type="password"
         name="Password"
         v-model="password"/>
-
-    <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
-
     <button
         type="submit" v-on:click="login"
         class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -37,6 +34,7 @@ import UsersService from '../APIs/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import { router } from "@/router";
+import { openAlert } from "@/utils/helper";
 
 export default {
   name: 'LoginUser',
@@ -49,9 +47,10 @@ export default {
         userId: Number,
         token: String
       },
-      error: '',
+      message: '',
       email: '',
-      password: ''
+      password: '',
+      alertOpen: false
     }
   },
   methods: {
@@ -63,7 +62,7 @@ export default {
         localStorage.setItem('authenticated', "true")
         router.push('/')
       }).catch(e => {
-        this.error = e.response.data.error
+        openAlert(this, "error", e.response.data.error)
       });
     }
   }

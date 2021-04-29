@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="business in businesses" :key="i" class="flex flex-wrap p-4">
-      <business v-bind:company-name="business.name" v-bind:photo="photo" v-bind:redirect-link="redirectLink"
+    <div v-for="(business,i) in businesses" :key="i" class="flex flex-wrap p-4">
+      <business v-bind:business="business"
                 v-bind:rateValue="rateValue"></business>
     </div>
   </div>
@@ -13,10 +13,6 @@ import Business from "@/components/Business";
 export default {
   name: "BusinessList",
   components: {Business},
-  props: ['businesses', 'photo', 'redirectLink', 'rateValue']
+  props: ['businesses', 'rateValue']
 }
 </script>
-
-<style scoped>
-
-</style>
