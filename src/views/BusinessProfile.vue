@@ -11,7 +11,9 @@
 <script>
 import SearchBar from "@/components/SearchBar";
 import ProfileComponent from "@/components/Profile";
-import Business from "@/components/BusinessList";
+import Business from "@/components/Business";
+import { userToken } from "@/utils/validation";
+import BusinessService from "@/APIs/BusinessService";
 
 export default {
   name: "BusinessProfile",
@@ -31,6 +33,22 @@ export default {
         address: ''
       },
       rateValue: Number
+    }
+  },
+  async created() {
+    await this.getBusinessById()
+  },
+  methods: {
+    async getBusinessById() {
+      if (this.$route.params.id) {
+        await BusinessService.getBusiness(userToken(), this.$route.params.id).then(async res => {
+          this.business = res.data
+        })
+      } else {
+        await BusinessService.getInfo(userToken()).then(async res => {
+          this.business = res.data
+        })
+      }
     }
   }
 }

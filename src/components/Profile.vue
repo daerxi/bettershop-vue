@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="w-16 px-4 absolute top-0 right-0 px-12 py-12">
+    <div class="w-16 px-4 absolute top-0 right-0 px-16 py-12">
       <round-image :photo="photo" :redirect-link="redirectLink"></round-image>
       <div class="inline-flex py-4">
         <button v-if="authenticated" class="bg-gray-300 hover:bg-gray-500 text-blue-700 font-bold py-1 rounded"

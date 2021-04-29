@@ -45,6 +45,14 @@ class BusinessService {
         })
     }
 
+    static getBusiness(token, id) {
+        return instance.get('/info/' + id, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
     static updateInfo(token, body) {
         return instance.put('/info', body, {
             headers: {

@@ -1,41 +1,31 @@
 <template>
   <form-component title="Sign up">
-    <input-component
-        type="text"
-        name="firstName"
-        placeholder="First Name"
-        v-model="firstName"/>
 
     <input-component
         type="text"
         class="block border border-grey-light w-full p-3 rounded mb-4"
-        name="lastName"
-        placeholder="Last Name"
-        v-model="lastName"/>
+        name="User name"
+        v-model="userName"/>
 
     <input-component
         type="email"
-        name="email"
-        placeholder="Email"
+        name="Email"
         v-model="email"/>
 
     <input-component
-        v-if="showCompany"
+        v-if="isBusiness"
         type="text"
-        name="company"
-        placeholder="Company Name"
+        name="Company"
         v-model="company"/>
 
     <input-component
         type="password"
-        name="password"
-        placeholder="Password"
+        name="Password"
         v-model="password"/>
 
     <input-component
         type="password"
-        name="confirm_password"
-        placeholder="Confirm Password"
+        name="Confirm your password"
         v-model="password2"/>
 
     <checkbox v-bind:check="check" label="Are you signing up as a business?"></checkbox>
@@ -68,21 +58,19 @@ export default {
   components: {SubmitButton, Checkbox, InputComponent, FormComponent, TCP},
   data() {
     return {
-      users: [],
       user: {},
       error: '',
-      firstName: '',
-      lastName: '',
+      userName: '',
       email: '',
       password: '',
       password2: '',
-      showCompany: true,
+      isBusiness: true,
       company: ''
     }
   },
   methods: {
     async check() {
-      this.showCompany = !this.showCompany
+      this.isBusiness = !this.isBusiness
     },
     async createUser() {
       try {
@@ -94,11 +82,10 @@ export default {
           this.error = "The email is invalid."
         } else {
           const body = {
-            firstName: this.firstName,
-            lastName: this.lastName,
+            userName: this.userName,
             email: this.email,
             password: this.password,
-            isBusiness: this.showCompany,
+            isBusiness: this.isBusiness,
             name: this.company
           }
           await UsersService.createUser(body).then(res => {
