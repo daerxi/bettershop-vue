@@ -6,7 +6,7 @@ import RegisterUser from "@/views/RegisterUser";
 import ForgotPassword from "@/components/ForgotPassword";
 import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
-import CompanyInfoForm from "@/components/CompanyInfoForm";
+import CompanyInfoForm from "@/views/CompanyInfoForm";
 
 import {verifyAuth, isAuthenticated, isBusiness} from "@/utils/validation";
 
