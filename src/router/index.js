@@ -41,11 +41,6 @@ export const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'BetterShop',
-            component: Home
-        },
-        {
-            path: '/categories/:type',
             name: 'Home',
             component: Home
         },

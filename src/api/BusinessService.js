@@ -64,7 +64,7 @@ class BusinessService {
     static searchKeyword(keyword) {
         return new Promise((resolve, reject) => {
             try {
-                instance.get('/search?' + keyword).then(res => {
+                instance.get('/search?keyword=' + keyword).then(res => {
                     const data = res.data
                     resolve(
                         data.map(businesses => ({
