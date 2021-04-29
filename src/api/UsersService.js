@@ -1,4 +1,4 @@
-import {API} from "@/utils/helper";
+import { API } from "@/utils/helper";
 
 const instance = API('http://localhost:4040/users')
 
@@ -6,12 +6,7 @@ class UsersService {
     static getUsers() {
         return new Promise((resolve, reject) => {
             try {
-                instance.get('/', {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-                    }
-                }).then(res => {
+                instance.get('/').then(res => {
                     const data = res.data
                     resolve(
                         data.map(users => ({
@@ -28,7 +23,6 @@ class UsersService {
     static createUser(body) {
         return instance.post('/', body)
     }
-
 
     static loginUser(email, password) {
         return instance.post('/login', {
