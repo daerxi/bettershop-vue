@@ -1,7 +1,9 @@
 <template>
   <div id="app">
+    <div class="p-24">
       <a><h1 v-on:click="reload" class="bold text-5xl">BetterShop</h1></a>
-    <router-view></router-view>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 

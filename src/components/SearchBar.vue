@@ -1,5 +1,5 @@
 <template>
-  <div class="px-16 py-12">
+  <div class="px-16 py-16">
     <input
         class="w-7/12 h-16 px-3 rounded focus:outline-none focus:shadow-outline text-base shadow-lg placeholder-gray-500"
         type="search" placeholder="Search..."
