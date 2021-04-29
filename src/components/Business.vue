@@ -20,7 +20,8 @@ export default {
   components: {RoundImage, Rate},
   props: {
     business: {
-      userId: '',
+      id: 0,
+      userId: 0,
       name: '',
       category: '',
       website: '',
@@ -49,6 +50,7 @@ export default {
         await UsersService.getUser(userToken(),this.business.userId).then(res => {
           this.businessUser = res.data
           if (!this.businessUser.avatar) this.businessUser.avatar = emptyAvatar
+          this.redirectLink = "/businesses/" + this.business.id
         })
       }
     }
