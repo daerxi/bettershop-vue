@@ -2,10 +2,11 @@
   <div class="flex flex-wrap p-12">
     <div class="w-full">
       <ul class="flex grid xl:grid-cols-10 2xl:grid-cols-10 lg:grid-cols-10 md:grid-cols-5 sm:grid-cols-5 grid-cols-2 gap-4">
-        <li v-for="(category, i) in categories" :key="i" class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-          <a v-on:click="toggleTabs(i, category.type)"
-             class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
-             v-bind:class="{'text-blueGray-600 bg-gray-100': openTab === i, 'text-white bg-gray-600': openTab !== i}">
+        <li v-for="(category, i) in categories" :key="i" class="-mb-px mr-2 last:mr-0 flex-auto text-center"
+            v-on:click="toggleTabs(i, category.type)">
+          <a
+              class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+              v-bind:class="{'text-blueGray-600 bg-gray-100': openTab === i, 'text-white bg-gray-600': openTab !== i}">
             {{ category.type }}
           </a>
         </li>
@@ -17,7 +18,6 @@
 <script>
 import CategoriesService from "@/api/CategoriesService";
 import { router } from "@/router";
-import BusinessService from "@/api/BusinessService";
 
 export default {
   name: "Categories",
@@ -25,14 +25,16 @@ export default {
   data() {
     return {
       categories: [],
-      openTab: -1,
+      openTab: parseInt(localStorage.getItem("open-tab")),
       businesses: []
     }
   },
   async created() {
     try {
+      console.log(this.$route.name)
+      if (this.$route.name === 'Home') localStorage.setItem("open-tab", -1)
       this.categories = await CategoriesService.getCategories()
-      console.log(this.categories)
+      this.openTab = parseInt(localStorage.getItem("open-tab"))
     } catch (err) {
       //
     }
@@ -42,13 +44,15 @@ export default {
       if (this.openTab !== tabNumber) {
         await this.getCategoriesByType(type).then(async () => {
           this.openTab = tabNumber
+          localStorage.setItem("open-tab", this.openTab)
         })
-      } else this.openTab = -1
+      } else {
+        await router.push("/")
+      }
+      window.location.reload()
     },
     async getCategoriesByType(type) {
       await router.push("/categories?type=" + type).then(async () => {
-        window.location.reload()
-        this.businesses = await BusinessService.getBusinessByType(type)
       })
     }
   }

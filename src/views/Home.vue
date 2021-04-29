@@ -57,6 +57,7 @@ export default {
           this.businesses = await BusinessService.getBusinessByType(this.$route.query.type)
         }
       } else {
+        localStorage.setItem("open-tab", "-1")
         this.businesses = await BusinessService.searchKeyword(this.$route.query.keyword)
       }
     }
