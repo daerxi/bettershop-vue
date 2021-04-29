@@ -51,7 +51,7 @@ import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import Checkbox from "@/components/Checkbox";
 import SubmitButton from "@/components/SubmitButton";
-import { router } from "@/router";
+import { saveAuth } from "@/utils/helper";
 
 export default {
   name: 'RegisterUser',
@@ -88,9 +88,12 @@ export default {
             isBusiness: this.isBusiness,
             name: this.company
           }
-          await UsersService.createUser(body).then(res => {
+          await UsersService.createUser(body).then(async res => {
             this.user = res.data
-            router.push('login')
+            await UsersService.loginUser(this.email, this.password).then(async res => {
+              this.userToken = res.data
+              saveAuth(this.userToken)
+            })
           }).catch(e => {
             const error = e.response.data.error.toString()
             console.log(error);

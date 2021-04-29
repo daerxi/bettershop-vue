@@ -33,8 +33,7 @@
 import UsersService from '../api/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
-import { router } from "@/router";
-import { openAlert } from "@/utils/helper";
+import { openAlert, saveAuth } from "@/utils/helper";
 
 export default {
   name: 'LoginUser',
@@ -57,10 +56,7 @@ export default {
     async login() {
       await UsersService.loginUser(this.email, this.password).then(res => {
         this.userToken = res.data;
-        localStorage.setItem('user-token', this.userToken.token)
-        localStorage.setItem('user-id', this.userToken.userId)
-        localStorage.setItem('authenticated', "true")
-        router.push('/')
+        saveAuth(this.userToken)
       }).catch(e => {
         openAlert(this, "error", e.response.data.error)
       });

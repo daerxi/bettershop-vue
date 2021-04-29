@@ -27,8 +27,7 @@ import InputComponent from "@/components/Input";
 import FormComponent from "@/components/Form";
 import SubmitButton from "@/components/SubmitButton";
 import UsersService from "@/api/UsersService";
-import { openAlert } from "@/utils/helper";
-import { router } from "@/router";
+import { openAlert, saveAuth } from "@/utils/helper";
 
 export default {
   name: 'ForgotPassword',
@@ -40,7 +39,8 @@ export default {
       message: '',
       alertOpen: false,
       isVerifying: false,
-      verificationCode: ''
+      verificationCode: '',
+      userToken: {}
     }
   },
   methods: {
@@ -54,10 +54,8 @@ export default {
     },
     async verify() {
       await UsersService.verifyCode(this.verificationCode).then(async res => {
-        localStorage.setItem('user-token', res.data.token)
-        localStorage.setItem('user-id', res.data.userId)
-        localStorage.setItem('authenticated', "true")
-        await router.push('/')
+        this.userToken = res.data
+        saveAuth(this.userToken)
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())
       })
