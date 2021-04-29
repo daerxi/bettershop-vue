@@ -24,7 +24,7 @@ export default {
     try {
       this.categories = await CategoriesService.getCategories()
     } catch (err) {
-      this.error = err
+      //
     }
   }
 }

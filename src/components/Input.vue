@@ -1,6 +1,6 @@
 <template>
   <input
-      class="block border border-grey-light w-full p-3 rounded mb-4"
+      class="block border border-gray-300 w-full p-3 rounded mb-4"
       :name="name"
       :placeholder="name"
       :value="value" @input="$emit('input', $event.target.value)"

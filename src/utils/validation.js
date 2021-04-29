@@ -18,6 +18,10 @@ export const isAuthenticated = () => {
     return localStorage.getItem('authenticated') === "true"
 }
 
+export const isBusiness = () => {
+    return localStorage.getItem('is-business') === "true"
+}
+
 export const userId = () => {
     return parseInt(localStorage.getItem('user-id')) || 0
 }

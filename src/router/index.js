@@ -6,7 +6,9 @@ import RegisterUser from "@/views/RegisterUser";
 import ForgotPassword from "@/components/ForgotPassword";
 import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
-import {verifyAuth, isAuthenticated} from "@/utils/validation";
+import CompanyInfoForm from "@/components/CompanyInfoForm";
+
+import {verifyAuth, isAuthenticated, isBusiness} from "@/utils/validation";
 
 Vue.use(VueRouter)
 
@@ -16,6 +18,17 @@ function requireAuth(to, from, next) {
         next({
             path: '/login',
             query: {redirect: to.fullPath}
+        })
+    } else {
+        next()
+    }
+}
+
+function requireBusiness(to, from, next) {
+    requireAuth(to, from, next);
+    if (!isBusiness()) {
+        next({
+            path: '/not-a-business'
         })
     } else {
         next()
@@ -66,7 +79,13 @@ export const router = new VueRouter({
             path: '/business_profile',
             name: 'Business Profile',
             component: BusinessProfile,
-            beforeEnter: requireAuth
+            beforeEnter: requireBusiness
+        },
+        {
+            path: '/business/edit',
+            name: 'Edit Profile',
+            component: CompanyInfoForm,
+            beforeEnter: requireBusiness
         }
     ]
 })
