@@ -47,7 +47,7 @@ export default {
           this.user = res.data
         })
       } else {
-        await UsersService.getMe(userToken()).then(async res => {
+        await UsersService.getMe().then(async res => {
           this.user = res.data
           console.log(this.user);
         })

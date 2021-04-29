@@ -2,7 +2,7 @@ import UsersService from "@/api/UsersService";
 
 export const verifyAuth = () => {
     if (localStorage.getItem('user-token')) {
-        UsersService.getMe(localStorage.getItem('user-token')).then(r => {
+        UsersService.getMe().then(r => {
             localStorage.setItem('authenticated', "true")
             localStorage.setItem('user-id', r.data.id)
             localStorage.setItem('is-business', r.data.isBusiness)

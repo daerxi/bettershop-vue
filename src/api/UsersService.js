@@ -1,4 +1,5 @@
 import { API } from "@/utils/helper";
+import { userToken } from "@/utils/validation";
 
 const instance = API('http://localhost:4040/users')
 
@@ -30,7 +31,17 @@ class UsersService {
         })
     }
 
-    static getMe(token) {
+    static updatePassword(password, token = userToken()) {
+        return instance.post('/login', {
+            password
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
+    static getMe(token = userToken()) {
         return instance.get('/me', {
             headers: {
                 'Authorization': 'Bearer ' + token
