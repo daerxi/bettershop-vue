@@ -23,7 +23,7 @@ class BusinessService {
     static getBusinessByType(type) {
         return new Promise((resolve, reject) => {
             try {
-                instance.get('/' + type).then(res => {
+                instance.get('/categories/' + type).then(res => {
                     const data = res.data
                     resolve(
                         data.map(businesses => ({
@@ -33,6 +33,22 @@ class BusinessService {
                 })
             } catch (err) {
                 reject(err)
+            }
+        })
+    }
+
+    static getInfo(token) {
+        return instance.get('/info', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
+    static updateInfo(token, body) {
+        return instance.put('/info', body, {
+            headers: {
+                'Authorization': 'Bearer ' + token
             }
         })
     }

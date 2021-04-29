@@ -3,7 +3,7 @@
     <router-link class="p-10 no-underline text-black" to="/">
       <h1 class="bold text-5xl">BetterShop</h1>
     </router-link>
-    <RouterView></RouterView>
+    <router-view></router-view>
   </div>
 </template>
 
