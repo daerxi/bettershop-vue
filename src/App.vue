@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <router-link class="p-10 no-underline text-black" to="/">
-      <h1 class="bold text-5xl">BetterShop</h1>
-    </router-link>
+      <a><h1 v-on:click="reload" class="bold text-5xl">BetterShop</h1></a>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import { router } from "@/router";
+
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    async reload() {
+      await router.push("/")
+      window.location.reload()
+    }
+  }
 }
 </script>
 

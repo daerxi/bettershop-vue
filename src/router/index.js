@@ -45,6 +45,11 @@ export const router = new VueRouter({
             component: Home
         },
         {
+            path: '/categories',
+            name: 'Sub Home',
+            component: Home
+        },
+        {
             path: '/login',
             name: 'Login',
             component: LoginUser

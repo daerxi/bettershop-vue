@@ -4,8 +4,8 @@
     <form @submit.prevent="onSubmit">
       <search-bar v-model="keyword"></search-bar>
     </form>
-    <categories></categories>
-    <business-list v-if="selected" v-bind:businesses="businesses" v-bind:redirect-link="redirectLink"
+    <categories :selected="selected"></categories>
+    <business-list v-bind:businesses="businesses"
                    v-bind:rateValue=4>
     </business-list>
     <footer-component>Hey! You are reaching the end!</footer-component>
@@ -36,7 +36,6 @@ export default {
       authenticated: false,
       user: {},
       businesses: [],
-      redirectLink: '/',
       keyword: '',
       selected: false
     }
@@ -53,8 +52,10 @@ export default {
     async getBusiness() {
       if (!this.$route.query.keyword) {
         this.businesses = await BusinessService.getBusinesses()
-        if (this.$route.params.type)
+        if (this.$route.query.type) {
+          this.selected = true
           this.businesses = await BusinessService.getBusinessByType(this.$route.query.type)
+        }
       } else {
         this.businesses = await BusinessService.searchKeyword(this.$route.query.keyword)
       }
