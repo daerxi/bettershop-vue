@@ -28,6 +28,7 @@ import FormComponent from "@/components/Form";
 import SubmitButton from "@/components/SubmitButton";
 import UsersService from "@/api/UsersService";
 import { openAlert, saveAuth } from "@/utils/helper";
+import { router } from "@/router";
 
 export default {
   name: 'ForgotPassword',
@@ -56,6 +57,7 @@ export default {
       await UsersService.verifyCode(this.verificationCode).then(async res => {
         this.userToken = res.data
         saveAuth(this.userToken)
+        await router.push('Reset Password')
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())
       })
