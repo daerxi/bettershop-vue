@@ -48,11 +48,14 @@ export default {
       }
     }
   },
-  async beforeCreate() {
-    this.categories = await CategoriesService.getCategories()
-    this.business = await this.getInfo()
+  async created() {
+    await this.getCategories()
+    await this.getInfo()
   },
   methods: {
+    async getCategories() {
+      this.categories = await CategoriesService.getCategories()
+    },
     async updateInfo() {
       this.alertOpen = false
       await BusinessService.updateInfo(userToken(), this.business).then(async res => {
