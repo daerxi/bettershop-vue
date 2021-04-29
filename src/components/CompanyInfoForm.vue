@@ -1,6 +1,5 @@
 <template>
-  <form-component title="Edit Company Info">
-    <alert-component message="haha"></alert-component>
+  <form-component :alert-open="alertOpen" title="Edit Company Info" :type="type" :message="message">
     <input-component type="text" name="Company Name" v-model="business.name"></input-component>
     <dropdown-component class="h-6" v-model="business.category" :options="categories"
                         placeholder="Please select your category"></dropdown-component>
@@ -22,14 +21,16 @@ import DropdownComponent from "@/components/Dropdown";
 import CategoriesService from "@/APIs/CategoriesService";
 import SubmitButton from "@/components/SubmitButton";
 import BusinessService from "@/APIs/BusinessService";
-import AlertComponent from "@/components/Alert";
 
 export default {
   name: "CompanyInfoForm",
-  components: {AlertComponent, SubmitButton, DropdownComponent, InputComponent, FormComponent},
+  components: {SubmitButton, DropdownComponent, InputComponent, FormComponent},
   data() {
     return {
+      alertOpen: false,
+      message: '',
       categories: [],
+      type: 'error',
       business: {
         name: '',
         category: '',
@@ -48,10 +49,17 @@ export default {
   },
   methods: {
     async updateInfo() {
+      this.alertOpen = false
       await BusinessService.updateInfo(userToken(), this.business).then(async res => {
+        this.alertOpen = true
+        this.type = "success"
+        this.message = "Updated successfully."
         console.log(res)
       }).catch(e => {
+        this.alertOpen = true
+        this.type = "error"
         console.error(e)
+        this.message = "Update failed."
       })
     },
     async getInfo() {
