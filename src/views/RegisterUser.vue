@@ -1,5 +1,5 @@
 <template>
-  <form-component title="Sign up">
+  <form-component :alert-open="alertOpen" :type="type" :message="message" title="Sign up">
 
     <input-component
         type="text"
@@ -30,8 +30,6 @@
 
     <checkbox v-bind:check="check" label="Are you signing up as a business?"></checkbox>
 
-    <p class="error text-red-800 mb-4" v-if="error">{{ error }}</p>
-
     <submit-button v-bind:fn="createUser" title="Create Account"></submit-button>
     <t-c-p/>
 
@@ -51,7 +49,7 @@ import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import Checkbox from "@/components/Checkbox";
 import SubmitButton from "@/components/SubmitButton";
-import { saveAuth } from "@/utils/helper";
+import { isNullOrEmpty, openAlert, saveAuth } from "@/utils/helper";
 
 export default {
   name: 'RegisterUser',
@@ -59,13 +57,15 @@ export default {
   data() {
     return {
       user: {},
-      error: '',
       userName: '',
       email: '',
       password: '',
       password2: '',
       isBusiness: true,
-      company: ''
+      company: '',
+      alertOpen: false,
+      type: '',
+      message: ''
     }
   },
   methods: {
@@ -74,12 +74,14 @@ export default {
     },
     async createUser() {
       try {
-        if (this.password !== this.password2) {
-          this.error = "The password is not same."
+        if (isNullOrEmpty(this.userName) || isNullOrEmpty(this.email) || isNullOrEmpty(this.password) || isNullOrEmpty(this.password2)) {
+          openAlert(this, "error", "Please fill out required fields.")
+        } else if (this.password !== this.password2) {
+          openAlert(this, "error", "The password is not same.")
           this.password = '';
           this.password2 = '';
         } else if (!this.email.includes("@")) {
-          this.error = "The email is invalid."
+          openAlert(this, "error", "The email is invalid.")
         } else {
           const body = {
             userName: this.userName,
@@ -95,15 +97,14 @@ export default {
               saveAuth(this.userToken)
             })
           }).catch(e => {
-            const error = e.response.data.error.toString()
-            console.log(error);
+            let error = e.response.data.error.toString()
             if (error === "email must be unique")
-              this.error = "Account exists."
-            else this.error = error
+              error = "Account exists."
+            openAlert(this, "error", error)
           })
         }
       } catch (err) {
-        this.error = err
+        openAlert(this, "error", err.toString())
       }
     }
   }

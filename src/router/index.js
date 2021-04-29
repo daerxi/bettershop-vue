@@ -9,6 +9,7 @@ import UserProfile from "@/views/UserProfile";
 import CompanyInfoForm from "@/views/CompanyInfoForm";
 
 import { verifyAuth, isAuthenticated, isBusiness } from "@/utils/validation";
+import ResetPassword from "@/views/ResetPassword";
 
 Vue.use(VueRouter)
 
@@ -93,6 +94,11 @@ export const router = new VueRouter({
             name: 'Business Page',
             component: BusinessProfile,
             beforeEnter: requireAuth
+        },
+        {
+            path: '/resetPassword',
+            name: 'Reset Password',
+            component: ResetPassword
         }
     ]
 })

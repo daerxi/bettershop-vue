@@ -17,3 +17,7 @@ export const saveAuth = async userToken => {
     localStorage.setItem('authenticated', "true")
     return router.push('/')
 }
+
+export const isNullOrEmpty = (element) => {
+    return !element || element.trim() === ''
+}
