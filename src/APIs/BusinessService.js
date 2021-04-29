@@ -60,6 +60,23 @@ class BusinessService {
             }
         })
     }
+
+    static searchKeyword(keyword) {
+        return new Promise((resolve, reject) => {
+            try {
+                instance.get('/search?' + keyword).then(res => {
+                    const data = res.data
+                    resolve(
+                        data.map(businesses => ({
+                            ...businesses
+                        }))
+                    )
+                })
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
 }
 
 export default BusinessService;
