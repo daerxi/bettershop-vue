@@ -55,6 +55,16 @@ class UsersService {
             }
         })
     }
+
+    static forgotPassword(email) {
+        return instance.get("/forgotPassword?email=" + email)
+    }
+
+    static verifyCode(verificationCode) {
+        return instance.post("/verify", {
+            verificationCode
+        })
+    }
 }
 
 export default UsersService;
