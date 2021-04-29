@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import UsersService from '../APIs/UsersService'
+import UsersService from '../api/UsersService'
 import TCP from "@/components/TCP";
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";

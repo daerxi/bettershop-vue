@@ -21,9 +21,9 @@ import { userToken } from "@/utils/validation";
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import DropdownComponent from "@/components/Dropdown";
-import CategoriesService from "@/APIs/CategoriesService";
+import CategoriesService from "@/api/CategoriesService";
 import SubmitButton from "@/components/SubmitButton";
-import BusinessService from "@/APIs/BusinessService";
+import BusinessService from "@/api/BusinessService";
 import { openAlert } from "@/utils/helper";
 import ProfileComponent from "@/components/Profile";
 

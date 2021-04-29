@@ -22,7 +22,7 @@
 import ProfileComponent from "@/components/Profile";
 import Review from "@/components/Review";
 import { userToken } from "@/utils/validation";
-import UsersService from "@/APIs/UsersService";
+import UsersService from "@/api/UsersService";
 
 export default {
   name: "UserProfile",

@@ -13,7 +13,7 @@
 import SearchBar from "@/components/SearchBar";
 import ProfileButton from "@/components/Profile";
 import Categories from "@/components/Categories";
-import BusinessService from "@/APIs/BusinessService";
+import BusinessService from "@/api/BusinessService";
 import BusinessList from "@/components/BusinessList";
 
 export default {

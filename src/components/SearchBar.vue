@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import BusinessService from "@/APIs/BusinessService";
+import BusinessService from "@/api/BusinessService";
 
 export default {
   name: "SearchBar",

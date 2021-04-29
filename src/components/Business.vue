@@ -12,7 +12,7 @@
 <script>
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
-import UsersService from "@/APIs/UsersService";
+import UsersService from "@/api/UsersService";
 import { emptyAvatar, userToken } from "@/utils/validation";
 
 export default {

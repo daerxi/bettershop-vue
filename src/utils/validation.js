@@ -1,4 +1,4 @@
-import UsersService from "@/APIs/UsersService";
+import UsersService from "@/api/UsersService";
 
 export const verifyAuth = () => {
     if (localStorage.getItem('user-token')) {

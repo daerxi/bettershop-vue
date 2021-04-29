@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import UsersService from '../APIs/UsersService'
+import UsersService from '../api/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import { router } from "@/router";

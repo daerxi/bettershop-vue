@@ -17,7 +17,7 @@
 <script>
 import RoundImage from "@/components/RoundImage";
 import { isAuthenticated, userAvatar, userId, userToken, verifyAuth } from "@/utils/validation";
-import UsersService from "@/APIs/UsersService";
+import UsersService from "@/api/UsersService";
 import { router } from "@/router";
 
 export default {

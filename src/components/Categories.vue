@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import CategoriesService from "@/APIs/CategoriesService";
+import CategoriesService from "@/api/CategoriesService";
 
 export default {
   name: "Categories",

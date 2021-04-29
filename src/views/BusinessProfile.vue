@@ -13,7 +13,7 @@ import SearchBar from "@/components/SearchBar";
 import ProfileComponent from "@/components/Profile";
 import Business from "@/components/Business";
 import { userToken } from "@/utils/validation";
-import BusinessService from "@/APIs/BusinessService";
+import BusinessService from "@/api/BusinessService";
 
 export default {
   name: "BusinessProfile",
