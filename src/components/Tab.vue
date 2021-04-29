@@ -16,6 +16,9 @@
 
 <script>
 
+import { router } from "@/router";
+import BusinessService from "@/api/BusinessService";
+
 export default {
   name: "TabComponent",
   props: [
@@ -29,6 +32,11 @@ export default {
   methods: {
     async toggleTabs (tabNumber) {
       this.openTab = tabNumber
+    },
+    async getCategoriesByType (type) {
+      await router.push("?type=" + type).then(async () => {
+        this.businesses = await BusinessService.getBusinessByType(type)
+      })
     }
   }
 }

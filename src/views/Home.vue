@@ -50,7 +50,6 @@ export default {
       const query = '/?keyword=' + this.keyword
       await router.push(query)
     },
-,
     async getBusiness() {
       if (!this.$route.query.keyword) {
         this.businesses = await BusinessService.getBusinesses()
