@@ -5,8 +5,8 @@
       <search-bar v-model="keyword"></search-bar>
     </form>
     <categories></categories>
-    <business-list v-bind:businesses="businesses" v-bind:redirect-link="redirectLink"
-                   v-bind:rateValue=3>
+    <business-list v-if="selected" v-bind:businesses="businesses" v-bind:redirect-link="redirectLink"
+                   v-bind:rateValue=4>
     </business-list>
     <footer-component>Hey! You are reaching the end!</footer-component>
   </div>
@@ -37,7 +37,8 @@ export default {
       user: {},
       businesses: [],
       redirectLink: '/',
-      keyword: ''
+      keyword: '',
+      selected: false
     }
   },
   async created() {
@@ -49,9 +50,7 @@ export default {
       const query = '/?keyword=' + this.keyword
       await router.push(query)
     },
-    async onSelect() {
-      this.businesses = await BusinessService.getBusinessByType(this.$route.query.type)
-    },
+,
     async getBusiness() {
       if (!this.$route.query.keyword) {
         this.businesses = await BusinessService.getBusinesses()
