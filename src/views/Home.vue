@@ -3,7 +3,9 @@
     <profile-button></profile-button>
     <search-bar></search-bar>
     <categories></categories>
-    <business></business>
+    <business-list v-bind:businesses="businesses" v-bind:photo="photo" v-bind:redirect-link="redirectLink"
+                   v-bind:rateValue=3>
+    </business-list>
   </div>
 </template>
 
@@ -12,12 +14,12 @@ import SearchBar from "@/components/SearchBar";
 import ProfileButton from "@/components/Profile";
 import Categories from "@/components/Categories";
 import BusinessService from "@/APIs/BusinessService";
-import Business from "@/components/Business";
+import BusinessList from "@/components/BusinessList";
 
 export default {
   name: "Home.vue",
   components: {
-    Business,
+    BusinessList,
     Categories,
     SearchBar,
     ProfileButton
@@ -27,17 +29,17 @@ export default {
       business: false,
       authenticated: false,
       user: {},
-      wholeLists: [],
-      lists: []
+      businesses: [],
+      redirectLink: '/',
+      photo: "https://media.londolozi.com/wp-content/uploads/2018/03/20125221/ntsevu-Lioness-bw-JT-1398x932.jpg"
     }
   },
   async created() {
-    this.lists = await BusinessService.getBusinesses()
+    this.businesses = await BusinessService.getBusinesses()
     if (this.$route.params.type)
-      this.lists = await BusinessService.getBusinessByType(this.$route.params.type)
+      this.businesses = await BusinessService.getBusinessByType(this.$route.params.type)
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
