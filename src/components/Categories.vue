@@ -1,23 +1,16 @@
 <template>
-  <div
-      class="px-12 grid xl:grid-cols-10 2xl:grid-cols-10 lg:grid-cols-10 md:grid-cols-5 sm:grid-cols-5 grid-cols-2 gap-4">
-    <div v-for="(category,i) in categories" :key="i">
-      <router-link class="no-underline" :to="{ name: 'Home', query: { type: category.type.toLowerCase() }}">
-        <div
-            class="h-12 rounded-md flex items-center justify-center text-white text-base
-                   font-extrabold bg-blue-700 hover:bg-blue-800">
-          {{ category.type }}
-        </div>
-      </router-link>
-    </div>
+  <div>
+    <tab-component class="px-12" :options="categories" :click="onClick"></tab-component>
   </div>
 </template>
 
 <script>
 import CategoriesService from "@/api/CategoriesService";
+import TabComponent from "@/components/Tab";
 
 export default {
   name: "Categories",
+  components: {TabComponent},
   data() {
     return {
       categories: []
@@ -26,7 +19,13 @@ export default {
   async created() {
     try {
       this.categories = await CategoriesService.getCategories()
+      console.log(this.categories)
     } catch (err) {
+      //
+    }
+  },
+  methods: {
+    async onClick() {
       //
     }
   }
