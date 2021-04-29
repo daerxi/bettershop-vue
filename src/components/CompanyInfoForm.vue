@@ -21,6 +21,7 @@ import DropdownComponent from "@/components/Dropdown";
 import CategoriesService from "@/APIs/CategoriesService";
 import SubmitButton from "@/components/SubmitButton";
 import BusinessService from "@/APIs/BusinessService";
+import { openErrorAlert, openSuccessAlert } from "@/utils/helper";
 
 export default {
   name: "CompanyInfoForm",
@@ -51,15 +52,11 @@ export default {
     async updateInfo() {
       this.alertOpen = false
       await BusinessService.updateInfo(userToken(), this.business).then(async res => {
-        this.alertOpen = true
-        this.type = "success"
-        this.message = "Updated successfully."
+        openSuccessAlert(this, "Updated successfully")
         console.log(res)
       }).catch(e => {
-        this.alertOpen = true
-        this.type = "error"
+        openErrorAlert(this, "Update failed.")
         console.error(e)
-        this.message = "Update failed."
       })
     },
     async getInfo() {
