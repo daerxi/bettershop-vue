@@ -68,7 +68,8 @@ export default {
     },
     async onSubmit() {
       if (this.business.id) {
-        await BusinessService.postReview(this.content, this.rate, this.business.id).then(async review => {
+        this.rate = localStorage.getItem("rate-value")
+        await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
           console.log(review)
           window.location.reload()
         })

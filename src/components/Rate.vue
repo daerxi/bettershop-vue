@@ -21,6 +21,7 @@ export default {
     }
   },
   async created() {
+    localStorage.setItem('rate-value', 0)
     await this.assignStar()
   },
   methods: {
@@ -31,6 +32,7 @@ export default {
     },
     async assignNumber(i) {
       this.rateValue = i + 1
+      localStorage.setItem('rate-value', this.rateValue)
       console.log(this.rateValue)
       this.stars = []
       await this.assignStar()

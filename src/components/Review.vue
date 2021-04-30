@@ -24,6 +24,9 @@ export default {
       }
     }
   },
+  async created() {
+    console.log(this.review)
+  },
   async emptyAvatar() {
     if (this.user.avatar === null) this.user.avatar = emptyAvatar
   }
