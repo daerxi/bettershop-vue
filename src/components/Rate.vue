@@ -17,25 +17,26 @@ export default {
   props: ['rateValue'],
   data() {
     return {
-      stars: []
+      stars: [],
+      rate: this.rateValue
     }
   },
   async created() {
     localStorage.setItem('rate-value', 0)
-    await this.assignStar()
+    await this.assignStar(this.rateValue)
   },
   methods: {
-    async assignStar() {
+    async assignStar(rate) {
       for (let i = 0; i < 5; i++) {
-        this.stars.push(parseInt(this.rateValue) > i)
+        this.stars.push(parseInt(rate) > i)
       }
     },
     async assignNumber(i) {
-      this.rateValue = i + 1
-      localStorage.setItem('rate-value', this.rateValue)
-      console.log(this.rateValue)
+      this.rate = i + 1
+      localStorage.setItem('rate-value', this.rate)
+      console.log(this.rate)
       this.stars = []
-      await this.assignStar()
+      await this.assignStar(this.rate)
     }
   }
 }
