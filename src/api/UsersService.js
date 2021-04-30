@@ -1,7 +1,8 @@
 import { API } from "@/utils/helper";
 import { userToken } from "@/utils/validation";
+import { BASE_URL } from "@/utils/config";
 
-const instance = API('http://localhost:4040/users')
+const instance = API(BASE_URL + '/users')
 
 class UsersService {
     static getUsers() {

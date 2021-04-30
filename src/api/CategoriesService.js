@@ -1,6 +1,7 @@
 import {API} from "@/utils/helper";
+import { BASE_URL } from "@/utils/config";
 
-const instance = API('http://localhost:4040/categories')
+const instance = API(BASE_URL + '/categories')
 
 class CategoriesService {
     static getCategories() {

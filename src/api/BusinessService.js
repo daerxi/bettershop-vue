@@ -1,7 +1,8 @@
 import { API } from "@/utils/helper";
 import { userId, userToken } from "@/utils/validation";
+import { BASE_URL } from "@/utils/config";
 
-const instance = API('http://localhost:4040/business')
+const instance = API(BASE_URL + '/business')
 
 class BusinessService {
     static getBusinesses() {
