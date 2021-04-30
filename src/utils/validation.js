@@ -1,6 +1,7 @@
 import UsersService from "@/api/UsersService";
+import { router } from "@/router";
 
-export const verifyAuth = () => {
+export const verifyAuth = async () => {
     if (localStorage.getItem('user-token')) {
         UsersService.getMe().then(r => {
             localStorage.setItem('authenticated', "true")
@@ -8,6 +9,9 @@ export const verifyAuth = () => {
             localStorage.setItem('is-business', r.data.isBusiness)
             localStorage.setItem('user-avatar', r.data.avatar)
             localStorage.setItem('user-email', r.data.email)
+            if (!r.data.active) {
+                router.push('/')
+            }
         }).catch(() => {
             localStorage.clear()
         })
