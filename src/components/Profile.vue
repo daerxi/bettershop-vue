@@ -2,14 +2,26 @@
   <div class="flex flex-wrap">
     <div class="w-16 px-4 absolute top-0 right-0 px-16 py-12">
       <round-image :user="user"></round-image>
-      <div class="inline-flex py-4">
-        <button v-if="authenticated" class="bg-gray-300 hover:bg-gray-500 text-blue-700 font-bold py-1 rounded"
-                v-on:click="logout">Logout
-        </button>
-        <router-link v-else class="no-underline" to="/login">
-          <button class="bg-gray-300 hover:bg-gray-500 text-blue-700 font-bold py-1 rounded">Login</button>
-        </router-link>
-      </div>
+      <ul class="flex grid grid-cols-1">
+        <li class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+            v-on:click="edit">
+          <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
+            Edit
+          </a>
+        </li>
+        <li class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+            v-on:click="logout">
+          <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
+            Logout
+          </a>
+        </li>
+        <li v-if="!authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+            v-on:click="login">
+          <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
+            Login
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -37,9 +49,9 @@ export default {
   async created() {
     await verifyAuth()
     if (this.$route.name === 'User Profile') {
-       await UsersService.getUser(this.$route.params.id).then(async res=> {
-         this.user = res.data
-       })
+      await UsersService.getUser(this.$route.params.id).then(async res => {
+        this.user = res.data
+      })
     } else {
       this.user.avatar = userAvatar()
     }
@@ -47,9 +59,9 @@ export default {
   },
   methods: {
     async logout() {
-      await UsersService.logoutUser(userToken()).then(() => {
+      await UsersService.logoutUser(userToken()).then(async () => {
         localStorage.clear()
-        router.push('/')
+        await router.push('/')
       }).catch(e => console.log(e))
       await this.getAuth()
     },
@@ -57,6 +69,12 @@ export default {
       this.authenticated = isAuthenticated()
       this.photo = userAvatar()
       this.userId = userId()
+    },
+    async edit() {
+      await router.push('/business/edit')
+    },
+    async login() {
+      await router.push('/login')
     }
   }
 }
