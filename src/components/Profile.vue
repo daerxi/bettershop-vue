@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="absolute top-0 right-0 p-3 2xl:p-12 xl:p-12 lg:p-12 md:p-12 sm:p-12">
-      <round-image :user="user"></round-image>
+    <div class="absolute top-0 right-0 sm:p-1 p-12">
+      <round-image class="w-full" :user="user"></round-image>
       <ul class="flex grid grid-cols-1">
         <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="edit">

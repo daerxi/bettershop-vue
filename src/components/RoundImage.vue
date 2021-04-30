@@ -1,7 +1,7 @@
 <template>
-  <button :redirect="redirect" class="bg-transparent border-none w-20 h-20">
+  <button :redirect="redirect" class="bg-transparent border-none">
     <img :src="user.avatar"
-         class="inline object-cover border-none w-16 h-16 mr-2 rounded-full" alt="user profile"/>
+         class="inline border-none w-16 h-16 mr-2 rounded-full" alt="user profile"/>
   </button>
 </template>
 

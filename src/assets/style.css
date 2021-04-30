@@ -159,9 +159,9 @@ img, video {
     width: 100%
 }
 
-@media (min-width: 640px) {
+@media (min-width: 120px) {
     .container {
-        max-width: 640px
+        max-width: 240px
     }
 }
 
@@ -11391,7 +11391,7 @@ img, video {
 }
 
 .max-w-screen-sm {
-    max-width: 640px
+    max-width: 240px
 }
 
 .max-w-screen-md {
@@ -21110,14 +21110,14 @@ img, video {
     animation: bounce 1s infinite
 }
 
-@media (min-width: 640px) {
+@media (min-width: 120px) {
     .sm\:container {
         width: 100%
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 120px) {
         .sm\:container {
-            max-width: 640px
+            max-width: 240px
         }
     }@media (min-width: 768px) {
     .sm\:container {
@@ -32339,7 +32339,7 @@ img, video {
     }
 
     .sm\:max-w-screen-sm {
-        max-width: 640px
+        max-width: 240px
     }
 
     .sm\:max-w-screen-md {
@@ -42034,9 +42034,9 @@ img, video {
         width: 100%
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 120px) {
         .md\:container {
-            max-width: 640px
+            max-width: 240px
         }
     }@media (min-width: 768px) {
     .md\:container {
@@ -53258,7 +53258,7 @@ img, video {
     }
 
     .md\:max-w-screen-sm {
-        max-width: 640px
+        max-width: 240px
     }
 
     .md\:max-w-screen-md {
@@ -62953,9 +62953,9 @@ img, video {
         width: 100%
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 120px) {
         .lg\:container {
-            max-width: 640px
+            max-width: 240px
         }
     }@media (min-width: 768px) {
     .lg\:container {
@@ -74177,7 +74177,7 @@ img, video {
     }
 
     .lg\:max-w-screen-sm {
-        max-width: 640px
+        max-width: 240px
     }
 
     .lg\:max-w-screen-md {
@@ -83872,9 +83872,9 @@ img, video {
         width: 100%
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 120px) {
         .xl\:container {
-            max-width: 640px
+            max-width: 240px
         }
     }@media (min-width: 768px) {
     .xl\:container {
@@ -95096,7 +95096,7 @@ img, video {
     }
 
     .xl\:max-w-screen-sm {
-        max-width: 640px
+        max-width: 240px
     }
 
     .xl\:max-w-screen-md {

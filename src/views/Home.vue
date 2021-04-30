@@ -1,12 +1,14 @@
 <template>
   <div>
     <profile-button></profile-button>
+    <div class="h-5"></div>
     <form @submit.prevent="onSubmit">
       <search-bar v-model="keyword"></search-bar>
     </form>
     <categories :selected="selected"></categories>
     <business-list v-bind:businesses="businesses">
     </business-list>
+
     <footer-component>Hey! You are reaching the end!</footer-component>
   </div>
 </template>
