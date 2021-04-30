@@ -1,6 +1,6 @@
 <template>
   <div class="p-8">
-    <rate v-bind:rateValue=review.rate>
+    <rate editable=false v-bind:rateValue="review.rate">
     </rate>
     <round-image :user="user"></round-image>
     <p class="inline">{{ review.content }}</p>

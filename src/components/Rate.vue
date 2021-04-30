@@ -1,6 +1,7 @@
 <template>
-  <div class="text-xl">
-    <span v-for="(star,i) in stars" :key="i">
+  <div>
+    <div class="text-xl" v-if="editable">
+          <span v-for="(star,i) in stars" :key="i">
       <a v-on:click="assignNumber(i)">
         <span v-if="star">★</span>
       </a>
@@ -8,13 +9,21 @@
         <span v-if="!star">☆</span>
       </a>
     </span>
+    </div>
+
+    <div class="text-l" v-if="!editable">
+      <span v-for="(star,i) in stars" :key="i">
+        <a><span v-if="star">★</span></a>
+        <a><span v-if="!star">☆</span></a>
+    </span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Rate",
-  props: ['rateValue'],
+  props: ['rateValue', 'editable'],
   data() {
     return {
       stars: [],

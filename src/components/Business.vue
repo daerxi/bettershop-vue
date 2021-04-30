@@ -4,7 +4,7 @@
     <div class="block">{{ business.name }}</div>
     <br>
     <div class="block">
-      <rate v-bind:rateValue="rateValue"></rate>
+      <rate editable=false v-bind:rateValue="rateValue"></rate>
     </div>
   </div>
 </template>

@@ -32,7 +32,7 @@ class UsersService {
     }
 
     static updatePassword(password, token = userToken()) {
-        return instance.post('/login', {
+        return instance.put('/resetPassword', {
             password
         }, {
             headers: {

@@ -4,7 +4,7 @@
     <search-bar></search-bar>
     <business :business="business">
     </business>
-    <rate></rate>
+    <rate editable=true></rate>
     <text-area v-model="content"></text-area>
     <div class="py-2"></div>
     <div class="flex flex-wrap w-20">
