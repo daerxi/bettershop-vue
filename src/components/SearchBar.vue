@@ -1,7 +1,7 @@
 <template>
-  <div class="px-2 xl:px-12 lg:px-12 md:px-10 sm:px-4 py-16">
+  <div class="p-12 sm:px-0">
     <input
-        class="w-full xl:w-7/12 lg:w-8/12 md:w-8/12 sm:w-10/12 h-16 p-2
+        class="p-2 w-8/12 h-12
                focus:outline-none focus:shadow-outline
                text-base shadow-lg placeholder-gray-500
                border rounded border-gray-200"

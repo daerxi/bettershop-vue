@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <div class="p-12">
-      <a><h1 v-on:click="reload" class="text-5xl sm:text-xl">BetterShop</h1></a>
+      <a>
+        <h1 v-on:click="reload"
+            v-bind:class="{'text-xl': $isMobile(),
+                           'text-5xl': !$isMobile()}">
+          BetterShop</h1>
+      </a>
       <router-view></router-view>
     </div>
   </div>

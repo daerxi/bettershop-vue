@@ -5,6 +5,8 @@ import { router } from '@/router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import store from './store'
+import VueMobileDetection from 'vue-mobile-detection'
+Vue.use(VueMobileDetection)
 
 library.add(faUserSecret)
 
