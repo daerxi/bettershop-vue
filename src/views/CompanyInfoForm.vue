@@ -58,7 +58,7 @@ export default {
     },
     async updateInfo() {
       this.alertOpen = false
-      await BusinessService.updateInfo(userToken(), this.business).then(async res => {
+      await BusinessService.updateInfo(userToken(), this.business).then(async () => {
         openAlert(this, "success", "Updated successfully")
       }).catch(e => {
         openAlert(this, "error", "Update failed.")
