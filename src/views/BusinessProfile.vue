@@ -2,13 +2,16 @@
   <div>
     <profile-component></profile-component>
     <search-bar></search-bar>
-    <business v-bind:business="business">
+    <business :business="business">
     </business>
-    <text-area></text-area>
+    <rate></rate>
+    <text-area v-model="content"></text-area>
     <div class="py-2"></div>
     <div class="flex flex-wrap w-20">
-      <submit-button title="Submit"></submit-button>
+      <submit-button title="Submit" :fn="onSubmit"></submit-button>
     </div>
+
+    <review-list :reviews="reviews"></review-list>
 
   </div>
 </template>
@@ -21,10 +24,12 @@ import BusinessService from "@/api/BusinessService";
 import TextArea from "@/components/TextArea";
 import SubmitButton from "@/components/SubmitButton";
 import { userToken } from "@/utils/validation";
+import ReviewList from "@/components/ReviewList";
+import Rate from "@/components/Rate"
 
 export default {
   name: "BusinessProfile",
-  components: {SubmitButton, TextArea, Business, ProfileComponent, SearchBar},
+  components: {ReviewList, SubmitButton, TextArea, Business, ProfileComponent, SearchBar, Rate},
   data() {
     return {
       business: {
@@ -63,7 +68,10 @@ export default {
     },
     async onSubmit() {
       if (this.business.id) {
-        await  BusinessService.postReview(this.content, this.rate, this.business.id)
+        await BusinessService.postReview(this.content, this.rate, this.business.id).then(async review => {
+          console.log(review)
+          window.location.reload()
+        })
       }
     }
   }

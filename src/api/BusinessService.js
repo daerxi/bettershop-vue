@@ -82,7 +82,7 @@ class BusinessService {
     static getReviewsByBusinessId(businessId) {
         return new Promise((resolve, reject) => {
             try {
-                instance.get('/businesses/' + businessId + '/posts').then(res => {
+                instance.get(businessId + '/posts').then(res => {
                     const data = res.data
                     resolve(
                         data.map(reviews => ({
@@ -97,7 +97,7 @@ class BusinessService {
     }
 
     static postReview(content, rate, businessId) {
-        return instance.post('/', {
+        return instance.post(businessId + '/posts', {
             content,
             rate,
             businessId,

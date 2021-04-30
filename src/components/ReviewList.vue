@@ -8,6 +8,7 @@
 
 <script>
 import ReviewComponent from "@/components/Review";
+
 export default {
   name: "ReviewList",
   components: {ReviewComponent},
