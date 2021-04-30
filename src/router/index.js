@@ -3,13 +3,14 @@ import VueRouter from 'vue-router'
 import Home from "@/views/Home"
 import LoginUser from "@/views/LoginUser"
 import RegisterUser from "@/views/RegisterUser";
-import ForgotPassword from "@/components/ForgotPassword";
+import ForgotPassword from "@/views/ForgotPassword";
 import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
 import CompanyInfoForm from "@/views/CompanyInfoForm";
 
 import { verifyAuth, isAuthenticated, isBusiness } from "@/utils/validation";
 import ResetPassword from "@/views/ResetPassword";
+import VerifyCode from "@/views/VerifyCode";
 
 Vue.use(VueRouter)
 
@@ -98,7 +99,13 @@ export const router = new VueRouter({
         {
             path: '/resetPassword',
             name: 'Reset Password',
-            component: ResetPassword
+            component: ResetPassword,
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/verifyCode',
+            name: 'Verify Code',
+            component: VerifyCode
         }
     ]
 })
