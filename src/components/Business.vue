@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap p-8">
-    <round-image v-bind:photo="businessUser.avatar" v-bind:redirect-link="redirectLink"></round-image>
+    <round-image :user="businessUser"></round-image>
     <div class="block">{{ business.name }}</div>
     <br>
     <div class="block">
@@ -47,7 +47,7 @@ export default {
   methods: {
     async getBusinessUser() {
       if (this.business.userId > 0) {
-        await UsersService.getUser(userToken(),this.business.userId).then(res => {
+        await UsersService.getUser(userToken(), this.business.userId).then(res => {
           this.businessUser = res.data
           if (!this.businessUser.avatar) this.businessUser.avatar = emptyAvatar
           this.redirectLink = "/businesses/" + this.business.id

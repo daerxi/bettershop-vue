@@ -9,10 +9,10 @@
         <h3 v-if="isMe" class="p-4">My Review</h3>
       </div>
       <div class="flex flex-wrap content-start px-4">
-        <review></review>
+        <review-component></review-component>
       </div>
       <div class="flex flex-wrap content-start px-4">
-        <review></review>
+        <review-component></review-component>
       </div>
     </div>
   </div>
@@ -20,13 +20,13 @@
 
 <script>
 import ProfileComponent from "@/components/Profile";
-import Review from "@/components/Review";
 import { userToken } from "@/utils/validation";
 import UsersService from "@/api/UsersService";
+import ReviewComponent from "@/components/Review";
 
 export default {
   name: "UserProfile",
-  components: {Review, ProfileComponent},
+  components: {ReviewComponent, ProfileComponent},
   data() {
     return {
       reviews: [],

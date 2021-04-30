@@ -2,8 +2,7 @@
   <div>
     <profile-component></profile-component>
     <search-bar></search-bar>
-    <business v-bind:business="business"
-              v-bind:rateValue=3>
+    <business v-bind:business="business">
     </business>
   </div>
 </template>
