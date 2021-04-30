@@ -14,8 +14,9 @@ export default {
   name: 'App',
   methods: {
     async reload() {
-      await router.push("/")
-      window.location.reload()
+      await router.push("/").then(()=> {
+        window.location.reload()
+      }).catch(e => console.warn(e))
     }
   }
 }

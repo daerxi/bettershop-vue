@@ -46,7 +46,7 @@ export default {
     async onSubmit() {
       this.businesses = await BusinessService.searchKeyword(this.keyword)
       const query = '/?keyword=' + this.keyword
-      await router.push(query)
+      await router.push(query).catch(e => console.warn(e))
     },
     async getBusiness() {
       if (!this.$route.query.keyword) {
