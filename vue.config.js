@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/'
+    publicPath: 'bettershop-h6y59.ondigitalocean.app'
 }
