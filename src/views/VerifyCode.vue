@@ -33,7 +33,7 @@ export default {
       message: '',
       alertOpen: false,
       userToken: {},
-      resetPassword: localStorage.getItem('reset-password') === "true"
+      resetPassword: localStorage.getItem('reset-password')
     }
   },
   methods: {
