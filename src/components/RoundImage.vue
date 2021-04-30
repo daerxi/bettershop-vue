@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import { emptyAvatar, isBusiness } from "@/utils/validation";
+import { emptyAvatar, isBusiness, userId, userToken } from "@/utils/validation";
 import { router } from "@/router";
+import BusinessService from "@/api/BusinessService";
 
 export default {
   name: "RoundImage",
@@ -17,10 +18,15 @@ export default {
   },
   methods: {
     async redirectToProfile() {
-      if (isBusiness()) {
-        await router.push('/business/profile')
+      if (this.user.userId === userId()) {
+        if (isBusiness()) {
+          await router.push('/business/profile')
+        } else {
+          await router.push('/profile')
+        }
       } else {
-        await router.push('/profile')
+        await BusinessService.getBusiness(userToken(), user.id)
+        await router.push('/businesses/')
       }
     }
   }
