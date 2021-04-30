@@ -13,6 +13,11 @@ import BusinessService from "@/api/BusinessService";
 export default {
   name: "RoundImage",
   props: ['user'],
+  data() {
+    return {
+      business: {}
+    }
+  },
   async created() {
     if (!this.user.avatar) this.user.avatar = emptyAvatar
   },
@@ -25,8 +30,11 @@ export default {
           await router.push('/profile')
         }
       } else {
-        await BusinessService.getBusiness(userToken(), user.id)
-        await router.push('/businesses/')
+        await BusinessService.getBusinessByUserId(userToken(), this.user.id)
+            .then(async res => {
+              this.business = res.data
+            })
+        await router.push('/businesses/' + this.business.id)
       }
     }
   }

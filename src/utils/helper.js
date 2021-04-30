@@ -15,10 +15,11 @@ export const saveAuth = async userToken => {
     localStorage.setItem('user-token', userToken.token)
     localStorage.setItem('user-id', userToken.userId)
     localStorage.setItem('authenticated', "true")
+    console.log()
     if (localStorage.getItem('reset-password')) {
         localStorage.removeItem('reset-password')
-        return router.push('/')
-    } else return router.push('/resetPassword')
+        return router.push('/resetPassword')
+    } else return router.push('/')
 }
 
 export const isNullOrEmpty = (element) => {
