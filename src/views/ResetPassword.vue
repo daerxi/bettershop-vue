@@ -6,12 +6,10 @@
           type="password"
           name="Password"
           v-model="password"/>
-
       <input-component
           type="password"
           name="Confirm your password"
           v-model="password2"/>
-
       <submit-button v-bind:fn="reset" title="Submit"></submit-button>
     </form-component>
   </div>
@@ -20,11 +18,11 @@
 <script>
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
-import { isNullOrEmpty, openAlert } from "@/utils/helper";
-import UsersService from "@/api/UsersService";
-import { router } from "@/router";
 import ProfileComponent from "@/components/Profile";
 import SubmitButton from "@/components/SubmitButton";
+import UsersService from "@/api/UsersService";
+import { isNullOrEmpty, openAlert } from "@/utils/helper";
+import { router } from "@/router";
 
 export default {
   name: "ResetPassword",

@@ -20,7 +20,6 @@
 
 <script>
 import ProfileComponent from "@/components/Profile";
-import { userToken } from "@/utils/validation";
 import UsersService from "@/api/UsersService";
 import ReviewComponent from "@/components/Review";
 
@@ -43,7 +42,7 @@ export default {
     async getUserById() {
       this.isMe = !this.$route.params.userId
       if (!this.isMe) {
-        await UsersService.getUser(userToken(), this.$route.params.userId).then(async res => {
+        await UsersService.getUser(this.$route.params.userId).then(async res => {
           this.user = res.data
         })
       } else {

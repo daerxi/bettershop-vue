@@ -1,12 +1,10 @@
 <template>
-  <div class="p-2">
     <input
         class="block border border-gray-300 w-full p-4 rounded mb-4"
         :name="name"
         :placeholder="name"
         :value="value" @input="$emit('input', $event.target.value)"
     />
-  </div>
 </template>
 
 <script>

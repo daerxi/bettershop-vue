@@ -49,7 +49,7 @@ class UsersService {
         })
     }
 
-    static getUser(token, id) {
+    static getUser(id) {
         return instance.get('/' + id)
     }
 

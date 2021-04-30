@@ -11,6 +11,7 @@ export const verifyAuth = async () => {
             localStorage.setItem('user-email', r.data.email)
             if (!r.data.active) {
                 router.push('/verifyCode')
+                localStorage.removeItem('reset-password')
             }
         }).catch(() => {
             localStorage.clear()

@@ -6,12 +6,15 @@
 </template>
 
 <script>
-import { isBusiness } from "@/utils/validation";
+import { emptyAvatar, isBusiness } from "@/utils/validation";
 import { router } from "@/router";
 
 export default {
   name: "RoundImage",
   props: ['user'],
+  async created() {
+    if (!this.user.avatar) this.user.avatar = emptyAvatar
+  },
   methods: {
     async redirectToProfile() {
       if (isBusiness()) {

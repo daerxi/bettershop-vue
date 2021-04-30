@@ -34,10 +34,16 @@ export default {
       userId: Number
     }
   },
-  created() {
-    verifyAuth()
-    this.user.avatar = userAvatar()
-    this.getAuth()
+  async created() {
+    await verifyAuth()
+    if (this.$route.name === 'User Profile') {
+       await UsersService.getUser(this.$route.params.id).then(async res=> {
+         this.user = res.data
+       })
+    } else {
+      this.user.avatar = userAvatar()
+    }
+    await this.getAuth()
   },
   methods: {
     async logout() {
