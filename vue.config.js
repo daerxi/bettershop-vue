@@ -1,3 +1,7 @@
 module.exports = {
-    publicPath: '/'
+    devServer: {
+        allowedHosts: [
+            'ondigitalocean.app'
+        ]
+    }
 }
