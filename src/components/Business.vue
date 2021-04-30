@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap p-8">
-    <round-image :user="businessUser"></round-image>
+    <round-image :redirect="redirectLink" :user="businessUser"></round-image>
     <div class="block">{{ business.name }}</div>
     <br>
     <div class="block">

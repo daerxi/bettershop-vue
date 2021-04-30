@@ -60,7 +60,6 @@ export default {
       this.alertOpen = false
       await BusinessService.updateInfo(userToken(), this.business).then(async res => {
         openAlert(this, "success", "Updated successfully")
-        console.log(res)
       }).catch(e => {
         openAlert(this, "error", "Update failed.")
         console.error(e)
@@ -69,7 +68,6 @@ export default {
     async getInfo() {
       await BusinessService.getInfo(userToken()).then(async res => {
         this.business = res.data
-        console.log(this.business)
       })
     }
   }

@@ -48,7 +48,6 @@ export default {
       } else {
         await UsersService.getMe().then(async res => {
           this.user = res.data
-          console.log(this.user);
         })
       }
     }
