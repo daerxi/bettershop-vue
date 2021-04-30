@@ -3,13 +3,13 @@
     <div class="w-16 px-4 absolute top-0 right-0 px-16 py-12">
       <round-image :user="user"></round-image>
       <ul class="flex grid grid-cols-1">
-        <li class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+        <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="edit">
           <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
             Edit
           </a>
         </li>
-        <li class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+        <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="logout">
           <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
             Logout
@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       redirectLink: "/profile",
-      authenticated: Boolean,
+      authenticated: false,
       photo: String,
       user: {
         avatar: ''

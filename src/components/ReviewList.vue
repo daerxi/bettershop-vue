@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-for="(review,i) in reviews" :key="i" class="flex flex-wrap p-4">
+  <div class="w-full block flex-wrap p-4">
+    <div v-for="(review,i) in reviews" :key="i">
       <review-component :review="review"></review-component>
     </div>
   </div>
