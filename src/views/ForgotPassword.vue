@@ -37,8 +37,9 @@ export default {
   methods: {
     async forgot() {
       await UsersService.forgotPassword(this.email).then(async () => {
-        await router.push('Verify Code')
         openAlert(this, "success", "Check your email for verification code.")
+        localStorage.setItem("reset-password", "true")
+        await router.push('Verify Code')
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())
       })
