@@ -1,6 +1,6 @@
 <template>
   <div class="p-8">
-    <rate editable=false v-bind:rateValue="review.rate">
+    <rate :editable="editable" v-bind:rateValue="review.rate">
     </rate>
     <round-image :user="user"></round-image>
     <p class="inline">{{ review.content }}</p>
@@ -21,7 +21,8 @@ export default {
       user: {
         id: 0,
         avatar: ''
-      }
+      },
+      editable: false
     }
   },
   async created() {

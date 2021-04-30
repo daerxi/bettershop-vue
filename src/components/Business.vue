@@ -4,7 +4,7 @@
     <div class="block">{{ business.name }}</div>
     <br>
     <div class="block">
-      <rate editable=false v-bind:rateValue="rateValue"></rate>
+      <rate :editable="editable" v-bind:rateValue="rateValue"></rate>
     </div>
   </div>
 </template>
@@ -38,7 +38,8 @@ export default {
       redirectLink: "/",
       businessUser: {
         avatar: ''
-      }
+      },
+      editable: false
     }
   },
   async created() {
