@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="w-16 px-4 absolute top-0 right-0 px-16 py-12">
+    <div class="absolute top-0 right-0 p-3 2xl:p-12 xl:p-12 lg:p-12 md:p-12 sm:p-12">
       <round-image :user="user"></round-image>
       <ul class="flex grid grid-cols-1">
         <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"

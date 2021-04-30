@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div class="p-24">
-      <a><h1 v-on:click="reload" class="bold text-5xl">BetterShop</h1></a>
+    <div class="p-12">
+      <a><h1 v-on:click="reload" class="bold xl:text-5xl lg:text-5xl md:text-5xl sm:text-5xl text-2xl">BetterShop</h1></a>
       <router-view></router-view>
     </div>
   </div>

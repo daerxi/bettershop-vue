@@ -1,7 +1,8 @@
 <template>
   <div class="px-16 py-16">
     <input
-        class="w-7/12 h-16 px-3 rounded focus:outline-none focus:shadow-outline text-base shadow-lg placeholder-gray-500"
+        class="xl:w-7/12 lg:w-8/12 md:w-8/12 sm:w-10/12 h-16 px-3 rounded focus:outline-none focus:shadow-outline
+               text-base shadow-lg placeholder-gray-500"
         type="search" placeholder="Search..."
         :value="value" @input="$emit('input', $event.target.value)"
     />
