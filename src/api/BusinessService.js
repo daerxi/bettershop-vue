@@ -1,5 +1,5 @@
-import {API} from "@/utils/helper";
-import { userId } from "@/utils/validation";
+import { API } from "@/utils/helper";
+import { userId, userToken } from "@/utils/validation";
 
 const instance = API('http://localhost:4040/business')
 
@@ -96,12 +96,16 @@ class BusinessService {
         })
     }
 
-    static postReview(content, rate, businessId) {
+    static postReview(content, rate, businessId, token = userToken()) {
         return instance.post(businessId + '/posts', {
             content,
             rate,
             businessId,
             userId: userId()
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
         })
     }
 
