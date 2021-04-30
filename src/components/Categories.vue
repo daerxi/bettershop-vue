@@ -31,7 +31,6 @@ export default {
   },
   async created() {
     try {
-      console.log(this.$route.name)
       if (this.$route.name === 'Home') localStorage.setItem("open-tab", -1)
       this.categories = await CategoriesService.getCategories()
       this.openTab = parseInt(localStorage.getItem("open-tab"))

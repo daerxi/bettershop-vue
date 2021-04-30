@@ -47,7 +47,7 @@ export default {
       } else {
         await UsersService.updatePassword(this.password).then(async () => {
           openAlert(this, "success", "Updated successfully.")
-          await router.push("Home")
+          await router.push("/")
         })
       }
     }

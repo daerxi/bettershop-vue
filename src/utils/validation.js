@@ -10,7 +10,7 @@ export const verifyAuth = async () => {
             localStorage.setItem('user-avatar', r.data.avatar)
             localStorage.setItem('user-email', r.data.email)
             if (!r.data.active) {
-                router.push('/')
+                router.push('/verifyCode')
             }
         }).catch(() => {
             localStorage.clear()

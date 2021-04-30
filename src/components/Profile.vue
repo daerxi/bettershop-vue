@@ -43,7 +43,7 @@ export default {
     async logout() {
       await UsersService.logoutUser(userToken()).then(() => {
         localStorage.clear()
-        router.push('Home')
+        router.push('/')
       }).catch(e => console.log(e))
       await this.getAuth()
     },
