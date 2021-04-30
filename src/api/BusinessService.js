@@ -1,4 +1,5 @@
 import {API} from "@/utils/helper";
+import { userId } from "@/utils/validation";
 
 const instance = API('http://localhost:4040/business')
 
@@ -77,6 +78,33 @@ class BusinessService {
             }
         })
     }
+
+    static getReviewsByBusinessId(businessId) {
+        return new Promise((resolve, reject) => {
+            try {
+                instance.get('/businesses/' + businessId + '/posts').then(res => {
+                    const data = res.data
+                    resolve(
+                        data.map(reviews => ({
+                            ...reviews
+                        }))
+                    )
+                })
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
+
+    static postReview(content, rate, businessId) {
+        return instance.post('/', {
+            content,
+            rate,
+            businessId,
+            userId: userId()
+        })
+    }
+
 }
 
 export default BusinessService;

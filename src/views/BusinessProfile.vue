@@ -4,6 +4,12 @@
     <search-bar></search-bar>
     <business v-bind:business="business">
     </business>
+    <text-area></text-area>
+    <div class="py-2"></div>
+    <div class="flex flex-wrap w-20">
+      <submit-button title="Submit"></submit-button>
+    </div>
+
   </div>
 </template>
 
@@ -11,12 +17,14 @@
 import SearchBar from "@/components/SearchBar";
 import ProfileComponent from "@/components/Profile";
 import Business from "@/components/Business";
-import { userToken } from "@/utils/validation";
 import BusinessService from "@/api/BusinessService";
+import TextArea from "@/components/TextArea";
+import SubmitButton from "@/components/SubmitButton";
+import { userToken } from "@/utils/validation";
 
 export default {
   name: "BusinessProfile",
-  components: {Business, ProfileComponent, SearchBar},
+  components: {SubmitButton, TextArea, Business, ProfileComponent, SearchBar},
   data() {
     return {
       business: {
@@ -31,11 +39,15 @@ export default {
         city: '',
         address: ''
       },
-      rateValue: Number
+      rateValue: Number,
+      content: '',
+      rate: 0,
+      reviews: []
     }
   },
   async created() {
     await this.getBusinessById()
+    this.reviews = await BusinessService.getReviewsByBusinessId(this.business.id)
   },
   methods: {
     async getBusinessById() {
@@ -48,11 +60,12 @@ export default {
           this.business = res.data
         })
       }
+    },
+    async onSubmit() {
+      if (this.business.id) {
+        await  BusinessService.postReview(this.content, this.rate, this.business.id)
+      }
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
