@@ -5,7 +5,7 @@
     <business :business="business">
     </business>
     <rate editable=true></rate>
-    <text-area v-model="content"></text-area>
+    <text-area v-model.trim="content"></text-area>
     <div class="py-2"></div>
     <div class="flex flex-wrap w-20">
       <submit-button title="Submit" :fn="onSubmit"></submit-button>
@@ -26,6 +26,7 @@ import SubmitButton from "@/components/SubmitButton";
 import { userToken } from "@/utils/validation";
 import ReviewList from "@/components/ReviewList";
 import Rate from "@/components/Rate"
+import { isNullOrEmpty } from "@/utils/helper";
 
 export default {
   name: "BusinessProfile",
@@ -69,11 +70,14 @@ export default {
     async onSubmit() {
       if (this.business.id) {
         this.rate = localStorage.getItem("rate-value")
-        console.log("****", this.rate);
-        await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
-          console.log(review)
-          window.location.reload()
-        })
+        if (isNullOrEmpty(this.content)) {
+          // alert
+        } else {
+          await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
+            console.log(review)
+            window.location.reload()
+          })
+        }
       }
     }
   }
