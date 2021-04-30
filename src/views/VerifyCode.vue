@@ -46,7 +46,7 @@ export default {
       })
     },
     async resend() {
-      await UsersService.forgotPassword(localStorage.getItem("email")).then(async () => {
+      await UsersService.forgotPassword(localStorage.getItem("user-email")).then(async () => {
         openAlert(this, "success", "Check your email for verification code.")
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())
