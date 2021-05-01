@@ -2,16 +2,16 @@
   <div v-if="alertOpen">
     <div v-if="type==='error'" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
       <span class="inline-block align-middle mr-8">
-        <b class="capitalize">Oops!</b> {{ message }}
+        <b class="capitalize inline">Oops!</b> {{ message }}
       </span>
-      <close-icon :close="close"></close-icon>
+      <close-icon class="inline" :close="close"></close-icon>
     </div>
     <div v-else class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500"
          :class="{'text-sm':$isMobile}">
       <span class="inline-block align-middle mr-8">
         {{ message }}
       </span>
-      <close-icon :close="close"></close-icon>
+      <close-icon class="inline" :close="close"></close-icon>
     </div>
   </div>
 </template>
