@@ -9,11 +9,7 @@
         type="password"
         name="Password"
          v-model.trim="password"/>
-    <button
-        type="submit" v-on:click="login"
-        class="w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >Login
-    </button>
+    <submit-button title="Login" :fn="login">Login</submit-button>
     <div class="text-right text-sm text-gray-800 mt-4">
       <a class="no-underline border-b border-grey-dark text-gray-700" href="../forgotPassword">
         Forgot Password?
@@ -34,10 +30,11 @@ import UsersService from '../api/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import { openAlert, saveAuth } from "@/utils/helper";
+import SubmitButton from "@/components/SubmitButton";
 
 export default {
   name: 'LoginUser',
-  components: {InputComponent, FormComponent},
+  components: {SubmitButton, InputComponent, FormComponent},
   data() {
     return {
       users: [],
