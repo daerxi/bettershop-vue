@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="py-12">
     <div v-for="(business,i) in businesses" :key="i" class="flex flex-wrap p-4">
       <business v-bind:business="business"
                 v-bind:rateValue="rateValue"></business>

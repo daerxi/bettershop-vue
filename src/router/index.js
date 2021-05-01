@@ -15,15 +15,16 @@ import VerifyCode from "@/views/VerifyCode";
 Vue.use(VueRouter)
 
 function requireAuth(to, from, next) {
-    verifyAuth();
-    if (!isAuthenticated()) {
-        next({
-            path: '/login',
-            query: {redirect: to.fullPath}
-        })
-    } else {
-        next()
-    }
+    verifyAuth().then( async () => {
+        if (!isAuthenticated()) {
+            next({
+                path: '/login',
+                query: {redirect: to.fullPath}
+            })
+        } else {
+            next()
+        }
+    })
 }
 
 function requireBusiness(to, from, next) {

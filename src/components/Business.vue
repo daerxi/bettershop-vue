@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap p-8">
+  <div class="flex flex-wrap py-4">
     <round-image :redirect="redirectLink" :user="businessUser"></round-image>
     <div class="block">{{ business.name }}</div>
     <br>
@@ -13,7 +13,7 @@
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
 import UsersService from "@/api/UsersService";
-import { emptyAvatar } from "@/utils/validation";
+import { emptyAvatar, userId } from "@/utils/validation";
 
 export default {
   name: "Business",
@@ -43,7 +43,12 @@ export default {
     }
   },
   async created() {
-    await this.getBusinessUser();
+    await this.getBusinessUser()
+    if (userId() !== this.business.userId) {
+      this.redirectLink = "/businesses/" + this.business.id
+    } else {
+      this.redirectLink = "/business/profile"
+    }
   },
   methods: {
     async getBusinessUser() {
@@ -51,7 +56,6 @@ export default {
         await UsersService.getUser(this.business.userId).then(res => {
           this.businessUser = res.data
           if (!this.businessUser.avatar) this.businessUser.avatar = emptyAvatar
-          this.redirectLink = "/businesses/" + this.business.id
         })
       }
     }
