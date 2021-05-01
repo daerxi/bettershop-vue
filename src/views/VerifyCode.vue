@@ -7,7 +7,7 @@
     <submit-button title="Verify" :fn="verify"/>
     <div class="py-3"></div>
     <submit-button title="Resend" :fn="resend"/>
-    <div v-if="resetPassword" class="text-gray-800 mt-6">
+    <div v-if="resetPassword" class="text-gray-700 mt-6">
       Remember the password now?
       <a class="no-underline border-b border-grey-dark text-gray-700" href="../login">
         Login here
