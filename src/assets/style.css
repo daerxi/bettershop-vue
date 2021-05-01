@@ -5,6 +5,10 @@ html {
     font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
+h1, h2, h3, h4 {
+    color: #2c3e50
+}
+
 button {
     border: none
 }
