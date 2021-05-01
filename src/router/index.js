@@ -92,7 +92,7 @@ export const router = new VueRouter({
             beforeEnter: requireBusiness
         },
         {
-            path: '/businesses/:id',
+            path: '/businesses/:businessId',
             name: 'Business Info',
             component: BusinessProfile,
             beforeEnter: requireAuth

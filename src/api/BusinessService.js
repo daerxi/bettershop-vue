@@ -56,7 +56,7 @@ class BusinessService {
     }
 
     static getBusinessByUserId(token, userId) {
-        return instance.get('/info?userId' + userId, {
+        return instance.get('/info?userId=' + userId, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }

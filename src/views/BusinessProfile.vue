@@ -57,13 +57,15 @@ export default {
   },
   methods: {
     async getBusinessById() {
-      if (this.$route.params.id) {
-        await BusinessService.getBusiness(userToken(), this.$route.params.id).then(async res => {
+      if (this.$route.params.businessId) {
+        await BusinessService.getBusiness(userToken(), this.$route.params.businessId).then(async res => {
           this.business = res.data
+          console.log("*****", this.$route.params.businessId, res.data, this.business)
         })
       } else {
         await BusinessService.getInfo(userToken()).then(async res => {
           this.business = res.data
+          console.log("me")
         })
       }
     },
