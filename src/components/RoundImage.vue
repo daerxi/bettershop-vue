@@ -9,7 +9,6 @@
 
 <script>
 import { emptyAvatar } from "@/utils/validation";
-import { router } from "@/router";
 
 export default {
   name: "RoundImage",
@@ -18,11 +17,6 @@ export default {
     return {
       business: {},
       emptyAvatar: emptyAvatar
-    }
-  },
-  methods: {
-    async toProfile() {
-      await router.push(this.redirect)
     }
   }
 }
