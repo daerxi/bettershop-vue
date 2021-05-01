@@ -3,7 +3,7 @@
     <div class="p-12">
       <a>
         <h1 v-on:click="reload"
-            v-bind:class="{'text-xl': $isMobile(),
+            v-bind:class="{'text-3xl': $isMobile(),
                            'text-5xl': !$isMobile()}">
           BetterShop</h1>
       </a>
