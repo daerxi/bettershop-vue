@@ -2,7 +2,7 @@
   <div class="p-8">
     <rate :editable="editable" v-bind:rateValue="review.rate">
     </rate>
-    <round-image :user="user"></round-image>
+    <round-image :user="user" redirect=""></round-image>
     <p class="inline">{{ review.content }}</p>
   </div>
 </template>
@@ -10,7 +10,6 @@
 <script>
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
-import { emptyAvatar } from "@/utils/validation";
 
 export default {
   name: "ReviewComponent",
@@ -22,14 +21,12 @@ export default {
         id: 0,
         avatar: ''
       },
-      editable: false
+      editable: false,
+      redirect: ''
     }
   },
   async created() {
-    console.log(this.review)
-  },
-  async emptyAvatar() {
-    if (this.user.avatar === null) this.user.avatar = emptyAvatar
+    this.redirect = "/profile/" + this.user.id
   }
 }
 </script>

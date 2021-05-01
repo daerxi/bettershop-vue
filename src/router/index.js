@@ -68,12 +68,6 @@ export const router = new VueRouter({
             component: ForgotPassword
         },
         {
-            path: '/profile',
-            name: 'Profile',
-            component: UserProfile,
-            beforeEnter: requireAuth
-        },
-        {
             path: '/profile/:userId',
             name: 'User Profile',
             component: UserProfile,

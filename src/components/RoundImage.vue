@@ -1,6 +1,8 @@
 <template>
   <router-link :to="redirect" class="bg-transparent border-none">
-    <img :src="user.avatar"
+    <img v-if="user.avatar" :src=user.avatar
+         class="inline border-none w-16 h-16 mr-2 rounded-full" alt="user profile"/>
+    <img v-else :src="emptyAvatar"
          class="inline border-none w-16 h-16 mr-2 rounded-full" alt="user profile"/>
   </router-link>
 </template>
@@ -15,10 +17,8 @@ export default {
   data() {
     return {
       business: {},
+      emptyAvatar: emptyAvatar
     }
-  },
-  async created() {
-    if (!this.user.avatar) this.user.avatar = emptyAvatar
   },
   methods: {
     async toProfile() {
