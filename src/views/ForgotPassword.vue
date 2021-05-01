@@ -5,9 +5,9 @@
         name="Email"
         v-model="email"/>
     <submit-button type="submit" title="Submit" :fn="forgot"/>
-    <div class="text-gray-800 mt-6">
+    <div class="text-gray-800 mt-6 text-sm">
       Remember the password now?
-      <a class="no-underline border-b border-grey-dark text-gray-800" href="../login">
+      <a class="no-underline border-b border-grey-dark text-gray-700" href="../login">
         Login here
       </a>.
     </div>

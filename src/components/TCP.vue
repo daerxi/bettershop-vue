@@ -1,10 +1,11 @@
 <template>
-  <div class="text-center text-sm text-gray-800 mt-6">
+  <div class="text-center text-sm text-gray-700 mt-6">
+    <div class="py-4"></div>
     By signing up, you agree to the
-    <a class="no-underline border-b border-grey-dark text-gray-800" href="#">
+    <a class="no-underline border-b border-grey-dark text-gray-600" href="#">
       Terms of Service
     </a> and
-    <a class="no-underline border-b border-grey-dark text-gray-800" href="#">
+    <a class="no-underline border-b border-grey-dark text-gray-600" href="#">
       Privacy Policy
     </a>
   </div>
@@ -17,5 +18,9 @@ export default {
 </script>
 
 <style scoped>
-
+  hr{
+    height: 1px;
+    background-color: #718096;
+    border: none;
+  }
 </style>

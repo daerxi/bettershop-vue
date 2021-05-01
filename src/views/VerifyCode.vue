@@ -9,7 +9,7 @@
     <submit-button title="Resend" :fn="resend"/>
     <div v-if="resetPassword" class="text-gray-800 mt-6">
       Remember the password now?
-      <a class="no-underline border-b border-grey-dark text-gray-800" href="../login">
+      <a class="no-underline border-b border-grey-dark text-gray-700" href="../login">
         Login here
       </a>.
     </div>

@@ -3,7 +3,6 @@
 
     <input-component
         type="text"
-        class="block border border-grey-light w-full p-3 rounded mb-4"
         name="User name"
         v-model="userName"/>
 
@@ -31,14 +30,15 @@
     <checkbox v-bind:check="check" label="Are you signing up as a business?"></checkbox>
 
     <submit-button v-bind:fn="createUser" title="Create Account"></submit-button>
-    <t-c-p/>
 
-    <div class="text-gray-800 p-5">
+    <div class="text-gray-800 mt-6 text-sm">
       Already have an account?
-      <a class="no-underline border-b border-grey-dark text-gray-800" href="../login">
+      <a class="no-underline border-b border-grey-dark text-gray-700" href="../login">
         Login
       </a>
     </div>
+
+    <t-c-p/>
   </form-component>
 </template>
 
