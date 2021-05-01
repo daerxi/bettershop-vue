@@ -4,7 +4,7 @@
       <a>
         <h1 v-on:click="reload"
             v-bind:class="{'text-3xl': $isMobile(),
-                           'text-5xl': !$isMobile()}">
+                           'text-5xl sm:text-3xl': !$isMobile()}">
           BetterShop</h1>
       </a>
       <router-view></router-view>
