@@ -5,11 +5,11 @@
       <input-component
           type="password"
           name="Password"
-          v-model="password"/>
+           v-model.trim="password"/>
       <input-component
           type="password"
           name="Confirm your password"
-          v-model="password2"/>
+           v-model.trim="password2"/>
       <submit-button v-bind:fn="reset" title="Submit"></submit-button>
     </form-component>
   </div>

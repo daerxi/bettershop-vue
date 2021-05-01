@@ -3,7 +3,7 @@
     <input-component
         type="email"
         name="Email"
-        v-model="email"/>
+         v-model.trim="email"/>
     <submit-button type="submit" title="Submit" :fn="forgot"/>
     <div class="text-gray-700 mt-6 text-sm">
       Remember the password now?

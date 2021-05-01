@@ -3,7 +3,7 @@
     <input-component
         type="text"
         name="Verification Code"
-        v-model="verificationCode"/>
+        v-model.trim="verificationCode"/>
     <submit-button title="Verify" :fn="verify"/>
     <div class="py-3"></div>
     <submit-button title="Resend" :fn="resend"/>

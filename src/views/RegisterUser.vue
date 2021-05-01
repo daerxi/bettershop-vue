@@ -4,28 +4,28 @@
     <input-component
         type="text"
         name="User name"
-        v-model="userName"/>
+         v-model.trim="userName"/>
 
     <input-component
         type="email"
         name="Email"
-        v-model="email"/>
+         v-model.trim="email"/>
 
     <input-component
         v-if="isBusiness"
         type="text"
         name="Company"
-        v-model="company"/>
+         v-model.trim="company"/>
 
     <input-component
         type="password"
         name="Password"
-        v-model="password"/>
+         v-model.trim="password"/>
 
     <input-component
         type="password"
         name="Confirm your password"
-        v-model="password2"/>
+         v-model.trim="password2"/>
 
     <checkbox v-bind:check="check" label="Are you signing up as a business?"></checkbox>
 

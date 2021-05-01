@@ -3,7 +3,7 @@
     <profile-button></profile-button>
     <div class="h-5"></div>
     <form @submit.prevent="onSubmit">
-      <search-bar v-model="keyword"></search-bar>
+      <search-bar  v-model.trim="keyword"></search-bar>
     </form>
     <categories :selected="selected"></categories>
     <business-list v-bind:businesses="businesses">

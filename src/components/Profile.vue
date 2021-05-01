@@ -5,19 +5,19 @@
       <ul class="flex grid grid-cols-1">
         <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="edit">
-          <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
+          <a class="text-xs font-bold px-5 py-3 shadow-md rounded block leading-normal text-blueGray-600 bg-gray-100">
             Edit
           </a>
         </li>
         <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="logout">
-          <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
+          <a class="text-xs font-bold px-5 py-3 shadow-md rounded block leading-normal text-blueGray-600 bg-gray-100">
             Logout
           </a>
         </li>
         <li v-if="!authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="login">
-          <a class="text-xs font-bold px-5 py-3 shadow-lg rounded block leading-normal text-blueGray-600 bg-gray-100">
+          <a class="text-xs font-bold px-5 py-3 shadow-md rounded block leading-normal text-blueGray-600 bg-gray-100">
             Login
           </a>
         </li>
