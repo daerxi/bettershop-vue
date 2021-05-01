@@ -1,5 +1,5 @@
 <template>
-  <div v-if="alertOpen" v-on:click="close">
+  <div v-if="alertOpen">
     <div v-if="type==='error'" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
       <span class="inline-block align-middle mr-8">
         <b class="capitalize inline">Oops!</b> {{ message }}
@@ -20,11 +20,6 @@ export default {
   data() {
     return {
       alertOpen: true
-    }
-  },
-  methods: {
-    async close() {
-      this.alertOpen = false;
     }
   }
 }
