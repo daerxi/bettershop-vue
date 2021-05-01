@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center text-sm text-gray-700 mt-6">
+  <div class="text-center text-xs text-gray-700 mt-6">
     <hr>
     <div class="py-3"></div>
     By signing up, you agree to the

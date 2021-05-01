@@ -20,7 +20,7 @@
       </a>
     </div>
 
-    <div class="text-gray-800 mt-6 text-sm">
+    <div class="text-gray-700 mt-6 text-sm">
       Doesn't have an account?
       <a class="no-underline border-b border-grey-dark text-gray-700" href="../signup">
         Sign up today!
