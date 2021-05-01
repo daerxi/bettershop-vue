@@ -2,7 +2,6 @@
   <div class="flex flex-wrap py-4">
     <round-image :redirect="redirectLink" :user="user"></round-image>
     <div class="block">{{ business.name }}</div>
-    <br>
     <div class="block">
       <rate :editable="editable" v-bind:rateValue="rateValue"></rate>
     </div>
