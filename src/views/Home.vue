@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile-component />
+    <profile-component/>
     <div class="h-5"/>
     <form @submit.prevent="onSubmit">
       <search-bar v-model.trim="keyword"/>

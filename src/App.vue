@@ -20,7 +20,7 @@ export default {
   name: 'App',
   methods: {
     async reload() {
-      await router.push("/").then(()=> {
+      await router.push("/").then(() => {
         window.location.reload()
       }).catch(e => avoidDuplicatedNavigation(e))
     }
@@ -36,6 +36,7 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 html {
   background: #f2f2f2;
 }

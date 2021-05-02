@@ -119,7 +119,8 @@ input,a {
 }
 
 hr {
-    border-top-width: 1px
+    border-top-width: 1px;
+    opacity: 0.4;
 }
 
 img {
