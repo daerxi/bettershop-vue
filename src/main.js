@@ -6,6 +6,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import store from './store'
 import VueMobileDetection from 'vue-mobile-detection'
+
+Vue.use(require('vue-cookies'))
 Vue.use(VueMobileDetection)
 
 library.add(faUserSecret)
