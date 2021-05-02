@@ -21,7 +21,7 @@ import { router } from "@/router";
 
 export default {
   name: "Categories",
-  props: ['selected'],
+  props: ['fn'],
   data() {
     return {
       categories: [],
@@ -30,29 +30,23 @@ export default {
     }
   },
   async created() {
-    try {
-      if (this.$route.name === 'Home') localStorage.setItem("open-tab", -1)
-      this.categories = await CategoriesService.getCategories()
-      this.openTab = parseInt(localStorage.getItem("open-tab"))
-    } catch (err) {
-      //
-    }
+    this.categories = await CategoriesService.getCategories()
   },
   methods: {
     async toggleTabs(tabNumber, type) {
       if (this.openTab !== tabNumber) {
-        await this.getCategoriesByType(type).then(async () => {
-          this.openTab = tabNumber
-          localStorage.setItem("open-tab", this.openTab)
-        })
+        this.openTab = tabNumber
       } else {
-        await router.push("/")
+        this.openTab = -1
       }
-      window.location.reload()
+      localStorage.setItem("open-tab", tabNumber)
+      await this.getCategoriesByType(type)
     },
     async getCategoriesByType(type) {
-      await router.push("/categories?type=" + type).then(async () => {
-      })
+      let query
+      if (type) query = "/categories?type=" + type
+      else query = "/"
+      await router.push(query).then(async () => this.fn()).catch(e => console.warn(e))
     }
   }
 }

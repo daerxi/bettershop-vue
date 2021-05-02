@@ -1,13 +1,12 @@
 <template>
   <div>
-    <profile-button></profile-button>
-    <div class="h-5"></div>
+    <profile-button/>
+    <div class="h-5"/>
     <form @submit.prevent="onSubmit">
-      <search-bar  v-model.trim="keyword"></search-bar>
+      <search-bar v-model.trim="keyword"/>
     </form>
-    <categories :selected="selected"></categories>
-    <business-list v-bind:businesses="businesses">
-    </business-list>
+    <categories :fn="getBusiness" :key="$route.fullPath"/>
+    <business-list v-bind:businesses="businesses"/>
 
     <footer-component>Hey! You are reaching the end!</footer-component>
   </div>
@@ -23,7 +22,7 @@ import FooterComponent from "@/components/Footer";
 import { router } from "@/router";
 
 export default {
-  name: "Home.vue",
+  name: "Home",
   components: {
     BusinessList,
     Categories,
@@ -37,31 +36,29 @@ export default {
       authenticated: false,
       user: {},
       businesses: [],
-      keyword: '',
-      selected: false
+      keyword: ''
     }
   },
   async created() {
+    if (this.$route.query.keyword)
+      await this.search()
     await this.getBusiness()
   },
   methods: {
+    async search() {
+      this.businesses = await BusinessService.searchKeyword(this.$route.query.keyword)
+    },
     async onSubmit() {
-      this.businesses = await BusinessService.searchKeyword(this.keyword)
-      const query = '/?keyword=' + this.keyword
-      await router.push(query).then(async ()=> {
-        // reload
-      }).catch(e => console.warn(e))
+      await router.push('/?keyword=' + this.keyword)
+          .then(async () => await this.search())
+          .catch(e => console.warn(e))
     },
     async getBusiness() {
-      if (!this.$route.query.keyword) {
-        this.businesses = await BusinessService.getBusinesses()
-        if (this.$route.query.type) {
-          this.selected = true
-          this.businesses = await BusinessService.getBusinessByType(this.$route.query.type)
-        }
+      if (this.$route.query.type) {
+        this.businesses = await BusinessService.getBusinessByType(this.$route.query.type)
       } else {
         localStorage.setItem("open-tab", "-1")
-        this.businesses = await BusinessService.searchKeyword(this.$route.query.keyword)
+        this.businesses = await BusinessService.getBusinesses()
       }
     }
   }
