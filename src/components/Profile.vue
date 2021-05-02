@@ -3,15 +3,15 @@
     <div class="absolute top-0 right-0 sm:p-1 p-12">
       <round-image class="w-full" :user="user" :redirect="redirectLink"></round-image>
       <ul class="flex grid grid-cols-1">
-        <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+        <li v-if="authenticated" class="flex-auto text-center w-16 py-1"
             v-on:click="edit">
           <action-button title="Edit"></action-button>
         </li>
-        <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+        <li v-if="authenticated" class="flex-auto text-center py-1 w-16"
             v-on:click="logout">
           <action-button title="Logout"></action-button>
         </li>
-        <li v-if="!authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
+        <li v-if="!authenticated" class="flex-auto text-center w-16 py-1"
             v-on:click="login">
           <action-button title="Login"></action-button>
         </li>
