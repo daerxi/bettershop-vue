@@ -1,5 +1,5 @@
 <template>
-  <section class="p-3">
+  <section :key="business.id" class="p-3">
     <div class="grid grid-cols-11 p-2">
       <div class="col-span-2">
         <round-image class="w-48" :redirect="redirectLink" :user="user"/>
@@ -34,28 +34,27 @@ export default {
     }
   },
   async mounted() {
-    await this.getBusinessUser()
-    await this.getRate()
-    console.log(this.rateValue)
-    this.redirectLink = "/businesses/" + this.business.id
+    if (this.business !== {}) {
+      await this.getBusinessUser()
+      await this.getRate()
+      this.redirectLink = "/businesses/" + this.business.id
+    }
   },
   methods: {
     async getBusinessUser() {
-      if (this.business.userId) {
-        await UsersService.getUser(this.business.userId)
-            .then(res => this.user = res.data)
-            .catch(e => console.error(e))
-      }
+      await UsersService.getUser(this.business.userId)
+          .then(async res => {
+            this.user = res.data
+            await this.getRate()
+          })
+          .catch(e => console.error(e))
     },
     async getRate() {
       await BusinessService.getReviewsByBusinessId(this.business.id)
-          .then(async res => {
-            console.log("here")
-            this.rateValue = res.data.rate
-            console.log(this.rateValue)
-          }).catch(e => console.error(e))
+          .then(async res => this.rateValue = res.data.rate)
+          .catch(e => console.error(e))
+    }
   }
-}
 }
 </script>
 

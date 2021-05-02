@@ -1,16 +1,15 @@
 <template>
   <div>
-    <profile-component />
-    <business :business="business">
-    </business>
-    <alert-component v-if="alertOpen" :type="type" :message="message"></alert-component>
-    <rate :rate-value="rateValue" :editable="editable"></rate>
-    <text-area v-model.trim="content"></text-area>
+    <profile-component/>
+    <business v-if="business.id" v-bind:business="business"/>
+    <alert-component v-if="alertOpen" :type="type" :message="message"/>
+    <rate :rate-value="rateValue" :editable="editable"/>
+    <text-area v-model.trim="content"/>
     <div class="py-2"></div>
     <div class="flex flex-wrap w-20">
-      <submit-button title="Submit" :fn="onSubmit"></submit-button>
+      <submit-button title="Submit" :fn="onSubmit"/>
     </div>
-    <review-list :reviews="reviews"></review-list>
+    <review-list :reviews="reviews"/>
   </div>
 </template>
 
@@ -31,18 +30,7 @@ export default {
   components: {AlertComponent, ReviewList, SubmitButton, TextArea, Business, ProfileComponent, Rate},
   data() {
     return {
-      business: {
-        id: 0,
-        userId: 0,
-        name: '',
-        category: '',
-        website: '',
-        description: '',
-        country: '',
-        province: '',
-        city: '',
-        address: ''
-      },
+      business: {},
       content: '',
       rateValue: 0,
       reviews: [],
@@ -53,8 +41,8 @@ export default {
     }
   },
   async created() {
-    await this.getBusinessById().then(async ()=> {
-      await BusinessService.getReviewsByBusinessId(this.business.id)
+    await this.getBusinessById().then(async () => {
+      await BusinessService.getReviewsByBusinessId(this.$route.params.businessId)
           .then(async res => this.reviews = res.data.reviews)
           .catch(e => console.error(e))
     })
@@ -64,20 +52,21 @@ export default {
       if (this.$route.params.businessId)
         await BusinessService.getBusiness(userToken(), this.$route.params.businessId)
             .then(async res => this.business = res.data)
+            .catch(e => console.error(e))
       else
-        await BusinessService.getInfo(userToken()).then(async res => this.business = res.data)
+        await BusinessService.getInfo(userToken())
+            .then(async res => this.business = res.data)
+            .catch(e => console.error(e))
     },
     async onSubmit() {
-      if (this.business.id) {
-        this.rate = localStorage.getItem("rate-value")
-        if (isNullOrEmpty(this.content)) {
-          openAlert(this, "error", "Content of review is required when submitting review.")
-        } else {
-          await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
-            console.log(review)
-            window.location.reload()
-          })
-        }
+      this.rate = localStorage.getItem("rate-value")
+      if (isNullOrEmpty(this.content)) {
+        openAlert(this, "error", "Content of review is required when submitting review.")
+      } else {
+        await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
+          console.log(review)
+          window.location.reload()
+        })
       }
     }
   }
