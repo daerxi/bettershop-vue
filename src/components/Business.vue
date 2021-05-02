@@ -1,8 +1,8 @@
 <template>
-  <section :key="business.id" class="p-3">
+  <section :key="business.id" class="py-4">
     <div class="grid grid-cols-12 w-full">
       <div class="col-span-1 w-24">
-        <round-image class="w-48" :redirect="redirectLink" :user="user"/>
+        <round-image :redirect="redirectLink" :user="user"/>
         <rate :key="rateValue" :editable="editable" :rateValue="rateValue"/>
       </div>
       <div class="col-span-1"/>
