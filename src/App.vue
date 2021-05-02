@@ -9,15 +9,18 @@
       </a>
       <router-view></router-view>
     </div>
+    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
 import { router } from "@/router";
 import { avoidDuplicatedNavigation } from "@/utils/helper";
+import FooterComponent from "@/components/Footer";
 
 export default {
   name: 'App',
+  components: {FooterComponent},
   methods: {
     async reload() {
       await router.push("/").then(() => {

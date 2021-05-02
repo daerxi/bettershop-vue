@@ -11,7 +11,6 @@
     <h2 v-if="$route.query.type" class="text-left">Category: {{$route.query.type}}</h2>
     <h2 v-else class="text-left">Hot businesses:</h2>
     <business-list v-bind:businesses="businesses"/>
-    <footer-component>Hey! You are reaching the end!</footer-component>
   </div>
 </template>
 
@@ -21,7 +20,6 @@ import ProfileComponent from "@/components/Profile";
 import Categories from "@/components/Categories";
 import BusinessService from "@/api/BusinessService";
 import BusinessList from "@/components/BusinessList";
-import FooterComponent from "@/components/Footer";
 import { router } from "@/router";
 import { avoidDuplicatedNavigation } from "@/utils/helper";
 
@@ -31,8 +29,7 @@ export default {
     BusinessList,
     Categories,
     SearchBar,
-    ProfileComponent,
-    FooterComponent
+    ProfileComponent
   },
   data() {
     return {
