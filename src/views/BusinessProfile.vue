@@ -17,21 +17,20 @@
 </template>
 
 <script>
-import SearchBar from "@/components/SearchBar";
 import ProfileComponent from "@/components/Profile";
 import Business from "@/components/Business";
 import BusinessService from "@/api/BusinessService";
 import TextArea from "@/components/TextArea";
 import SubmitButton from "@/components/SubmitButton";
-import { userToken } from "@/utils/validation";
 import ReviewList from "@/components/ReviewList";
 import Rate from "@/components/Rate"
-import { isNullOrEmpty, openAlert } from "@/utils/helper";
 import AlertComponent from "@/components/Alert";
+import { isNullOrEmpty, openAlert } from "@/utils/helper";
+import { userToken } from "@/utils/validation";
 
 export default {
   name: "BusinessProfile",
-  components: {AlertComponent, ReviewList, SubmitButton, TextArea, Business, ProfileComponent, SearchBar, Rate},
+  components: {AlertComponent, ReviewList, SubmitButton, TextArea, Business, ProfileComponent, Rate},
   data() {
     return {
       business: {
