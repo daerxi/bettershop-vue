@@ -24,8 +24,8 @@
 import RoundImage from "@/components/RoundImage";
 import { isAuthenticated, userAvatar, userId, userToken, verifyAuth } from "@/utils/validation";
 import UsersService from "@/api/UsersService";
-import { router } from "@/router";
 import ActionButton from "@/components/ActionButton";
+import { router } from "@/router";
 
 export default {
   name: "ProfileComponent",
@@ -51,7 +51,7 @@ export default {
     async logout() {
       await UsersService.logoutUser(userToken()).then(async () => {
         localStorage.clear()
-        await router.push('/')
+        await router.push('/').then().catch((e) => console.log(e))
       }).catch(e => console.log(e))
       await this.getAuth()
     },
@@ -61,10 +61,10 @@ export default {
       this.user.id = userId()
     },
     async edit() {
-      await router.push('/business/edit')
+      await router.push('/business/edit').then().catch((e) => console.log(e))
     },
     async login() {
-      await router.push('/login')
+      await router.push('/login').then().catch((e) => console.log(e))
     }
   }
 }

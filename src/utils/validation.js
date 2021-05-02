@@ -3,14 +3,14 @@ import { router } from "@/router";
 
 export const verifyAuth = async () => {
     if (localStorage.getItem('user-token')) {
-        UsersService.getMe().then(r => {
+        await UsersService.getMe().then(async r => {
             localStorage.setItem('authenticated', "true")
             localStorage.setItem('user-id', r.data.id)
             localStorage.setItem('is-business', r.data.isBusiness)
             localStorage.setItem('user-avatar', r.data.avatar)
             localStorage.setItem('user-email', r.data.email)
             if (!r.data.active) {
-                router.push('/verifyCode')
+                await router.push('/verifyCode').then().catch(e => console.log(e))
                 localStorage.removeItem('reset-password')
             }
         }).catch(() => {

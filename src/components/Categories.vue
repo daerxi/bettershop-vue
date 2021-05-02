@@ -34,19 +34,18 @@ export default {
   },
   methods: {
     async toggleTabs(tabNumber, type) {
-      if (this.openTab !== tabNumber) {
-        this.openTab = tabNumber
-      } else {
-        this.openTab = -1
-      }
-      localStorage.setItem("open-tab", tabNumber)
+      if (this.openTab !== tabNumber)
+        localStorage.setItem("open-tab", tabNumber)
+      else
+        localStorage.setItem("open-tab", -1)
+      this.openTab = parseInt(localStorage.getItem("open-tab"))
       await this.getCategoriesByType(type)
     },
     async getCategoriesByType(type) {
       let query
-      if (type) query = "/categories?type=" + type
+      if (this.openTab !== -1) query = "/categories?type=" + type
       else query = "/"
-      await router.push(query).then(async () => this.fn()).catch(e => console.warn(e))
+      await router.push(query).then(async ()=> await this.fn()).then(e => console.log(e))
     }
   }
 }
