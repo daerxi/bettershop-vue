@@ -3,7 +3,7 @@
     <profile-component/>
     <business v-if="business.id" v-bind:business="business"/>
     <alert-component v-if="alertOpen" :type="type" :message="message"/>
-    <rate :rate-value="rateValue" :editable="editable"/>
+    <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
     <text-area v-model.trim="content"/>
     <div class="py-2"></div>
     <div class="flex flex-wrap w-20">
