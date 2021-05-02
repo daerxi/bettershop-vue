@@ -1,10 +1,9 @@
 <template>
   <div>
     <profile-component></profile-component>
-    <search-bar v-model.trim="keyword"/>
     <business :business="business">
     </business>
-    <alert-component v-if="alertOpen"  type="type" :message="message"></alert-component>
+    <alert-component v-if="alertOpen" :type="type" :message="message"></alert-component>
     <rate editable=true></rate>
     <text-area v-model.trim="content"></text-area>
     <div class="py-2"></div>
@@ -51,7 +50,6 @@ export default {
       content: '',
       rate: 0,
       reviews: [],
-      keyword: '',
       alertOpen: false,
       message: '',
       type: ''
@@ -73,7 +71,7 @@ export default {
       if (this.business.id) {
         this.rate = localStorage.getItem("rate-value")
         if (isNullOrEmpty(this.content)) {
-          openAlert(this, "error", "Text description is required for review.")
+          openAlert(this, "error", "Content of review is required when submitting review.")
         } else {
           await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
             console.log(review)
