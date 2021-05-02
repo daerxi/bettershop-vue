@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-wrap py-4">
-    <round-image :redirect="redirectLink" :user="user"></round-image>
+    <round-image :redirect="redirectLink" :user="user"/>
     <div class="block">{{ business.name }}</div>
     <div class="block">
-      <rate :editable="editable" v-bind:rateValue="rateValue"></rate>
+      <rate :editable="editable" v-bind:rateValue="rateValue"/>
     </div>
   </div>
 </template>

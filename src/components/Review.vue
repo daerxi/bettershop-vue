@@ -1,8 +1,7 @@
 <template>
   <div class="p-8">
-    <rate :editable="editable" v-bind:rateValue="review.rate">
-    </rate>
-    <round-image :user="user" :redirect="redirectLink"></round-image>
+    <rate :editable="editable" v-bind:rateValue="review.rate"/>
+    <round-image :user="user" :redirect="redirectLink"/>
     <p class="inline">{{ review.content }}</p>
   </div>
 </template>
@@ -32,7 +31,7 @@ export default {
           this.user = res.data
           this.redirectLink = "/profile/" + this.review.userId
         }).catch(e => console.error(e))
-}
+  }
 }
 </script>
 
