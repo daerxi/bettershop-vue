@@ -1,12 +1,12 @@
 <template>
   <section :key="business.id" class="p-3">
-    <div class="grid grid-cols-11 p-2">
-      <div class="col-span-2">
+    <div class="grid grid-cols-12 w-full">
+      <div class="col-span-1 w-24">
         <round-image class="w-48" :redirect="redirectLink" :user="user"/>
         <rate :key="rateValue" :editable="editable" :rateValue="rateValue"/>
       </div>
-      <div class="col-span-2"/>
-      <div class="text-left w-full py-1 w-72 col-span-7">
+      <div class="col-span-1"/>
+      <div class="text-left py-1 col-span-10">
         <h3 class="text-xl font-semibold">{{ business.name }}</h3>
         <p class="text-sm italic">{{ business.category }}</p>
         <p class="text-gray-600">{{ business.description }}</p>
