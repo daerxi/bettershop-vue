@@ -5,21 +5,15 @@
       <ul class="flex grid grid-cols-1">
         <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="edit">
-          <a class="text-xs font-bold px-5 py-3 shadow-md rounded block leading-normal text-blueGray-600 bg-gray-100">
-            Edit
-          </a>
+          <action-button title="Edit"></action-button>
         </li>
         <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="logout">
-          <a class="text-xs font-bold px-5 py-3 shadow-md rounded block leading-normal text-blueGray-600 bg-gray-100">
-            Logout
-          </a>
+          <action-button title="Logout"></action-button>
         </li>
         <li v-if="!authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="login">
-          <a class="text-xs font-bold px-5 py-3 shadow-md rounded block leading-normal text-blueGray-600 bg-gray-100">
-            Login
-          </a>
+          <action-button title="Login"></action-button>
         </li>
       </ul>
     </div>
@@ -31,10 +25,11 @@ import RoundImage from "@/components/RoundImage";
 import { isAuthenticated, userAvatar, userId, userToken, verifyAuth } from "@/utils/validation";
 import UsersService from "@/api/UsersService";
 import { router } from "@/router";
+import ActionButton from "@/components/ActionButton";
 
 export default {
   name: "ProfileComponent",
-  components: {RoundImage},
+  components: {ActionButton, RoundImage},
   data() {
     return {
       redirectLink: '',
