@@ -36,14 +36,14 @@ export default {
       authenticated: false,
       photo: String,
       user: {
+        id: 0,
         avatar: ''
-      },
-      userId: Number
+      }
     }
   },
   async created() {
     await verifyAuth()
-    await UsersService.getUser(this.$route.params.id).then(async res => this.user = res.data)
+    await UsersService.getMe().then(async res => this.user = res.data).catch(e => console.warn(e))
     await this.getAuth()
     this.redirectLink = "/profile/" + userId()
   },
@@ -58,7 +58,7 @@ export default {
     async getAuth() {
       this.authenticated = isAuthenticated()
       this.photo = userAvatar()
-      this.userId = userId()
+      this.user.id = userId()
     },
     async edit() {
       await router.push('/business/edit')
