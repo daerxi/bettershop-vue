@@ -9,7 +9,7 @@
         <div class="col-span-2"/>
         <div class="text-left w-full py-1 w-72 col-span-7">
 <!--          <h3 class="text-xl font-semibold">{{ review }}</h3>-->
-          <p class="text-gray-600">{{ review.content }}</p>
+          <p class="text-gray-700">{{ review.content }}</p>
         </div>
       </div>
     </section>
