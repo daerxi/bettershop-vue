@@ -89,20 +89,7 @@ class BusinessService {
     }
 
     static getReviewsByBusinessId(businessId) {
-        return new Promise((resolve, reject) => {
-            try {
-                instance.get(businessId + '/posts').then(res => {
-                    const data = res.data
-                    resolve(
-                        data.map(reviews => ({
-                            ...reviews
-                        }))
-                    )
-                })
-            } catch (err) {
-                reject(err)
-            }
-        })
+        return instance.get(businessId + '/reviews')
     }
 
     static postReview(content, rate, businessId, token = userToken()) {

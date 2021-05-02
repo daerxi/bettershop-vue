@@ -4,15 +4,13 @@
     <business :business="business">
     </business>
     <alert-component v-if="alertOpen" :type="type" :message="message"></alert-component>
-    <rate editable=true></rate>
+    <rate :rate-value="rateValue" editable=true></rate>
     <text-area v-model.trim="content"></text-area>
     <div class="py-2"></div>
     <div class="flex flex-wrap w-20">
       <submit-button title="Submit" :fn="onSubmit"></submit-button>
     </div>
-
     <review-list :reviews="reviews"></review-list>
-
   </div>
 </template>
 
@@ -45,9 +43,8 @@ export default {
         city: '',
         address: ''
       },
-      rateValue: Number,
       content: '',
-      rate: 0,
+      rateValue: 0,
       reviews: [],
       alertOpen: false,
       message: '',
@@ -56,7 +53,10 @@ export default {
   },
   async created() {
     await this.getBusinessById()
-    this.reviews = await BusinessService.getReviewsByBusinessId(this.business.id)
+     await BusinessService.getReviewsByBusinessId(this.business.id).then(async res => {
+        this.reviews = res.data.reviews
+        this.rateValue = res.data.rate
+    }).catch(e => console.error(e))
   },
   methods: {
     async getBusinessById() {

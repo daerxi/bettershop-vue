@@ -19,6 +19,7 @@
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
 import UsersService from "@/api/UsersService";
+import BusinessService from "@/api/BusinessService";
 
 export default {
   name: "Business",
@@ -35,19 +36,20 @@ export default {
       province: '',
       city: '',
       address: ''
-    },
-    rateValue: Number
+    }
   },
   data() {
     return {
       redirectLink: "/",
       user: {},
-      editable: false
+      editable: false,
+      rateValue: Number
     }
   },
   async created() {
     await this.getBusinessUser()
     this.redirectLink = "/businesses/" + this.business.id
+    await this.getRate()
   },
   methods: {
     async getBusinessUser() {
@@ -55,6 +57,10 @@ export default {
         await UsersService.getUser(this.business.userId)
             .then(res => this.user = res.data)
             .catch(e => console.error(e))
+    },
+    async getRate() {
+      await BusinessService.getReviewsByBusinessId(this.business.id)
+          .then(async res => this.rateValue = res.data.rate).catch(e => console.error(e))
     }
   }
 }
