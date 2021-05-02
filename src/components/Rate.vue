@@ -31,6 +31,8 @@ export default {
     }
   },
   async created() {
+    if (!this.editable)
+      this.rate = this.rateValue
     localStorage.setItem('rate-value', 0)
     await this.assignStar(this.rateValue)
   },

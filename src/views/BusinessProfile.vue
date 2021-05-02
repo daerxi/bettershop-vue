@@ -4,7 +4,7 @@
     <business :business="business">
     </business>
     <alert-component v-if="alertOpen" :type="type" :message="message"></alert-component>
-    <rate :rate-value="rateValue" editable=true></rate>
+    <rate :rate-value="rateValue" :editable="editable"></rate>
     <text-area v-model.trim="content"></text-area>
     <div class="py-2"></div>
     <div class="flex flex-wrap w-20">
@@ -48,15 +48,16 @@ export default {
       reviews: [],
       alertOpen: false,
       message: '',
-      type: ''
+      type: '',
+      editable: true
     }
   },
   async created() {
-    await this.getBusinessById()
-     await BusinessService.getReviewsByBusinessId(this.business.id).then(async res => {
-        this.reviews = res.data.reviews
-        this.rateValue = res.data.rate
-    }).catch(e => console.error(e))
+    await this.getBusinessById().then(async ()=> {
+      await BusinessService.getReviewsByBusinessId(this.business.id)
+          .then(async res => this.reviews = res.data.reviews)
+          .catch(e => console.error(e))
+    })
   },
   methods: {
     async getBusinessById() {

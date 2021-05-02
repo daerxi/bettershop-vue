@@ -3,7 +3,7 @@
     <div class="grid grid-cols-11 p-2">
       <div class="col-span-2">
         <round-image class="w-48" :redirect="redirectLink" :user="user"/>
-        <rate :editable="editable" v-bind:rateValue="rateValue"/>
+        <rate :key="rateValue" :editable="editable" :rateValue="rateValue"/>
       </div>
       <div class="col-span-2"/>
       <div class="text-left w-full py-1 w-72 col-span-7">
@@ -24,45 +24,38 @@ import BusinessService from "@/api/BusinessService";
 export default {
   name: "Business",
   components: {RoundImage, Rate},
-  props: {
-    business: {
-      id: 0,
-      userId: 0,
-      name: '',
-      category: '',
-      website: '',
-      description: '',
-      country: '',
-      province: '',
-      city: '',
-      address: ''
-    }
-  },
+  props: ['business'],
   data() {
     return {
       redirectLink: "/",
       user: {},
       editable: false,
-      rateValue: Number
+      rateValue: 0
     }
   },
-  async created() {
+  async mounted() {
     await this.getBusinessUser()
-    this.redirectLink = "/businesses/" + this.business.id
     await this.getRate()
+    console.log(this.rateValue)
+    this.redirectLink = "/businesses/" + this.business.id
   },
   methods: {
     async getBusinessUser() {
-      if (this.business.userId > 0)
+      if (this.business.userId) {
         await UsersService.getUser(this.business.userId)
             .then(res => this.user = res.data)
             .catch(e => console.error(e))
+      }
     },
     async getRate() {
       await BusinessService.getReviewsByBusinessId(this.business.id)
-          .then(async res => this.rateValue = res.data.rate).catch(e => console.error(e))
-    }
+          .then(async res => {
+            console.log("here")
+            this.rateValue = res.data.rate
+            console.log(this.rateValue)
+          }).catch(e => console.error(e))
   }
+}
 }
 </script>
 
