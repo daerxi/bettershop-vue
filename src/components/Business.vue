@@ -1,12 +1,14 @@
 <template>
   <section :key="business.id" class="py-4">
-    <div class="grid grid-cols-12 w-full">
+    <div class="grid w-full" :class="{
+      'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
+      'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
         <round-image :redirect="redirectLink" :user="user"/>
         <rate :key="rateValue" :editable="editable" :rateValue="rateValue"/>
       </div>
       <div class="col-span-1"/>
-      <div class="text-left py-1 col-span-10">
+      <div class="text-left py-1" :class="{'col-span-3': $isMobile(), 'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
         <h3 class="text-xl font-semibold">{{ business.name }}</h3>
         <p class="text-sm italic">{{ business.category }}</p>
         <p class="text-gray-600">{{ business.description }}</p>

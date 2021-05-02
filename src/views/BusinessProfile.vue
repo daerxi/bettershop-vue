@@ -1,7 +1,9 @@
 <template>
   <div>
     <profile-component/>
-    <business v-if="business.id" v-bind:business="business"/>
+    <div class="py-6 px-8">
+      <business v-if="business.id" v-bind:business="business"/>
+    </div>
     <alert-component v-if="alertOpen" :type="type" :message="message"/>
     <div class="content-center lg:px-12 xl:px-24">
       <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
@@ -10,6 +12,7 @@
       <div class="flex flex-wrap w-20 content-right">
         <submit-button title="Submit" :fn="onSubmit"/>
       </div>
+      <div class="py-4"></div>
     </div>
     <review-list :reviews="reviews"/>
   </div>

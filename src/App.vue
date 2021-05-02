@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="p-12">
+    <div :class="{'p-12': !$isMobile(), 'p-2': $isMobile()}">
       <a>
         <h1 v-on:click="reload"
             v-bind:class="{'text-3xl': $isMobile(),
