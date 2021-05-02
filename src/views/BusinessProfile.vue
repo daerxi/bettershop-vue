@@ -3,11 +3,13 @@
     <profile-component/>
     <business v-if="business.id" v-bind:business="business"/>
     <alert-component v-if="alertOpen" :type="type" :message="message"/>
-    <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
-    <text-area v-model.trim="content"/>
-    <div class="py-2"></div>
-    <div class="flex flex-wrap w-20">
-      <submit-button title="Submit" :fn="onSubmit"/>
+    <div class="content-center lg:px-12 xl:px-24">
+      <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
+      <text-area v-model.trim="content"/>
+      <div class="py-2"/>
+      <div class="flex flex-wrap w-20 content-right">
+        <submit-button title="Submit" :fn="onSubmit"/>
+      </div>
     </div>
     <review-list :reviews="reviews"/>
   </div>
