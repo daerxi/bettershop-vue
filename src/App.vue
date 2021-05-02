@@ -27,8 +27,11 @@ export default {
   components: {CookieBanner, FooterComponent},
   data() {
     return {
-      cookie: navigator.cookieEnabled
+      cookie: this.$cookies.get("acceptCookie")
     }
+  },
+  created() {
+
   },
   methods: {
     async reload() {
@@ -37,7 +40,9 @@ export default {
       }).catch(e => avoidDuplicatedNavigation(e))
     },
     async enableCookie() {
-      this.cookie = !this.cookie
+      if (navigator.cookieEnabled)
+        this.$cookies.set("acceptCookie",true, Infinity);
+        this.cookie = true
     }
   }
 }
