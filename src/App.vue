@@ -1,15 +1,18 @@
 <template>
-  <div id="app">
-    <div :class="{'p-12': !$isMobile(), 'p-2': $isMobile()}">
-      <a>
-        <h1 v-on:click="reload"
-            v-bind:class="{'text-3xl': $isMobile(),
+  <div>
+    <cookie-banner :fn="enableCookie" v-if="!cookie"/>
+    <div id="app">
+      <div :class="{'p-12': !$isMobile(), 'p-2': $isMobile()}">
+        <a>
+          <h1 v-on:click="reload"
+              v-bind:class="{'text-3xl': $isMobile(),
                            'text-2xl xl:text-6xl lg:text-5xl md:text-4xl sm:text-3xl': !$isMobile()}">
-          BetterShop</h1>
-      </a>
-      <router-view></router-view>
+            BetterShop</h1>
+        </a>
+        <router-view></router-view>
+      </div>
+      <footer-component></footer-component>
     </div>
-    <footer-component></footer-component>
   </div>
 </template>
 
@@ -17,15 +20,24 @@
 import { router } from "@/router";
 import { avoidDuplicatedNavigation } from "@/utils/helper";
 import FooterComponent from "@/components/Footer";
+import CookieBanner from "@/views/CookieBanner";
 
 export default {
   name: 'App',
-  components: {FooterComponent},
+  components: {CookieBanner, FooterComponent},
+  data() {
+    return {
+      cookie: navigator.cookieEnabled
+    }
+  },
   methods: {
     async reload() {
       await router.push("/").then(() => {
         window.location.reload()
       }).catch(e => avoidDuplicatedNavigation(e))
+    },
+    async enableCookie() {
+      this.cookie = !this.cookie
     }
   }
 }
