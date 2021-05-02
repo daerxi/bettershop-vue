@@ -1,5 +1,6 @@
 import UsersService from "@/api/UsersService";
 import { router } from "@/router";
+import { avoidDuplicatedNavigation } from "@/utils/helper";
 
 export const verifyAuth = async () => {
     if (localStorage.getItem('user-token')) {
@@ -10,7 +11,7 @@ export const verifyAuth = async () => {
             localStorage.setItem('user-avatar', r.data.avatar)
             localStorage.setItem('user-email', r.data.email)
             if (!r.data.active) {
-                await router.push('/verifyCode').then().catch(e => console.log(e))
+                await router.push('/verifyCode').then().catch(e => avoidDuplicatedNavigation(e))
                 localStorage.removeItem('reset-password')
             }
         }).catch(() => {

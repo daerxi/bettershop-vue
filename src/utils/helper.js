@@ -25,3 +25,9 @@ export const saveAuth = async userToken => {
 export const isNullOrEmpty = (element) => {
     return !element || element.trim() === ''
 }
+
+export const avoidDuplicatedNavigation = (e) => {
+    if (e.name !== "NavigationDuplicated") {
+        console.error(e)
+    }
+}

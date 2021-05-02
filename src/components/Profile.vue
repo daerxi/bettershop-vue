@@ -26,6 +26,7 @@ import { isAuthenticated, userAvatar, userId, userToken, verifyAuth } from "@/ut
 import UsersService from "@/api/UsersService";
 import ActionButton from "@/components/ActionButton";
 import { router } from "@/router";
+import { avoidDuplicatedNavigation } from "@/utils/helper";
 
 export default {
   name: "ProfileComponent",
@@ -51,7 +52,7 @@ export default {
     async logout() {
       await UsersService.logoutUser(userToken()).then(async () => {
         localStorage.clear()
-        await router.push('/').then().catch((e) => console.log(e))
+        await router.push('/').then().catch(e => avoidDuplicatedNavigation(e))
       }).catch(e => console.log(e))
       await this.getAuth()
     },
@@ -61,10 +62,10 @@ export default {
       this.user.id = userId()
     },
     async edit() {
-      await router.push('/business/edit').then().catch((e) => console.log(e))
+      await router.push('/business/edit').then().catch(e => avoidDuplicatedNavigation(e))
     },
     async login() {
-      await router.push('/login').then().catch((e) => console.log(e))
+      await router.push('/login').then().catch(e => avoidDuplicatedNavigation(e))
     }
   }
 }

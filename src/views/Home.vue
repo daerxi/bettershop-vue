@@ -20,6 +20,7 @@ import BusinessService from "@/api/BusinessService";
 import BusinessList from "@/components/BusinessList";
 import FooterComponent from "@/components/Footer";
 import { router } from "@/router";
+import { avoidDuplicatedNavigation } from "@/utils/helper";
 
 export default {
   name: "Home",
@@ -52,7 +53,7 @@ export default {
     },
     async onSubmit() {
       const path = '/?keyword=' + this.keyword
-      await router.push(path).then(async () => await this.search()).catch(e => console.log(e))
+      await router.push(path).then(async () => await this.search()).catch(e => avoidDuplicatedNavigation(e))
     },
     async getBusiness() {
       if (this.$route.query.type) {

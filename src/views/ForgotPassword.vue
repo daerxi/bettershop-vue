@@ -20,7 +20,7 @@ import InputComponent from "@/components/Input";
 import FormComponent from "@/components/Form";
 import SubmitButton from "@/components/SubmitButton";
 import UsersService from "@/api/UsersService";
-import { openAlert } from "@/utils/helper";
+import { avoidDuplicatedNavigation, openAlert } from "@/utils/helper";
 import { router } from "@/router";
 
 export default {
@@ -39,7 +39,7 @@ export default {
       await UsersService.forgotPassword(this.email).then(async () => {
         openAlert(this, "success", "Check your email for verification code.")
         localStorage.setItem('reset-password', "true")
-        await router.push('/verifyCode').catch(e => console.log(e))
+        await router.push('/verifyCode').catch(e => avoidDuplicatedNavigation(e))
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())
       })

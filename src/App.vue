@@ -14,6 +14,7 @@
 
 <script>
 import { router } from "@/router";
+import { avoidDuplicatedNavigation } from "@/utils/helper";
 
 export default {
   name: 'App',
@@ -21,7 +22,7 @@ export default {
     async reload() {
       await router.push("/").then(()=> {
         window.location.reload()
-      }).catch(e => console.log(e))
+      }).catch(e => avoidDuplicatedNavigation(e))
     }
   }
 }

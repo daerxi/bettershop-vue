@@ -21,7 +21,7 @@ import InputComponent from "@/components/Input";
 import ProfileComponent from "@/components/Profile";
 import SubmitButton from "@/components/SubmitButton";
 import UsersService from "@/api/UsersService";
-import { isNullOrEmpty, openAlert } from "@/utils/helper";
+import { avoidDuplicatedNavigation, isNullOrEmpty, openAlert } from "@/utils/helper";
 import { router } from "@/router";
 
 export default {
@@ -45,7 +45,7 @@ export default {
       } else {
         await UsersService.updatePassword(this.password).then(async () => {
           openAlert(this, "success", "Updated successfully.")
-          await router.push("/").catch(e => console.log(e))
+          await router.push("/").catch(e => avoidDuplicatedNavigation(e))
         })
       }
     }
