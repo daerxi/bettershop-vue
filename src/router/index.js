@@ -11,6 +11,7 @@ import CompanyInfoForm from "@/views/CompanyInfoForm";
 import { verifyAuth, isAuthenticated, isBusiness } from "@/utils/validation";
 import ResetPassword from "@/views/ResetPassword";
 import VerifyCode from "@/views/VerifyCode";
+import DonatePage from "@/views/DonatePage";
 
 Vue.use(VueRouter)
 
@@ -101,6 +102,11 @@ export const router = new VueRouter({
             path: '/verifyCode',
             name: 'Verify Code',
             component: VerifyCode
+        },
+        {
+            path: '/donate',
+            name: 'Donate',
+            component: DonatePage
         }
     ]
 })
