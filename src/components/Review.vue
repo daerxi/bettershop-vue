@@ -2,7 +2,7 @@
   <div class="p-8">
     <rate :editable="editable" v-bind:rateValue="review.rate">
     </rate>
-    <round-image :user="user" redirect=""></round-image>
+    <round-image :user="user" :redirect="redirectLink"></round-image>
     <p class="inline">{{ review.content }}</p>
   </div>
 </template>
@@ -10,6 +10,7 @@
 <script>
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
+import UsersService from "@/api/UsersService";
 
 export default {
   name: "ReviewComponent",
@@ -22,12 +23,16 @@ export default {
         avatar: ''
       },
       editable: false,
-      redirect: ''
+      redirectLink: ''
     }
   },
   async created() {
-    this.redirect = "/profile/" + this.user.id
-  }
+    await UsersService.getUser(this.review.userId)
+        .then(async res => {
+          this.user = res.data
+          this.redirectLink = "/profile/" + this.review.userId
+        }).catch(e => console.error(e))
+}
 }
 </script>
 

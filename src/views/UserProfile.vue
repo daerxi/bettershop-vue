@@ -32,9 +32,7 @@ export default {
   async created() {
     const id = parseInt(this.$route.params.userId)
     this.isMe = id === userId()
-    await UsersService.getUser(id).then(async res => {
-      this.user = res.data
-    });
+    await UsersService.getUser(id).then(async res => this.user = res.data)
     this.reviews = await UsersService.getReviewsByUserId(id)
   },
   methods: {}

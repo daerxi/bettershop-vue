@@ -44,7 +44,10 @@ export default {
   },
   methods: {
     async getBusinessUser() {
-      await UsersService.getUser(this.business.userId).then(res => this.user = res.data)
+      if (this.business.userId > 0)
+        await UsersService.getUser(this.business.userId)
+            .then(res => this.user = res.data)
+            .catch(e => console.error(e))
     }
   }
 }
