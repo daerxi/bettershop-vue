@@ -21,7 +21,7 @@ export default {
     async reload() {
       await router.push("/").then(()=> {
         window.location.reload()
-      }).catch(e => console.warn(e))
+      }).catch(e => console.log(e))
     }
   }
 }

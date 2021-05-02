@@ -48,6 +48,7 @@ export default {
   methods: {
     async search() {
       this.businesses = await BusinessService.searchKeyword(this.$route.query.keyword)
+      localStorage.setItem('open-tab', -1)
     },
     async onSubmit() {
       const path = '/?keyword=' + this.keyword

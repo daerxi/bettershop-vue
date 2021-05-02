@@ -45,7 +45,7 @@ export default {
       } else {
         await UsersService.updatePassword(this.password).then(async () => {
           openAlert(this, "success", "Updated successfully.")
-          await router.push("/").catch(e => console.warn(e))
+          await router.push("/").catch(e => console.log(e))
         })
       }
     }
