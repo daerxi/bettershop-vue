@@ -1,13 +1,20 @@
 <template>
-  <div class="flex flex-wrap py-4">
-    <div>
-      <round-image :redirect="redirectLink" :user="user"/>
+  <section class="p-4">
+    <div class="flex flex-wrap -mx-10">
+      <div class="grid grid-cols-3 p-2">
+        <div class="w-full py-1">
+          <round-image :redirect="redirectLink" :user="user"/>
+          <rate :editable="editable" v-bind:rateValue="rateValue"/>
+        </div>
+        <div class="w-full p-4"/>
+        <div class="w-full py-1">
+          <h3 class="text-left text-xl font-semibold">{{ business.name }}</h3>
+          <p class="text-left text-sm italic">{{ business.category }}</p>
+          <p class="text-left text-gray-600">{{ business.description }}</p>
+        </div>
+      </div>
     </div>
-    <div class="block">{{ business.name }}</div>
-    <div class="block">
-      <rate :editable="editable" v-bind:rateValue="rateValue"/>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
