@@ -41,8 +41,8 @@ export default {
     },
     async enableCookie() {
       if (navigator.cookieEnabled)
-        this.$cookies.set("acceptCookie",true, Infinity);
-        this.cookie = true
+        this.$cookies.set("acceptCookie", true, Infinity)
+      this.cookie = true
     }
   }
 }
