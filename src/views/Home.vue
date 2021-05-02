@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile-button/>
+    <profile-component />
     <div class="h-5"/>
     <form @submit.prevent="onSubmit">
       <search-bar v-model.trim="keyword"/>
@@ -14,7 +14,7 @@
 
 <script>
 import SearchBar from "@/components/SearchBar";
-import ProfileButton from "@/components/Profile";
+import ProfileComponent from "@/components/Profile";
 import Categories from "@/components/Categories";
 import BusinessService from "@/api/BusinessService";
 import BusinessList from "@/components/BusinessList";
@@ -27,7 +27,7 @@ export default {
     BusinessList,
     Categories,
     SearchBar,
-    ProfileButton,
+    ProfileComponent,
     FooterComponent
   },
   data() {
@@ -36,7 +36,8 @@ export default {
       authenticated: false,
       user: {},
       businesses: [],
-      keyword: ''
+      keyword: '',
+      toProfile: ''
     }
   },
   async created() {

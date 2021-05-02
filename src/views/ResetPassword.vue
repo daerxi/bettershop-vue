@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile-component></profile-component>
+    <profile-component />
     <form-component title="Reset your password" :type="type" :message="message" :alert-open="alertOpen">
       <input-component
           type="password"

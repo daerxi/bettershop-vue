@@ -71,6 +71,26 @@ class UsersService {
             verificationCode
         })
     }
+
+    static getReviewsByUserId(userId, token = userToken()) {
+        return new Promise((resolve, reject) => {
+            try {
+                instance.get(userId +"/reviews", {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }}).then(res => {
+                    const data = res.data
+                    resolve(
+                        data.map(users => ({
+                            ...users
+                        }))
+                    )
+                })
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
 }
 
 export default UsersService;

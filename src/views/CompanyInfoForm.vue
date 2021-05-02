@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile-component></profile-component>
+    <profile-component />
     <form-component :alert-open="alertOpen" title="Edit Company Info" :type="type" :message="message">
       <input-component type="text" name="Company Name"  v-model.trim="business.name"></input-component>
       <dropdown-component class="h-6"  v-model.trim="business.category" :options="categories"

@@ -1,19 +1,14 @@
 <template>
   <div>
-    <profile-component></profile-component>
+    <profile-component/>
     <div class="grid grid-cols-1 p-10">
       <div class="flex flex-wrap content-start px-12">
-        <h2 v-if="isMe" class="p-4">Hi, {{user.userName}}!</h2>
+        <h2 v-if="isMe" class="p-4">Hi, {{ user.userName }}!</h2>
       </div>
       <div class="flex flex-wrap content-start px-12">
         <h3 v-if="isMe" class="p-4">My Review</h3>
       </div>
-      <div class="flex flex-wrap content-start px-4">
-        <review-component></review-component>
-      </div>
-      <div class="flex flex-wrap content-start px-4">
-        <review-component></review-component>
-      </div>
+      <review-list :reviews="reviews"></review-list>
     </div>
   </div>
 </template>
@@ -21,12 +16,11 @@
 <script>
 import ProfileComponent from "@/components/Profile";
 import UsersService from "@/api/UsersService";
-import ReviewComponent from "@/components/Review";
-import { userId } from "@/utils/validation";
+import ReviewList from "@/components/ReviewList";
 
 export default {
   name: "UserProfile",
-  components: {ReviewComponent, ProfileComponent},
+  components: {ReviewList, ProfileComponent},
   data() {
     return {
       reviews: [],
@@ -35,24 +29,9 @@ export default {
     }
   },
   async created() {
-    // get user info
-    await this.getUserById()
-    // get reviews
+    this.reviews = await UsersService.getReviewsByUserId(this.user.id)
   },
-  methods: {
-    async getUserById() {
-      this.isMe = userId() === this.user.id
-      if (!this.isMe) {
-        await UsersService.getUser(this.userId).then(async res => {
-          this.user = res.data
-        })
-      } else {
-        await UsersService.getMe().then(async res => {
-          this.user = res.data
-        })
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 

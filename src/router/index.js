@@ -69,7 +69,7 @@ export const router = new VueRouter({
         },
         {
             path: '/profile/:userId',
-            name: 'User Profile',
+            name: "User's Profile",
             component: UserProfile,
             beforeEnter: requireAuth
         },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile-component></profile-component>
+    <profile-component />
     <business :business="business">
     </business>
     <alert-component v-if="alertOpen" :type="type" :message="message"></alert-component>

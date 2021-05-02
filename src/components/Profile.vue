@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap">
     <div class="absolute top-0 right-0 sm:p-1 p-12">
-      <round-image class="w-full" :user="user" redirect="/profile"></round-image>
+      <round-image class="w-full" :user="user" :redirect="redirectLink"></round-image>
       <ul class="flex grid grid-cols-1">
         <li v-if="authenticated" class="-mb-px mr-2 last:mr-0 flex-auto text-center w-20 py-1"
             v-on:click="edit">
@@ -37,7 +37,7 @@ export default {
   components: {RoundImage},
   data() {
     return {
-      redirectLink: "/profile",
+      redirectLink: '',
       authenticated: false,
       photo: String,
       user: {
@@ -48,14 +48,9 @@ export default {
   },
   async created() {
     await verifyAuth()
-    if (this.$route.name === 'User Profile') {
-      await UsersService.getUser(this.$route.params.id).then(async res => {
-        this.user = res.data
-      })
-    } else {
-      this.user.avatar = userAvatar()
-    }
+    await UsersService.getUser(this.$route.params.id).then(async res => this.user = res.data)
     await this.getAuth()
+    this.redirectLink = "/profile/" + userId()
   },
   methods: {
     async logout() {
