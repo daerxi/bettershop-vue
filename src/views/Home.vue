@@ -7,8 +7,9 @@
     </form>
     <categories :fn="getBusiness" :key="$route.fullPath"/>
     <div class="py-10"></div>
-    <h2 v-if="!$route.query.keyword" class="text-left">Hot businesses:</h2>
-    <h2 v-else class="text-left">Search Results:</h2>
+    <h2 v-if="$route.query.keyword" class="text-left">Search Results:</h2>
+    <h2 v-if="$route.query.type" class="text-left">Category: {{$route.query.type}}</h2>
+    <h2 v-else class="text-left">Hot businesses:</h2>
     <business-list v-bind:businesses="businesses"/>
     <footer-component>Hey! You are reaching the end!</footer-component>
   </div>
