@@ -1,7 +1,7 @@
 <template>
   <div class="h-16">
     <select :value="value" @input="$emit('input', $event.target.value)"
-        class="block border border-gray-300 w-full p-3 rounded mb-4 h-12" :name="id" :id="id" required>
+        class="block border border-gray-300 p-4 rounded mb-4 w-full" :name="id" :id="id" required>
       <option disabled class="rounded bg-transparent text-gray-300 p-2 w-full h-6 mb-4"
               value="">{{
           placeholder
@@ -26,7 +26,8 @@ export default {
   props: {
     options: Array,
     placeholder: String,
-    value: String
+    value: String,
+    fullLength: Boolean
   }
 }
 </script>
