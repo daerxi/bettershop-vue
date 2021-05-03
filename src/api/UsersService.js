@@ -1,7 +1,10 @@
 import { API } from "@/utils/helper";
 import { BASE_URL } from "@/utils/config";
-
+import Vue from "vue";
 const instance = API(BASE_URL + '/users')
+Vue.use(require('vue-cookies'))
+
+const userToken = Vue.$cookies.get('user-token')
 
 class UsersService {
     static getUsers() {
@@ -31,7 +34,7 @@ class UsersService {
         })
     }
 
-    static updatePassword(password, token = this.$cookies.get('user-token')) {
+    static updatePassword(password, token = userToken) {
         return instance.put('/resetPassword', {
             password
         }, {
@@ -41,7 +44,7 @@ class UsersService {
         })
     }
 
-    static getMe(token = this.$cookies.get('user-token')) {
+    static getMe(token = userToken) {
         return instance.get('/me', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -54,10 +57,10 @@ class UsersService {
     }
 
     static refreshToken() {
-        return instance.get('/refresh?refreshToken=' + this.$cookies.get('refresh-token'))
+        return instance.get('/refresh?refreshToken=' + Vue.$cookies.get('refresh-token'))
     }
 
-    static logoutUser(token = this.$cookies.get('user-token')) {
+    static logoutUser(token = userToken) {
         return instance.delete('/logout', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -75,7 +78,7 @@ class UsersService {
         })
     }
 
-    static getReviewsByUserId(userId, token = this.$cookies.get('user-token')) {
+    static getReviewsByUserId(userId, token = userToken) {
         return new Promise((resolve, reject) => {
             try {
                 instance.get(userId +"/reviews", {

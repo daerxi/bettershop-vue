@@ -1,9 +1,10 @@
 import { API } from "@/utils/helper";
 import { BASE_URL } from "@/utils/config";
-
+import Vue from 'vue'
 const instance = API(BASE_URL + '/business')
 
-const userToken = this.$cookies.get('user-token')
+Vue.use(require('vue-cookies'))
+const userToken = Vue.$cookies.get('user-token')
 
 class BusinessService {
     static getBusinesses() {
@@ -98,7 +99,7 @@ class BusinessService {
             content,
             rate,
             businessId,
-            userId: this.$cookies.get('user-id')
+            userId: Vue.$cookies.get('user-id')
         }, {
             headers: {
                 'Authorization': 'Bearer ' + token
