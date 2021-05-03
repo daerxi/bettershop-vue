@@ -41,8 +41,7 @@ export default {
       alertOpen: false,
       message: '',
       type: '',
-      editable: true,
-      rate: 0
+      editable: true
     }
   },
   async created() {
@@ -64,13 +63,13 @@ export default {
             .catch(e => console.error(e))
     },
     async onSubmit() {
-      this.rate = localStorage.getItem("rate-value")
+      this.rateValue = localStorage.getItem('rate-value')
       if (isNullOrEmpty(this.content)) {
         openAlert(this, "error", "The content of the review cannot be empty.")
-      } else if (this.rate === 0) {
+      } else if (parseInt(this.rateValue) === 0) {
         openAlert(this, "error", "The rate cannot be empty.")
       } else {
-        await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
+        await BusinessService.postReview(this.content, parseInt(this.rateValue), this.business.id).then(async review => {
           console.log(review)
           window.location.reload()
         })
