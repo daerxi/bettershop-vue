@@ -6,14 +6,18 @@ import Vue from "vue";
 Vue.use(require('vue-cookies'))
 Vue.$cookies.config('1d', '', '', false, 'Strict')
 
+export const setCookies = async() => {
+    Vue.$cookies.set('authenticated', true, '30min')
+    Vue.$cookies.set('user-id', r.data.id, '30min')
+    Vue.$cookies.set('is-business', r.data.isBusiness, '30min')
+    Vue.$cookies.set('user-avatar', r.data.avatar, '30min')
+    Vue.$cookies.set('forgot-password-email', r.data.email, '30min')
+}
+
 export const verifyAuth = async () => {
     if (Vue.$cookies.isKey('user-token')) {
         await UsersService.getMe().then(async r => {
-            Vue.$cookies.set('authenticated', true, '30min')
-            Vue.$cookies.set('user-id', r.data.id, '30min')
-            Vue.$cookies.set('is-business', r.data.isBusiness, '30min')
-            Vue.$cookies.set('user-avatar', r.data.avatar, '30min')
-            Vue.$cookies.set('forgot-password-email', r.data.email,'30min')
+            await setCookies()
             if (!r.data.active) {
                 await router.push('/verifyCode').then().catch(e => avoidDuplicatedNavigation(e))
                 Vue.$cookies.remove('reset-password')
