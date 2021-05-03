@@ -3,10 +3,10 @@
     <profile-component/>
     <div class="grid grid-cols-1 p-10">
       <div class="flex flex-wrap content-start px-12">
-        <h2 v-if="isMe" class="p-4">Hi, {{ user.userName }}!</h2>
+        <h2 v-if="isMe" class="py-4">Hi, {{ user.userName }}!</h2>
       </div>
       <div class="flex flex-wrap content-start px-12">
-        <h3 v-if="isMe" class="p-4">My Review</h3>
+        <h2 v-if="isMe" class="py-4">My Review</h2>
       </div>
       <review-list :reviews="reviews"></review-list>
     </div>
