@@ -1,32 +1,46 @@
 import UsersService from "@/api/UsersService";
 import { router } from "@/router";
 import { avoidDuplicatedNavigation } from "@/utils/helper";
+import Vue from "vue";
+
+Vue.use(require('vue-cookies'))
 
 export const verifyAuth = async () => {
-    if (this.$cookies.isKey('user-token')) {
+    if (Vue.$cookies.isKey('user-token')) {
         await UsersService.getMe().then(async r => {
-            this.$cookies.set('authenticated', true, '30min')
-            this.$cookies.set('user-id', r.data.id, '30min')
-            this.$cookies.set('is-business', r.data.isBusiness, '30min')
-            this.$cookies.set('user-avatar', r.data.avatar, '30min')
-            this.$cookies.set('forgot-password-email', '30min')
+            Vue.$cookies.set('authenticated', true, '30min')
+            Vue.$cookies.set('user-id', r.data.id, '30min')
+            Vue.$cookies.set('is-business', r.data.isBusiness, '30min')
+            Vue.$cookies.set('user-avatar', r.data.avatar, '30min')
+            Vue.$cookies.set('forgot-password-email', '30min')
             if (!r.data.active) {
                 await router.push('/verifyCode').then().catch(e => avoidDuplicatedNavigation(e))
-                this.$cookies.remove('reset-password')
+                Vue.$cookies.remove('reset-password')
             }
         }).catch(() => {
             localStorage.clear()
         })
-    } else if (this.$cookies.isKey('refresh-token')) {
+    } else if (Vue.$cookies.isKey('refresh-token')) {
         await UsersService.refreshToken().then(async r => {
-            this.$cookies.set('user-token', r.data.id, '30min')
+            Vue.$cookies.set('user-token', r.data.id, '30min')
             await this.verifyAuth()
         })
     }
 }
 
+export const saveAuth = async userToken => {
+    Vue.$cookies.set('refresh-token', userToken.token, '1d')
+    Vue.$cookies.set('user-token', userToken.token, '30min')
+    Vue.$cookies.set('user-id', userToken.id, '30min')
+    Vue.$cookies.set('authenticated', true, '30min')
+    if (this.$cookies.get('reset-password')) {
+        this.$cookies.remove('reset-password')
+        return router.push('/resetPassword').catch(e => avoidDuplicatedNavigation(e))
+    } else return router.push('/').catch(e => avoidDuplicatedNavigation(e))
+}
+
 export const userAvatar = () => {
-    const localAvatar = this.$cookies.get('user-avatar')
+    const localAvatar = Vue.$cookies.get('user-avatar')
     if (localAvatar === 'null' || localAvatar === null) return emptyAvatar
     else return localStorage.getItem('user-avatar')
 }

@@ -32,9 +32,10 @@
 import UsersService from '../api/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
-import { openAlert, saveAuth } from "@/utils/helper";
+import { openAlert } from "@/utils/helper";
 import SubmitButton from "@/components/SubmitButton";
 import Checkbox from "@/components/Checkbox";
+import { saveAuth } from "@/utils/validation";
 
 export default {
   name: 'LoginUser',

@@ -18,10 +18,11 @@
 
 <script>
 import UsersService from "@/api/UsersService";
-import { openAlert, saveAuth } from "@/utils/helper";
+import { openAlert } from "@/utils/helper";
 import InputComponent from "@/components/Input";
 import FormComponent from "@/components/Form";
 import SubmitButton from "@/components/SubmitButton";
+import { saveAuth } from "@/utils/validation";
 
 export default {
   name: "VerifyCode",

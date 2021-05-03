@@ -60,6 +60,8 @@ export default {
       }).catch(e => console.log(e))
     },
     async getAuth() {
+      console.log("****")
+      console.log("**", this.$cookies.keys())
       this.authenticated = this.$cookies.isKey('authenticated')
       this.photo = userAvatar()
       this.user.id = this.$cookies.get('user-id')

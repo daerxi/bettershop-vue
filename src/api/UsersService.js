@@ -2,8 +2,8 @@ import { API } from "@/utils/helper";
 import { BASE_URL } from "@/utils/config";
 import Vue from "vue";
 const instance = API(BASE_URL + '/users')
-Vue.use(require('vue-cookies'))
 
+Vue.use(require('vue-cookies'))
 const userToken = Vue.$cookies.get('user-token')
 
 class UsersService {

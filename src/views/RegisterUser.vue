@@ -49,7 +49,8 @@ import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import Checkbox from "@/components/Checkbox";
 import SubmitButton from "@/components/SubmitButton";
-import { isNullOrEmpty, openAlert, saveAuth } from "@/utils/helper";
+import { isNullOrEmpty, openAlert } from "@/utils/helper";
+import { saveAuth } from "@/utils/validation";
 
 export default {
   name: 'RegisterUser',
