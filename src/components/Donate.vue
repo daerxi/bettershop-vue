@@ -83,23 +83,6 @@ export default {
         else {
           openAlert(this, "success", "Thank your for your support. Your payment has been processed.")
           console.log(res.token)
-          // const stripe = require('stripe')(process.env.OUTWITSECRETKEY);
-          // stripe.customers.create({
-          //   name: req.body.name,
-          //   email: req.body.email,
-          //   source: req.body.stripeToken
-          // }).then(customer => stripe.charges.create({
-          //   amount: amount.toFixed(2) * 100,
-          //   currency: 'cad',
-          //   customer: customer.id,
-          //   description: 'Thank you for your payment.'
-          // })).then(() => {
-          //   lib.createCode(req, res, false, company, isHosted).then(()=> {
-          //     res.statusCode = 302;
-          //     res.setHeader("Location", company.external_host + "/booking-confirmed");
-          //     res.end();
-          //   });
-          // });
         }
       });
     }
