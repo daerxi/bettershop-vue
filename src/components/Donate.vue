@@ -1,6 +1,7 @@
 <template>
   <div>
     <form-component :alert-open="alertOpen" :type="type" :message="message" title="Donate">
+      <input-component type="text" name="Email" v-model.trim="email"/>
       <input-component type="text" name="Name" v-model.trim="customer.name"/>
       <input-component type="text" name="Country" v-model.trim="customer.address_country"/>
       <input-component type="text" name="Province" v-model.trim="customer.address_state"/>
@@ -28,8 +29,9 @@
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import SubmitButton from "@/components/SubmitButton";
-import { openAlert } from "@/utils/helper";
+import { API, openAlert } from "@/utils/helper";
 import DropdownComponent from "@/components/Dropdown";
+import { BASE_URL } from "@/utils/config";
 
 // eslint-disable-next-line no-undef
 const stripe = Stripe('pk_test_51I6OndA35cjOkMayVB9T8NZMMccYvOvuPkdOIAqyA4hWFqmYJYe1D96rqUFM68TKg6rrhisM9opX3CWkv5jjngce00ta64l2xz');
@@ -48,6 +50,8 @@ export default {
       amount: 0,
       showLabel: true,
       currency: '',
+      email: '',
+      stripeToken: '',
       options: [
         {
           type: 'USD'
@@ -82,9 +86,18 @@ export default {
         if (res.error) openAlert(this, "error", "res.error.message")
         else {
           openAlert(this, "success", "Thank your for your support. Your payment has been processed.")
-          console.log(res.token)
+          this.stripeToken = res.token
+          this.donateAPI()
         }
       });
+    },
+    async donateAPI() {
+      const name = this.customer.name
+      const { stripeToken, email, amount, currency } = this
+      const instance = API(BASE_URL + '/donate')
+      await instance.post('/', {
+        stripeToken, name, email, amount, currency
+      })
     }
   }
 }
