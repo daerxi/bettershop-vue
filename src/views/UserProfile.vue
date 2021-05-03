@@ -17,7 +17,6 @@
 import ProfileComponent from "@/components/Profile";
 import UsersService from "@/api/UsersService";
 import ReviewList from "@/components/ReviewList";
-import { userId } from "@/utils/validation";
 
 export default {
   name: "UserProfile",
@@ -31,7 +30,7 @@ export default {
   },
   async created() {
     const id = parseInt(this.$route.params.userId)
-    this.isMe = id === userId()
+    this.isMe = id === this.$cookies.get('user-id')
     await UsersService.getUser(id).then(async res => this.user = res.data)
     this.reviews = await UsersService.getReviewsByUserId(id)
   },

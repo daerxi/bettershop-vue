@@ -8,7 +8,7 @@ import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
 import CompanyInfoForm from "@/views/CompanyInfoForm";
 
-import { verifyAuth, isAuthenticated, isBusiness } from "@/utils/validation";
+import { verifyAuth} from "@/utils/validation";
 import ResetPassword from "@/views/ResetPassword";
 import VerifyCode from "@/views/VerifyCode";
 import DonatePage from "@/views/DonatePage";
@@ -17,7 +17,7 @@ Vue.use(VueRouter)
 
 function requireAuth(to, from, next) {
     verifyAuth().then( async () => {
-        if (!isAuthenticated()) {
+        if (!this.$cookies.isKey('authenticated')) {
             next({
                 path: '/login',
                 query: {redirect: to.fullPath}
@@ -30,7 +30,7 @@ function requireAuth(to, from, next) {
 
 function requireBusiness(to, from, next) {
     requireAuth(to, from, next);
-    if (!isBusiness()) {
+    if (!this.$cookies.isKey('is-business')) {
         next({
             path: '/not-a-business'
         })

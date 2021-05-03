@@ -1,8 +1,9 @@
 import { API } from "@/utils/helper";
-import { userId, userToken } from "@/utils/validation";
 import { BASE_URL } from "@/utils/config";
 
 const instance = API(BASE_URL + '/business')
+
+const userToken = this.$cookies.get('user-token')
 
 class BusinessService {
     static getBusinesses() {
@@ -39,7 +40,7 @@ class BusinessService {
         })
     }
 
-    static getInfo(token) {
+    static getInfo(token = userToken) {
         return instance.get('/info', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -47,7 +48,7 @@ class BusinessService {
         })
     }
 
-    static getBusiness(token, id) {
+    static getBusiness(id, token = userToken) {
         return instance.get('/info?id=' + id, {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -55,7 +56,7 @@ class BusinessService {
         })
     }
 
-    static getBusinessByUserId(token, userId) {
+    static getBusinessByUserId(userId, token = userToken) {
         return instance.get('/info?userId=' + userId, {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -63,7 +64,7 @@ class BusinessService {
         })
     }
 
-    static updateInfo(token, body) {
+    static updateInfo(body, token = userToken) {
         return instance.put('/info', body, {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -92,12 +93,12 @@ class BusinessService {
         return instance.get(businessId + '/reviews')
     }
 
-    static postReview(content, rate, businessId, token = userToken()) {
+    static postReview(content, rate, businessId, token = userToken) {
         return instance.post(businessId + '/posts', {
             content,
             rate,
             businessId,
-            userId: userId()
+            userId: this.$cookies.get('user-id')
         }, {
             headers: {
                 'Authorization': 'Bearer ' + token

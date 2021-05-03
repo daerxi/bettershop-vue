@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import { userToken } from "@/utils/validation";
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import DropdownComponent from "@/components/Dropdown";
@@ -58,7 +57,7 @@ export default {
     },
     async updateInfo() {
       this.alertOpen = false
-      await BusinessService.updateInfo(userToken(), this.business).then(async () => {
+      await BusinessService.updateInfo(this.business).then(async () => {
         openAlert(this, "success", "Updated successfully")
       }).catch(e => {
         openAlert(this, "error", "Update failed.")
@@ -66,7 +65,7 @@ export default {
       })
     },
     async getInfo() {
-      await BusinessService.getInfo(userToken()).then(async res => {
+      await BusinessService.getInfo().then(async res => {
         this.business = res.data
       })
     }

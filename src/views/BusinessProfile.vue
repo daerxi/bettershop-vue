@@ -28,7 +28,6 @@ import ReviewList from "@/components/ReviewList";
 import Rate from "@/components/Rate"
 import AlertComponent from "@/components/Alert";
 import { isNullOrEmpty, openAlert } from "@/utils/helper";
-import { userToken } from "@/utils/validation";
 
 export default {
   name: "BusinessProfile",
@@ -55,11 +54,11 @@ export default {
   methods: {
     async getBusinessById() {
       if (this.$route.params.businessId)
-        await BusinessService.getBusiness(userToken(), this.$route.params.businessId)
+        await BusinessService.getBusiness(this.$route.params.businessId)
             .then(async res => this.business = res.data)
             .catch(e => console.error(e))
       else
-        await BusinessService.getInfo(userToken())
+        await BusinessService.getInfo()
             .then(async res => this.business = res.data)
             .catch(e => console.error(e))
     },
