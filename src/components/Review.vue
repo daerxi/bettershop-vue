@@ -12,7 +12,7 @@
         <div class="text-left py-1"
              :class="{'col-span-3': $isMobile(), 'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
           <router-link style="text-decoration: none" :to="businessRedirect">
-            <h3 class="">{{ business.name }} - {{ business.category }}</h3>
+            <h3 v-if="showBusinessName" class="">{{ business.name }} - {{ business.category }}</h3>
           </router-link>
           <p class="text-gray-700">{{ review.content }}</p>
 
@@ -41,10 +41,12 @@ export default {
       editable: false,
       redirectLink: '',
       business: {},
-      businessRedirect: ''
+      businessRedirect: '',
+      showBusinessName: false
     }
   },
   async created() {
+    this.showBusinessName = this.$route.fullPath.includes('profile')
     this.businessRedirect = '/businesses/' + this.review.businessId
     this.redirectLink = "/profile/" + this.review.userId
     await UsersService.getUser(this.review.userId)
