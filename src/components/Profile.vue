@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       redirectLink: '',
-      authenticated: false,
+      authenticated: this.$cookies.isKey('authenticated'),
       photo: String,
       user: {
         id: 0,
