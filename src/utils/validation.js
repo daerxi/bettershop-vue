@@ -33,8 +33,8 @@ export const saveAuth = async userToken => {
     Vue.$cookies.set('user-token', userToken.token, '30min')
     Vue.$cookies.set('user-id', userToken.id, '30min')
     Vue.$cookies.set('authenticated', true, '30min')
-    if (this.$cookies.get('reset-password')) {
-        this.$cookies.remove('reset-password')
+    if (Vue.$cookies.get('reset-password')) {
+        Vue.$cookies.remove('reset-password')
         return router.push('/resetPassword').catch(e => avoidDuplicatedNavigation(e))
     } else return router.push('/').catch(e => avoidDuplicatedNavigation(e))
 }
