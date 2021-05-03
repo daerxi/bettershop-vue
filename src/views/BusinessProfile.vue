@@ -8,8 +8,7 @@
       <alert-component v-if="alertOpen" :type="type" :message="message"/>
       <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
       <text-area v-model.trim="content"/>
-      <div class="py-2"/>
-      <div class="flex flex-wrap w-20 content-right">
+      <div class="text-right">
         <submit-button title="Submit" :fn="onSubmit"/>
       </div>
       <div class="py-4"></div>
