@@ -12,20 +12,27 @@ export const verifyAuth = async () => {
             Vue.$cookies.set('user-id', r.data.id, '30min')
             Vue.$cookies.set('is-business', r.data.isBusiness, '30min')
             Vue.$cookies.set('user-avatar', r.data.avatar, '30min')
-            Vue.$cookies.set('forgot-password-email', '30min')
+            Vue.$cookies.set('forgot-password-email', r.data.email,'30min')
             if (!r.data.active) {
                 await router.push('/verifyCode').then().catch(e => avoidDuplicatedNavigation(e))
                 Vue.$cookies.remove('reset-password')
             }
         }).catch(() => {
-            localStorage.clear()
+            clearCookies()
         })
     } else if (Vue.$cookies.isKey('refresh-token')) {
         await UsersService.refreshToken().then(async r => {
-            Vue.$cookies.set('user-token', r.data.id, '30min')
-            await this.verifyAuth()
+            Vue.$cookies.set('user-token', r.data.token, '30min')
+            await verifyAuth()
         })
     }
+}
+
+export const clearCookies = async () => {
+    localStorage.clear()
+    Vue.$cookies.remove('authenticated')
+    Vue.$cookies.remove('user-token')
+    Vue.$cookies.remove('refresh-token')
 }
 
 export const saveAuth = async userToken => {

@@ -4,7 +4,6 @@ import Vue from "vue";
 const instance = API(BASE_URL + '/users')
 
 Vue.use(require('vue-cookies'))
-const userToken = Vue.$cookies.get('user-token')
 
 class UsersService {
     static getUsers() {
@@ -34,7 +33,7 @@ class UsersService {
         })
     }
 
-    static updatePassword(password, token = userToken) {
+    static updatePassword(password, token = Vue.$cookies.get('user-token')) {
         return instance.put('/resetPassword', {
             password
         }, {
@@ -44,7 +43,7 @@ class UsersService {
         })
     }
 
-    static getMe(token = userToken) {
+    static getMe(token = Vue.$cookies.get('user-token')) {
         return instance.get('/me', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -60,7 +59,7 @@ class UsersService {
         return instance.get('/refresh?refreshToken=' + Vue.$cookies.get('refresh-token'))
     }
 
-    static logoutUser(token = userToken) {
+    static logoutUser(token = Vue.$cookies.get('user-token')) {
         return instance.delete('/logout', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -78,7 +77,7 @@ class UsersService {
         })
     }
 
-    static getReviewsByUserId(userId, token = userToken) {
+    static getReviewsByUserId(userId, token = Vue.$cookies.get('user-token')) {
         return new Promise((resolve, reject) => {
             try {
                 instance.get(userId +"/reviews", {

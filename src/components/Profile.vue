@@ -22,7 +22,7 @@
 
 <script>
 import RoundImage from "@/components/RoundImage";
-import { userAvatar, verifyAuth } from "@/utils/validation";
+import { clearCookies, userAvatar, verifyAuth } from "@/utils/validation";
 import UsersService from "@/api/UsersService";
 import ActionButton from "@/components/ActionButton";
 import { router } from "@/router";
@@ -55,13 +55,11 @@ export default {
   methods: {
     async logout() {
       await UsersService.logoutUser().then(async () => {
-        localStorage.clear()
+        await clearCookies()
         await router.push('/').then().catch(e => avoidDuplicatedNavigation(e))
       }).catch(e => console.log(e))
     },
     async getAuth() {
-      console.log("****")
-      console.log("**", this.$cookies.keys())
       this.authenticated = this.$cookies.isKey('authenticated')
       this.photo = userAvatar()
       this.user.id = this.$cookies.get('user-id')

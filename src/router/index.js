@@ -14,10 +14,11 @@ import VerifyCode from "@/views/VerifyCode";
 import DonatePage from "@/views/DonatePage";
 
 Vue.use(VueRouter)
+Vue.use(require('vue-cookies'))
 
 function requireAuth(to, from, next) {
     verifyAuth().then( async () => {
-        if (!this.$cookies.isKey('authenticated')) {
+        if (!Vue.$cookies.isKey('authenticated')) {
             next({
                 path: '/login',
                 query: {redirect: to.fullPath}
@@ -30,7 +31,7 @@ function requireAuth(to, from, next) {
 
 function requireBusiness(to, from, next) {
     requireAuth(to, from, next);
-    if (!this.$cookies.isKey('is-business')) {
+    if (!Vue.$cookies.isKey('is-business')) {
         next({
             path: '/not-a-business'
         })
