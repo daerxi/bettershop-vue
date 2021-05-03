@@ -4,7 +4,7 @@
     <div class="py-6 px-8">
       <business v-if="business.id" v-bind:business="business"/>
     </div>
-    <div class="content-center lg:px-12 xl:px-24">
+    <div v-if="showTextArea" class="content-center lg:px-12 xl:px-24">
       <alert-component v-if="alertOpen" :type="type" :message="message"/>
       <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
       <text-area v-model.trim="content"/>
@@ -41,13 +41,19 @@ export default {
       message: '',
       type: '',
       editable: true,
-      max: 2
+      max: 2,
+      showTextArea: true
     }
   },
   async created() {
     await this.getBusinessById().then(async () => {
       await BusinessService.getReviewsByBusinessId(this.$route.params.businessId)
-          .then(async res => this.reviews = res.data.reviews)
+          .then(async res => {
+            this.reviews = res.data.reviews
+            for (const review of this.reviews) {
+              if (review.userId === parseInt(this.$cookies.get('user-id'))) this.showTextArea = false
+            }
+          })
           .catch(e => console.error(e))
     })
   },
@@ -55,26 +61,30 @@ export default {
     async getBusinessById() {
       if (this.$route.params.businessId)
         await BusinessService.getBusiness(this.$route.params.businessId)
-            .then(async res => this.business = res.data)
+            .then(async res => {
+              this.business = res.data
+              console.log(this.business.userId, this.$cookies.get('user-id'))
+              if (this.business.userId === parseInt(this.$cookies.get('user-id'))) this.showTextArea = false
+            })
             .catch(e => console.error(e))
-      else
-        await BusinessService.getInfo()
-            .then(async res => this.business = res.data)
-            .catch(e => console.error(e))
-    },
-    async onSubmit() {
-      this.rateValue = localStorage.getItem('rate-value')
-      if (isNullOrEmpty(this.content)) {
-        openAlert(this, "error", "The content of the review cannot be empty.")
-      } else if (parseInt(this.rateValue) === 0) {
-        openAlert(this, "error", "The rate cannot be empty.")
-      } else {
-        await BusinessService.postReview(this.content, parseInt(this.rateValue), this.business.id).then(async review => {
-          console.log(review)
-          window.location.reload()
-        })
-      }
+    else
+    await BusinessService.getInfo()
+        .then(async res => this.business = res.data)
+        .catch(e => console.error(e))
+  },
+  async onSubmit() {
+    this.rateValue = localStorage.getItem('rate-value')
+    if (isNullOrEmpty(this.content)) {
+      openAlert(this, "error", "The content of the review cannot be empty.")
+    } else if (parseInt(this.rateValue) === 0) {
+      openAlert(this, "error", "The rate cannot be empty.")
+    } else {
+      await BusinessService.postReview(this.content, parseInt(this.rateValue), this.business.id).then(async review => {
+        console.log(review)
+        window.location.reload()
+      })
     }
   }
+}
 }
 </script>
