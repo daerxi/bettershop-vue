@@ -7,7 +7,7 @@
       <input-component type="text" name="Province" v-model.trim="customer.address_state"/>
       <input-component type="text" name="City" v-model.trim="customer.address_city"/>
       <input-component type="text" name="Address Line 1" v-model.trim="customer.address_line1"/>
-      <input-component type="text" name="Address Line 2" v-model.trim="customer.address_line2"/>
+      <input-component type="text" name="Address Line 2 (Optional)" v-model.trim="customer.address_line2"/>
       <input-component type="text" name="Postal Code" v-model.trim="customer.address_zip"/>
       <div class="flex grid grid-cols-12 gap-2">
         <input-component v-bind:class="{'col-span-6': $isMobile(),
@@ -29,7 +29,7 @@
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import SubmitButton from "@/components/SubmitButton";
-import { API, openAlert } from "@/utils/helper";
+import { API, isNullOrEmpty, openAlert } from "@/utils/helper";
 import DropdownComponent from "@/components/Dropdown";
 import { BASE_URL } from "@/utils/config";
 
@@ -46,7 +46,15 @@ export default {
       type: '',
       message: '',
       alertOpen: false,
-      customer: {},
+      customer: {
+        name: '',
+        address_country: '',
+        address_state: '',
+        address_city: '',
+        address_line1: '',
+        address_line2: '',
+        address_zip: ''
+      },
       amount: 0,
       showLabel: true,
       currency: '',
@@ -82,30 +90,31 @@ export default {
   },
   methods: {
     async submitPayment() {
-      if (this.amount <= 0) {
+      if (this.amount <= 0)
         openAlert(this, "error", "Please enter an amount greater than 0.")
-      } else {
-        stripe.createToken(card, this.customer).then(res => {
-          if (res.error) openAlert(this, "error", res.error.message)
-          else {
-            this.stripeToken = res.token.id
-            this.donateAPI()
-          }
-        })
+      else {
+        if (isNullOrEmpty(this.customer.name) || isNullOrEmpty(this.email) || isNullOrEmpty(this.customer.address_country) || isNullOrEmpty(this.customer.address_state) || isNullOrEmpty(this.customer.address_city) || isNullOrEmpty(this.customer.address_line1) || isNullOrEmpty(this.customer.zip))
+          openAlert(this, "error", "Please fill out required fields.")
+        else
+          stripe.createToken(card, this.customer).then(res => {
+            if (res.error) openAlert(this, "error", res.error.message)
+            else {
+              this.stripeToken = res.token.id
+              this.donateAPI()
+            }
+          })
       }
-    },
-    async donateAPI() {
-      const name = this.customer.name
-      const {stripeToken, email, amount, currency} = this
-      const instance = API(BASE_URL + '/donate')
-      await instance.post('/', {
-        stripeToken, name, email, amount, currency
-      }).then(async () => {
-        openAlert(this, "success", "Thank your for your support. Your payment has been processed.")
-      }).catch(e => {
-        openAlert(this, "error", e.response.error)
-      })
     }
+  },
+  async donateAPI() {
+    const name = this.customer.name
+    const {stripeToken, email, amount, currency} = this
+    const instance = API(BASE_URL + '/donate')
+    await instance.post('/', {
+      stripeToken, name, email, amount, currency
+    }).then(async () =>
+        openAlert(this, "success", "Thank your for your support. Your payment has been processed."))
+        .catch(e => openAlert(this, "error", e.response.error))
   }
 }
 </script>
