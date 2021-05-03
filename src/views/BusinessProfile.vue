@@ -4,8 +4,8 @@
     <div class="py-6 px-8">
       <business v-if="business.id" v-bind:business="business"/>
     </div>
-    <alert-component v-if="alertOpen" :type="type" :message="message"/>
     <div class="content-center lg:px-12 xl:px-24">
+      <alert-component v-if="alertOpen" :type="type" :message="message"/>
       <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
       <text-area v-model.trim="content"/>
       <div class="py-2"/>
@@ -41,7 +41,8 @@ export default {
       alertOpen: false,
       message: '',
       type: '',
-      editable: true
+      editable: true,
+      rate: 0
     }
   },
   async created() {
@@ -65,7 +66,9 @@ export default {
     async onSubmit() {
       this.rate = localStorage.getItem("rate-value")
       if (isNullOrEmpty(this.content)) {
-        openAlert(this, "error", "Content of review is required when submitting review.")
+        openAlert(this, "error", "The content of the review cannot be empty.")
+      } else if (this.rate === 0) {
+        openAlert(this, "error", "The rate cannot be empty.")
       } else {
         await BusinessService.postReview(this.content, parseInt(this.rate), this.business.id).then(async review => {
           console.log(review)
