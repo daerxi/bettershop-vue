@@ -11,10 +11,11 @@
       <div class="flex flex-col lg:flex-row items-center w-full lg:w-auto">
         <div class="mx-auto lg:mx-0 lg:ml-auto">
           <a class="inline-block mt-0 ml-8 text-blue-900 hover:text-indigo-600" href="/donate">Donate</a>
-          <a class="inline-block mt-0 ml-8 text-blue-900 hover:text-indigo-600" href="https://github.com/daerxi/bettershop-vue">Github</a>
+          <a class="inline-block mt-0 ml-8 text-blue-900 hover:text-indigo-600"
+             href="https://github.com/daerxi/bettershop-vue">Github</a>
         </div>
         <div class="flex justify-center space-x-6 mt-4 lg:mt-0 lg:ml-8">
-          <a href="#">
+          <a href="mailto: bofeng.li@student.uq.edu.au">
             <svg class="text-gray-600 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,6 +29,35 @@
                     d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
             </svg>
           </a>
+          <ShareNetwork class="no-underline text-gray-800"
+                        network="facebook"
+                        :url="currentUrl"
+                        title="BetterShop - Improve your everyday life"
+                        description="Join us to know more about the products you are using daily"
+                        quote=""
+                        hashtags="bettershop"
+          >
+            <font-awesome-icon class="text-gray-600 text-2xl" :icon="['fab', 'facebook']"/>
+          </ShareNetwork>
+          <ShareNetwork class="no-underline text-gray-800"
+                        network="twitter"
+                        :url="currentUrl"
+                        title="BetterShop - Improve your everyday life"
+                        description="Join us to know more about the products you are using daily"
+                        quote=""
+                        hashtags="bettershop"
+          >
+            <font-awesome-icon class="text-gray-600 text-2xl" :icon="['fab', 'twitter']"/>
+          </ShareNetwork>
+          <ShareNetwork class="no-underline text-gray-800"
+                        network="reddit"
+                        :url="currentUrl"
+                        title="BetterShop - Improve your everyday life"
+                        description="Join us to know more about the products you are using daily"
+                        hashtags="bettershop"
+          >
+            <font-awesome-icon class="text-gray-600 text-2xl" :icon="['fab', 'reddit']"/>
+          </ShareNetwork>
         </div>
       </div>
     </footer>
@@ -36,7 +66,17 @@
 
 <script>
 export default {
-  name: "FooterComponent"
+  name: "FooterComponent",
+  data() {
+    return {
+      currentUrl: ''
+    }
+  },
+  methods: {
+    getCurrentUrl() {
+      this.currentUrl = window.location.href
+    }
+  }
 }
 </script>
 
