@@ -13,13 +13,14 @@ export const openAlert = (it, type, message) => {
 }
 
 export const saveAuth = async userToken => {
-    localStorage.setItem('user-token', userToken.token)
-    localStorage.setItem('user-id', userToken.userId)
-    localStorage.setItem('authenticated', "true")
-    if (localStorage.getItem('reset-password')) {
-        localStorage.removeItem('reset-password')
-        return router.push('/resetPassword')
-    } else return router.push('/')
+    this.$cookies.set('refresh-token', userToken.token, '1d')
+    this.$cookies.set('user-token', userToken.token, '30min')
+    this.$cookies.set('user-id', userToken.id, '30min')
+    this.$cookies.set('authenticated', true, '30min')
+    if (this.$cookies.get('reset-password')) {
+        this.$cookies.remove('reset-password')
+        return router.push('/resetPassword').catch(e => avoidDuplicatedNavigation(e))
+    } else return router.push('/').catch(e => avoidDuplicatedNavigation(e))
 }
 
 export const isNullOrEmpty = (element) => {

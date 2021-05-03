@@ -22,7 +22,7 @@
 
 <script>
 import RoundImage from "@/components/RoundImage";
-import { isAuthenticated, userAvatar, userId, userToken, verifyAuth } from "@/utils/validation";
+import { userAvatar, verifyAuth } from "@/utils/validation";
 import UsersService from "@/api/UsersService";
 import ActionButton from "@/components/ActionButton";
 import { router } from "@/router";
@@ -44,22 +44,26 @@ export default {
   },
   async created() {
     await verifyAuth()
-    await UsersService.getMe().then(async res => this.user = res.data).catch(e => console.warn(e))
-    await this.getAuth()
-    this.redirectLink = "/profile/" + userId()
+    await UsersService.getMe()
+        .then(async res => {
+          this.user = res.data
+          await this.getAuth()
+        })
+        .catch(e => console.warn(e))
+        await this.getAuth()
   },
   methods: {
     async logout() {
-      await UsersService.logoutUser(userToken()).then(async () => {
+      await UsersService.logoutUser().then(async () => {
         localStorage.clear()
         await router.push('/').then().catch(e => avoidDuplicatedNavigation(e))
       }).catch(e => console.log(e))
-      await this.getAuth()
     },
     async getAuth() {
-      this.authenticated = isAuthenticated()
+      this.authenticated = this.$cookies.isKey('authenticated')
       this.photo = userAvatar()
-      this.user.id = userId()
+      this.user.id = this.$cookies.get('user-id')
+      this.redirectLink = "/profile/" + this.user.id
     },
     async edit() {
       await router.push('/business/edit').then().catch(e => avoidDuplicatedNavigation(e))

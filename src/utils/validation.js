@@ -3,43 +3,32 @@ import { router } from "@/router";
 import { avoidDuplicatedNavigation } from "@/utils/helper";
 
 export const verifyAuth = async () => {
-    if (localStorage.getItem('user-token')) {
+    if (this.$cookies.isKey('user-token')) {
         await UsersService.getMe().then(async r => {
-            localStorage.setItem('authenticated', "true")
-            localStorage.setItem('user-id', r.data.id)
-            localStorage.setItem('is-business', r.data.isBusiness)
-            localStorage.setItem('user-avatar', r.data.avatar)
-            localStorage.setItem('user-email', r.data.email)
+            this.$cookies.set('authenticated', true, '30min')
+            this.$cookies.set('user-id', r.data.id, '30min')
+            this.$cookies.set('is-business', r.data.isBusiness, '30min')
+            this.$cookies.set('user-avatar', r.data.avatar, '30min')
+            this.$cookies.set('forgot-password-email', '30mins')
             if (!r.data.active) {
                 await router.push('/verifyCode').then().catch(e => avoidDuplicatedNavigation(e))
-                localStorage.removeItem('reset-password')
+                this.$cookies.remove('reset-password')
             }
         }).catch(() => {
             localStorage.clear()
         })
+    } else if (this.$cookies.isKey('refresh-token')) {
+        await UsersService.refreshToken().then(async r => {
+            this.$cookies.set('user-token', r.data.id, '30min')
+            await this.verifyAuth()
+        })
     }
 }
 
-export const isAuthenticated = () => {
-    return localStorage.getItem('authenticated') === "true"
-}
-
-export const isBusiness = () => {
-    return localStorage.getItem('is-business') === "true"
-}
-
-export const userId = () => {
-    return parseInt(localStorage.getItem('user-id')) || 0
-}
-
 export const userAvatar = () => {
-    const localAvatar = localStorage.getItem('user-avatar')
+    const localAvatar = this.$cookies.get('user-avatar')
     if (localAvatar === 'null' || localAvatar === null) return emptyAvatar
     else return localStorage.getItem('user-avatar')
 }
 
 export const emptyAvatar = "https://imgur.com/uF05hWw.png"
-
-export const userToken = () => {
-    return localStorage.getItem('user-token')
-}

@@ -40,13 +40,13 @@ export default {
     async verify() {
       await UsersService.verifyCode(this.verificationCode).then(async res => {
         this.userToken = res.data
-        saveAuth(this.userToken)
+        await saveAuth(this.userToken)
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())
       })
     },
     async resend() {
-      await UsersService.forgotPassword(localStorage.getItem("user-email")).then(async () => {
+      await UsersService.forgotPassword(this.$cookies.get("forgot-password-email")).then(async () => {
         openAlert(this, "success", "Check your email for verification code.")
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())

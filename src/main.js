@@ -8,6 +8,8 @@ import store from './store'
 import VueMobileDetection from 'vue-mobile-detection'
 
 Vue.use(require('vue-cookies'))
+Vue.$cookies.config('1d', '', '', true, 'Strict')
+
 Vue.use(VueMobileDetection)
 
 library.add(faUserSecret)

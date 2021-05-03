@@ -1,5 +1,4 @@
 import { API } from "@/utils/helper";
-import { userToken } from "@/utils/validation";
 import { BASE_URL } from "@/utils/config";
 
 const instance = API(BASE_URL + '/users')
@@ -32,7 +31,7 @@ class UsersService {
         })
     }
 
-    static updatePassword(password, token = userToken()) {
+    static updatePassword(password, token = this.$cookies.get('user-token')) {
         return instance.put('/resetPassword', {
             password
         }, {
@@ -42,7 +41,7 @@ class UsersService {
         })
     }
 
-    static getMe(token = userToken()) {
+    static getMe(token = this.$cookies.get('user-token')) {
         return instance.get('/me', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -54,7 +53,11 @@ class UsersService {
         return instance.get('/' + id)
     }
 
-    static logoutUser(token) {
+    static refreshToken() {
+        return instance.get('/refresh?refreshToken=' + this.$cookies.get('refresh-token'))
+    }
+
+    static logoutUser(token = this.$cookies.get('user-token')) {
         return instance.delete('/logout', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -72,7 +75,7 @@ class UsersService {
         })
     }
 
-    static getReviewsByUserId(userId, token = userToken()) {
+    static getReviewsByUserId(userId, token = this.$cookies.get('user-token')) {
         return new Promise((resolve, reject) => {
             try {
                 instance.get(userId +"/reviews", {

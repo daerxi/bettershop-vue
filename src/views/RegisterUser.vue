@@ -94,7 +94,7 @@ export default {
             this.user = res.data
             await UsersService.loginUser(this.email, this.password).then(async res => {
               this.userToken = res.data
-              saveAuth(this.userToken)
+              await saveAuth(this.userToken)
             })
           }).catch(e => {
             let error = e.response.data.error.toString()

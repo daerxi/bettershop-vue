@@ -48,7 +48,7 @@ export default {
         token: String
       },
       message: '',
-      email: this.$cookies.get("bs-email"),
+      email: this.$cookies.get("user-email"),
       password: '',
       alertOpen: false,
       rememberMe: true
@@ -60,7 +60,7 @@ export default {
     },
     async login() {
       if (this.rememberMe)
-        this.$cookies.set("bs-email", this.email, Infinity)
+        this.$cookies.set("user-email", this.email, Infinity)
       await UsersService.loginUser(this.email, this.password).then(res => {
         this.userToken = res.data;
         saveAuth(this.userToken)
