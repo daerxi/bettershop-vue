@@ -45,15 +45,15 @@ export default {
     }
   },
   async created() {
+    this.businessRedirect = '/businesses/' + this.review.businessId
+    this.redirectLink = "/profile/" + this.review.userId
     await UsersService.getUser(this.review.userId)
         .then(async res => {
           this.user = res.data
-          this.redirectLink = "/profile/" + this.user.id
         }).catch(e => console.error(e))
     await BusinessService.getBusiness(this.review.businessId)
         .then(async res => {
           this.business = res.data
-          this.businessRedirect = '/businesses/' + this.business.id
           if (this.business.category === null) this.business.category = "Not categorized"
         }).catch(e => console.error(e))
   }
