@@ -82,13 +82,17 @@ export default {
   },
   methods: {
     async submitPayment() {
-      stripe.createToken(card, this.customer).then(res => {
-        if (res.error) openAlert(this, "error", res.error.message)
-        else {
-          this.stripeToken = res.token.id
-          this.donateAPI()
-        }
-      })
+      if (this.amount <= 0) {
+        openAlert(this, "error", "Please enter an amount greater than 0.")
+      } else {
+        stripe.createToken(card, this.customer).then(res => {
+          if (res.error) openAlert(this, "error", res.error.message)
+          else {
+            this.stripeToken = res.token.id
+            this.donateAPI()
+          }
+        })
+      }
     },
     async donateAPI() {
       const name = this.customer.name

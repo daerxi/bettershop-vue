@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './assets/style.css'
+import VueScrollTo from 'vue-scrollto'
 import { router } from '@/router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -9,6 +10,20 @@ import store from './store'
 import VueMobileDetection from 'vue-mobile-detection'
 import VueSocialSharing from 'vue-social-sharing'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+Vue.use(VueScrollTo, {
+    container: "body",
+    duration: 500,
+    easing: "ease",
+    offset: 0,
+    force: true,
+    cancelable: true,
+    onStart: false,
+    onDone: false,
+    onCancel: false,
+    x: false,
+    y: true
+})
 
 Vue.use(require('vue-cookies'))
 Vue.$cookies.config('1d', '', '', false, 'Strict')
