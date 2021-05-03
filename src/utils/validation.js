@@ -4,6 +4,7 @@ import { avoidDuplicatedNavigation } from "@/utils/helper";
 import Vue from "vue";
 
 Vue.use(require('vue-cookies'))
+Vue.$cookies.config('1d', '', '', false, 'Strict')
 
 export const verifyAuth = async () => {
     if (Vue.$cookies.isKey('user-token')) {

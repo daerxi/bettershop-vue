@@ -8,7 +8,7 @@ import store from './store'
 import VueMobileDetection from 'vue-mobile-detection'
 
 Vue.use(require('vue-cookies'))
-Vue.$cookies.config('1d', '', '', true, 'Strict')
+Vue.$cookies.config('1d', '', '', false, 'Strict')
 
 Vue.use(VueMobileDetection)
 
