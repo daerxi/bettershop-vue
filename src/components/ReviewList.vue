@@ -20,7 +20,7 @@ export default {
   props: ['reviews', 'number'],
   methods: {
     async showNumberOfReviews(i) {
-      return this.number > i
+      return this.number > i || !this.number
     }
   }
 }
