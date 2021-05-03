@@ -14,7 +14,7 @@
       </div>
       <div class="py-4"></div>
     </div>
-    <review-list :reviews="reviews"/>
+    <review-list :number="max" :reviews="reviews"/>
   </div>
 </template>
 
@@ -41,7 +41,8 @@ export default {
       alertOpen: false,
       message: '',
       type: '',
-      editable: true
+      editable: true,
+      max: 2
     }
   },
   async created() {
