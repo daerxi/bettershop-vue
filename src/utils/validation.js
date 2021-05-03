@@ -39,7 +39,7 @@ export const clearCookies = async () => {
 export const saveAuth = async userToken => {
     Vue.$cookies.set('refresh-token', userToken.token, '1d')
     Vue.$cookies.set('user-token', userToken.token, '30min')
-    Vue.$cookies.set('user-id', userToken.id, '30min')
+    Vue.$cookies.set('user-id', userToken.userId, '30min')
     Vue.$cookies.set('authenticated', true, '30min')
     if (Vue.$cookies.get('reset-password')) {
         Vue.$cookies.remove('reset-password')
