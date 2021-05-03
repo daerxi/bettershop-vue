@@ -5,7 +5,7 @@
     </div>
     <div class="w-full block flex-wrap p-4">
       <div v-for="(review,i) in reviews" :key="i">
-        <review-component v-if="showNumberOfReviews(i)" :rate="reviews" :review="review"></review-component>
+        <review-component v-if="showNumberOfReviews(i)" :review="review"></review-component>
       </div>
     </div>
   </div>

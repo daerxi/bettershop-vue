@@ -9,8 +9,13 @@
           <rate :editable="editable" v-bind:rateValue="review.rate"/>
         </div>
         <div class="col-span-1"/>
-        <div class="text-left py-1" :class="{'col-span-3': $isMobile(), 'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
+        <div class="text-left py-1"
+             :class="{'col-span-3': $isMobile(), 'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
+          <router-link style="text-decoration: none" :to="businessRedirect">
+            <h3 class="">{{ business.name }} - {{ business.category }}</h3>
+          </router-link>
           <p class="text-gray-700">{{ review.content }}</p>
+
         </div>
       </div>
     </section>
@@ -21,6 +26,7 @@
 import Rate from "@/components/Rate";
 import RoundImage from "@/components/RoundImage";
 import UsersService from "@/api/UsersService";
+import BusinessService from "@/api/BusinessService";
 
 export default {
   name: "ReviewComponent",
@@ -33,7 +39,9 @@ export default {
         avatar: ''
       },
       editable: false,
-      redirectLink: ''
+      redirectLink: '',
+      business: {},
+      businessRedirect: ''
     }
   },
   async created() {
@@ -41,6 +49,12 @@ export default {
         .then(async res => {
           this.user = res.data
           this.redirectLink = "/profile/" + this.review.userId
+        }).catch(e => console.error(e))
+    await BusinessService.getBusiness(this.review.businessId)
+        .then(async res => {
+          this.business = res.data
+          this.businessRedirect = '/businesses/' + this.business.id
+          if (this.business.category === null) this.business.category = "Not categorized"
         }).catch(e => console.error(e))
   }
 }
