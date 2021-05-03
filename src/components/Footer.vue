@@ -31,17 +31,16 @@
           </a>
           <ShareNetwork class="no-underline text-gray-800"
                         network="facebook"
-                        :url="currentUrl"
+                        url="159.65.243.244"
                         title="BetterShop - Improve your everyday life"
-                        description="Join us to know more about the products you are using daily"
-                        quote=""
+                        quote="Join us to know more about the products you are using daily"
                         hashtags="bettershop"
           >
             <font-awesome-icon class="text-gray-600 text-2xl" :icon="['fab', 'facebook']"/>
           </ShareNetwork>
           <ShareNetwork class="no-underline text-gray-800"
                         network="twitter"
-                        :url="currentUrl"
+                        url="159.65.243.244"
                         title="BetterShop - Improve your everyday life"
                         description="Join us to know more about the products you are using daily"
                         quote=""
@@ -51,7 +50,7 @@
           </ShareNetwork>
           <ShareNetwork class="no-underline text-gray-800"
                         network="reddit"
-                        :url="currentUrl"
+                        url="159.65.243.244"
                         title="BetterShop - Improve your everyday life"
                         description="Join us to know more about the products you are using daily"
                         hashtags="bettershop"
@@ -66,17 +65,7 @@
 
 <script>
 export default {
-  name: "FooterComponent",
-  data() {
-    return {
-      currentUrl: ''
-    }
-  },
-  methods: {
-    getCurrentUrl() {
-      this.currentUrl = window.location.href
-    }
-  }
+  name: "FooterComponent"
 }
 </script>
 
