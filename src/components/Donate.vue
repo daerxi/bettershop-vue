@@ -83,20 +83,23 @@ export default {
   methods: {
     async submitPayment() {
       stripe.createToken(card, this.customer).then(res => {
-        if (res.error) openAlert(this, "error", "res.error.message")
+        if (res.error) openAlert(this, "error", res.error.message)
         else {
-          openAlert(this, "success", "Thank your for your support. Your payment has been processed.")
-          this.stripeToken = res.token
+          this.stripeToken = res.token.id
           this.donateAPI()
         }
-      });
+      })
     },
     async donateAPI() {
       const name = this.customer.name
-      const { stripeToken, email, amount, currency } = this
+      const {stripeToken, email, amount, currency} = this
       const instance = API(BASE_URL + '/donate')
       await instance.post('/', {
         stripeToken, name, email, amount, currency
+      }).then(async () => {
+        openAlert(this, "success", "Thank your for your support. Your payment has been processed.")
+      }).catch(e => {
+        openAlert(this, "error", e.response.error)
       })
     }
   }
