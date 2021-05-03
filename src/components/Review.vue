@@ -48,7 +48,7 @@ export default {
     await UsersService.getUser(this.review.userId)
         .then(async res => {
           this.user = res.data
-          this.redirectLink = "/profile/" + this.review.userId
+          this.redirectLink = "/profile/" + this.user.id
         }).catch(e => console.error(e))
     await BusinessService.getBusiness(this.review.businessId)
         .then(async res => {
