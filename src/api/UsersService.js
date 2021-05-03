@@ -71,9 +71,10 @@ class UsersService {
         return instance.get("/forgotPassword?email=" + email)
     }
 
-    static verifyCode(verificationCode) {
+    static verifyCode(verificationCode, email) {
         return instance.post("/verify", {
-            verificationCode
+            verificationCode,
+            email
         })
     }
 

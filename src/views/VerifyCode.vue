@@ -34,12 +34,13 @@ export default {
       message: '',
       alertOpen: false,
       userToken: {},
-      resetPassword: localStorage.getItem('reset-password')
+      resetPassword: localStorage.getItem('reset-password'),
+      email: this.$cookies.get("forgot-password-email")
     }
   },
   methods: {
     async verify() {
-      await UsersService.verifyCode(this.verificationCode).then(async res => {
+      await UsersService.verifyCode(this.verificationCode, this.email).then(async res => {
         this.userToken = res.data
         await saveAuth(this.userToken)
       }).catch(e => {
@@ -47,7 +48,7 @@ export default {
       })
     },
     async resend() {
-      await UsersService.forgotPassword(this.$cookies.get("forgot-password-email")).then(async () => {
+      await UsersService.forgotPassword(this.email).then(async () => {
         openAlert(this, "success", "Check your email for verification code.")
       }).catch(e => {
         openAlert(this, "error", e.response.data.error.toString())

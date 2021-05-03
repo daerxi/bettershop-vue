@@ -67,7 +67,7 @@ export default {
         saveAuth(this.userToken)
       }).catch(e => {
         openAlert(this, "error", e.response.data.error)
-      });
+      })
     }
   }
 }
