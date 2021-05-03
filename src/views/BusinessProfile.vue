@@ -63,7 +63,6 @@ export default {
         await BusinessService.getBusiness(this.$route.params.businessId)
             .then(async res => {
               this.business = res.data
-              console.log(this.business.userId, this.$cookies.get('user-id'))
               if (this.business.userId === parseInt(this.$cookies.get('user-id'))) this.showTextArea = false
             })
             .catch(e => console.error(e))
