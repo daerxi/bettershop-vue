@@ -13,9 +13,11 @@
         <h3 class="text-xl font-semibold">{{ business.name }}</h3>
         <p class="text-sm italic">{{ business.category }}</p>
         <p class="text-gray-600">{{ business.description }}</p>
-        <p class="text-gray-600">{{ business.website }}</p>
-        <p class="text-gray-600" v-if="business.address && business.city && business.province && business.country">{{business.address}}, {{business.city}}, {{business.province}}, {{ business.country }}</p>
-
+        <a class="no-underline" :href="business.website"><p class="text-gray-600">{{ business.website }}</p></a>
+        <p class="text-gray-600"
+           v-if="business.address && business.city && business.province && business.country">
+          {{business.address}}, {{business.city}}, {{business.province}}, {{ business.country }}
+        </p>
 
       </div>
     </div>
