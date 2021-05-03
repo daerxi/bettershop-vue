@@ -9,7 +9,7 @@ export const verifyAuth = async () => {
             this.$cookies.set('user-id', r.data.id, '30min')
             this.$cookies.set('is-business', r.data.isBusiness, '30min')
             this.$cookies.set('user-avatar', r.data.avatar, '30min')
-            this.$cookies.set('forgot-password-email', '30mins')
+            this.$cookies.set('forgot-password-email', '30min')
             if (!r.data.active) {
                 await router.push('/verifyCode').then().catch(e => avoidDuplicatedNavigation(e))
                 this.$cookies.remove('reset-password')
