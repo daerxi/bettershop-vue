@@ -4,7 +4,6 @@ import Vue from 'vue'
 const instance = API(BASE_URL + '/business')
 
 Vue.use(require('vue-cookies'))
-const userToken = Vue.$cookies.get('user-token')
 
 class BusinessService {
     static getBusinesses() {
@@ -41,7 +40,7 @@ class BusinessService {
         })
     }
 
-    static getInfo(token = userToken) {
+    static getInfo(token = Vue.$cookies.get('user-token')) {
         return instance.get('/info', {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -49,7 +48,7 @@ class BusinessService {
         })
     }
 
-    static getBusiness(id, token = userToken) {
+    static getBusiness(id, token = Vue.$cookies.get('user-token')) {
         return instance.get('/info?id=' + id, {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -57,7 +56,7 @@ class BusinessService {
         })
     }
 
-    static getBusinessByUserId(userId, token = userToken) {
+    static getBusinessByUserId(userId, token = Vue.$cookies.get('user-token')) {
         return instance.get('/info?userId=' + userId, {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -65,7 +64,7 @@ class BusinessService {
         })
     }
 
-    static updateInfo(body, token = userToken) {
+    static updateInfo(body, token = Vue.$cookies.get('user-token')) {
         return instance.put('/info', body, {
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -94,7 +93,7 @@ class BusinessService {
         return instance.get(businessId + '/reviews')
     }
 
-    static postReview(content, rate, businessId, token = userToken) {
+    static postReview(content, rate, businessId, token = Vue.$cookies.get('user-token')) {
         return instance.post(businessId + '/posts', {
             content,
             rate,
