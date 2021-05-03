@@ -32,7 +32,7 @@ import { openAlert } from "@/utils/helper";
 import DropdownComponent from "@/components/Dropdown";
 
 // eslint-disable-next-line no-undef
-const stripe = Stripe('pk_test_51Ib6HRJ3hdZYvgvCNQAw3aqAPjEiSYmnXdNqim3x67ZPfHKIatQGrLFU0XmXKufciiLgmOCPe3e4171jK3ibVTDI00LNCtmpPQ');
+const stripe = Stripe('pk_test_51I6OndA35cjOkMayVB9T8NZMMccYvOvuPkdOIAqyA4hWFqmYJYe1D96rqUFM68TKg6rrhisM9opX3CWkv5jjngce00ta64l2xz');
 const elements = stripe.elements();
 let card = undefined;
 
