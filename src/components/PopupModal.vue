@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="">
     <transition name="slide" appear>
-      <div class="modal" v-if="show">
+      <div class="modal bg-gray-100 px-6 py-8 rounded shadow-lg border-gray-500" v-if="show">
         <h2>{{ title }}</h2>
-        <slot/>
+        <div class="p-4">
+          <slot/>
+        </div>
       </div>
     </transition>
   </div>
@@ -17,42 +19,16 @@ export default {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'montserrat', sans-serif;
-}
-
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99;
-
   width: 100%;
   max-width: 400px;
-  background-color: #FFF;
+  background-color: whitesmoke;
   border-radius: 16px;
-
   padding: 25px;
-
-  h1 {
-    color: #222;
-    font-size: 32px;
-    font-weight: 900;
-    margin-bottom: 15px;
-  }
-
-  p {
-    color: #666;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 15px;
-  }
 }
 </style>
