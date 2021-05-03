@@ -20,7 +20,7 @@
 import { router } from "@/router";
 import { avoidDuplicatedNavigation } from "@/utils/helper";
 import FooterComponent from "@/components/Footer";
-import CookieBanner from "@/views/CookieBanner";
+import CookieBanner from "@/components/CookieBanner";
 
 export default {
   name: 'App',

@@ -1,13 +1,24 @@
 <template>
-  <a class="text-xs font-bold p-2 shadow-md rounded block leading-normal text-blueGray-600 bg-gray-100">
-    {{ title }}
-  </a>
+  <button class="bg-transparent w-16" v-on:click="fn">
+    <a class="text-xs p-2 shadow-md rounded leading-normal text-blueGray-600 bg-gray-100"
+       v-bind:class="{'block': isBlock}">
+      {{ title }}
+    </a>
+  </button>
 </template>
 
 <script>
 export default {
   name: "ActionButton",
-  props: ["title"]
+  props: ["title", "block", "fn"],
+  data() {
+    return {
+      isBlock: true
+    }
+  },
+  async created() {
+    if (this.block === false) this.isBlock = false
+  }
 }
 </script>
 
