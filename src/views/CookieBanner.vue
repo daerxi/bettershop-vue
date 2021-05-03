@@ -1,5 +1,5 @@
 <template>
-  <div class="footer w-screen h-screen bg-transparent relative items-center justify-center">
+  <div class="w-screen bg-transparent relative items-center justify-center footer">
     <section class="p-5 lg:px-24 bg-gray-500">
       <div class="md:flex items-center -mx-3">
         <div class="md:flex-1 px-3 mb-5 md:mb-0">
@@ -33,6 +33,6 @@ export default {
   bottom: 0px;
   left: 0px;
   width: 100%;
-  height: 80px;
 }
+
 </style>
