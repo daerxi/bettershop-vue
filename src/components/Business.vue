@@ -4,7 +4,9 @@
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
       'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
-        <round-image :redirect="redirectLink" :user="user"/>
+        <div @click="updateClick">
+          <round-image :redirect="redirectLink" :user="user"/>
+        </div>
         <rate :key="rateValue" :editable="editable" :rateValue="rateValue"/>
       </div>
       <div class="col-span-1"/>
@@ -66,6 +68,11 @@ export default {
     async getRate() {
       await BusinessService.getReviewsByBusinessId(this.business.id)
           .then(async res => this.rateValue = res.data.rate)
+          .catch(e => console.error(e))
+    },
+    async updateClick() {
+      await BusinessService.updateClickTrack(this.business.id)
+          .then(async res => console.log(res.data))
           .catch(e => console.error(e))
     }
   }

@@ -72,6 +72,10 @@ class BusinessService {
         })
     }
 
+    static updateClickTrack(businessId) {
+        return instance.put('/' + businessId + '/click', {})
+    }
+
     static searchKeyword(keyword) {
         return new Promise((resolve, reject) => {
             try {
