@@ -20,7 +20,9 @@
         </div>
       </div>
     </section>
+    <div class="p-2"></div>
     <hr>
+    <div class="p-2"></div>
   </div>
 </template>
 
