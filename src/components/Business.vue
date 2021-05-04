@@ -48,7 +48,7 @@ export default {
       await this.getBusinessUser()
       await this.getRate()
       if (this.business && this.business.website && !this.business.website.includes("http"))
-        this.website = "https://" + this.website
+        this.website = "https://" + this.business.website
       else this.website = this.business.website
 
       this.redirectLink = "/businesses/" + this.business.id
