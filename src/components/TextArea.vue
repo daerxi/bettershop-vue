@@ -20,13 +20,13 @@ export default {
   props: ["value"],
   data() {
     return {
-      characters: 2000,
+      characters: 3000,
       overLimit: false
     }
   },
   methods: {
     async countCharacters() {
-      this.characters = 2000 - this.value.length
+      this.characters = 3000 - this.value.length
       this.overLimit = this.characters < 0
     }
   }
