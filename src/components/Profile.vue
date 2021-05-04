@@ -3,7 +3,7 @@
     <div class="absolute top-0 right-0 sm:p-1 p-12">
       <round-image class="w-full" :user="user" :redirect="redirectLink"></round-image>
       <ul class="flex grid grid-cols-1">
-        <li v-if="authenticated" class="flex-auto text-center w-16 py-1">
+        <li v-if="authenticated && user.isBusiness" class="flex-auto text-center w-16 py-1">
           <action-button :fn="edit" title="Edit"></action-button>
         </li>
         <li v-if="authenticated" class="flex-auto text-center py-1 w-16">
@@ -35,7 +35,11 @@ export default {
       photo: String,
       user: {
         id: 0,
-        avatar: ''
+        avatar: '',
+        userName: '',
+        active: 0,
+        email: '',
+        isBusiness: false
       }
     }
   },
