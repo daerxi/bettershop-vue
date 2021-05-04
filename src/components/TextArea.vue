@@ -9,7 +9,7 @@
               placeholder="Enter your thoughts here..."
               :value="value" @input="$emit('input', $event.target.value)">
     </textarea>
-    <p class="text-right" v-bind:class="{'text-red-800':overLimit}">{{ characters }} characters remaining...</p>
+    <p class="text-right cursor-default" v-bind:class="{'text-red-800':overLimit}">{{ characters }} characters remaining...</p>
   </div>
 </template>
 

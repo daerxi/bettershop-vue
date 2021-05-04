@@ -5,6 +5,7 @@
       <div :class="{'p-12': !$isMobile(), 'p-2': $isMobile()}">
         <a>
           <h1 v-on:click="reload"
+              class="cursor-pointer"
               v-bind:class="{'text-3xl': $isMobile(),
                            'text-2xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-3xl': !$isMobile()}">
             BetterShop</h1>

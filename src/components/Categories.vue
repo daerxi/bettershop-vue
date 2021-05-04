@@ -5,7 +5,7 @@
         <li v-for="(category, i) in categories" :key="i" class="-mb-px mr-2 last:mr-0 flex-auto text-center"
             v-on:click="toggleTabs(i, category.type)">
           <a
-              class="text-xs font-bold uppercase px-1 py-3 shadow-lg rounded block leading-normal"
+              class="text-xs font-bold uppercase px-1 py-3 shadow-lg rounded block leading-normal cursor-pointer"
               v-bind:class="{'text-blueGray-600 bg-gray-100': openTab === i, 'text-white bg-gray-600': openTab !== i}">
             {{ category.type }}
           </a>

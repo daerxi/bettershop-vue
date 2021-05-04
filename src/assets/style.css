@@ -10,7 +10,8 @@ h1, h2, h3, h4 {
 }
 
 button {
-    border: none
+    border: none;
+    outline: none;
 }
 
 [type=button], [type=reset], [type=submit], button {
