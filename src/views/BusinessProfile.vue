@@ -46,6 +46,7 @@ export default {
     }
   },
   async created() {
+    if (this.$cookies.get('is-business') === 'true') this.showTextArea = false
     await this.getBusinessById().then(async () => {
       await BusinessService.getReviewsByBusinessId(this.$route.params.businessId)
           .then(async res => {
@@ -63,7 +64,6 @@ export default {
         await BusinessService.getBusiness(this.$route.params.businessId)
             .then(async res => {
               this.business = res.data
-              if (this.business.userId === parseInt(this.$cookies.get('user-id'))) this.showTextArea = false
             })
             .catch(e => console.error(e))
     else
