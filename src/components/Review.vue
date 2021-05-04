@@ -14,7 +14,7 @@
           <router-link style="text-decoration: none" :to="businessRedirect">
             <h3 v-if="showBusinessName" class="">{{ business.name }} - {{ business.category }}</h3>
           </router-link>
-          <p class="text-gray-700" style="white-space: pre;">{{ review.content }}</p>
+          <p class="text-gray-700 whitespace-pre-line">{{ review.content }}</p>
 
         </div>
       </div>
