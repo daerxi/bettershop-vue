@@ -65,9 +65,7 @@ export default {
       })
     },
     async getInfo() {
-      await BusinessService.getInfo().then(async res => {
-        this.business = res.data
-      })
+      await BusinessService.getInfo().then(async res => this.business = res.data)
     }
   }
 }

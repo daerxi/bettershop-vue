@@ -13,7 +13,7 @@
         <h3 class="text-xl font-semibold">{{ business.name }}</h3>
         <p class="text-sm italic">{{ business.category }}</p>
         <p class="text-gray-600">{{ business.description }}</p>
-        <a class="no-underline" :href="business.website"><p class="text-gray-600">{{ business.website }}</p></a>
+        <a class="no-underline" :href="website"><p class="text-gray-600">{{ business.website }}</p></a>
         <p class="text-gray-600"
            v-if="business.address && business.city && business.province && business.country">
           {{business.address}}, {{business.city}}, {{business.province}}, {{ business.country }}
@@ -39,13 +39,16 @@ export default {
       redirectLink: "/",
       user: {},
       editable: false,
-      rateValue: 0
+      rateValue: 0,
+      website: ''
     }
   },
   async mounted() {
     if (this.business !== {}) {
       await this.getBusinessUser()
       await this.getRate()
+      this.website = this.business.website.includes("http") ? this.website : "https://" + this.business.website
+
       this.redirectLink = "/businesses/" + this.business.id
     }
   },
