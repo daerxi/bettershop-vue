@@ -11,6 +11,7 @@
       <input-component type="text" name="Province"  v-model.trim="business.province"></input-component>
       <input-component type="text" name="City"  v-model.trim="business.city"></input-component>
       <input-component type="text" name="Address"  v-model.trim="business.address"></input-component>
+<!--      TODO: Verify firstName, lastName, business license, phone number - to active-->
       <submit-button title="Submit" :fn="updateInfo"></submit-button>
     </form-component>
   </div>
