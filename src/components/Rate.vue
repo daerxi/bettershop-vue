@@ -3,18 +3,18 @@
     <div class="text-xl cursor-pointer" v-if="editable">
           <span v-for="(star,i) in stars" :key="i">
       <a v-on:click="assignNumber(i)">
-        <span v-if="star">★</span>
+        <span class="text-black" v-if="star">★</span>
       </a>
       <a v-on:click="assignNumber(i)">
-        <span v-if="!star">☆</span>
+        <span class="text-black" v-if="!star">☆</span>
       </a>
     </span>
     </div>
 
     <div class="text-l cursor-default" v-if="!editable">
       <span v-for="(star,i) in stars" :key="i">
-        <a><span v-if="star">★</span></a>
-        <a><span v-if="!star">☆</span></a>
+        <a><span class="text-black" v-if="star">★</span></a>
+        <a><span class="text-black"  v-if="!star">☆</span></a>
     </span>
     </div>
   </div>

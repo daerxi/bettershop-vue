@@ -10,6 +10,9 @@ import store from './store'
 import VueMobileDetection from 'vue-mobile-detection'
 import VueSocialSharing from 'vue-social-sharing'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import ReadMore from 'vue-read-more'
+
+Vue.use(ReadMore)
 
 Vue.use(VueScrollTo, {
     container: "body",

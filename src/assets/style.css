@@ -115,8 +115,7 @@ html {
 input,a {
     box-sizing: border-box;
     border-width: 0;
-    border-style: solid;
-    border-color: #e2e8f0
+    color: #4287f5;
 }
 
 hr {
@@ -126,10 +125,6 @@ hr {
 
 img {
     border-style: solid
-}
-
-textarea {
-    resize: vertical
 }
 
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
