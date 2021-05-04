@@ -65,12 +65,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-read-more {
-  a {
-    color: black;
-  }
-}
-
-</style>
