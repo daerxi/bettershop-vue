@@ -50,7 +50,10 @@ export default {
     },
     async onSubmit() {
       const path = '/?keyword=' + this.keyword
-      await router.push(path).then(async () => await this.search()).catch(e => avoidDuplicatedNavigation(e))
+      await router.push(path).then(async () => {
+        await this.search()
+        window.location.reload()
+      }).catch(e => avoidDuplicatedNavigation(e))
     },
     async getBusiness() {
       if (this.$route.query.type) {
