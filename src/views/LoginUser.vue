@@ -14,14 +14,14 @@
     <checkbox v-bind:check="()=>{}" label="Remember me"></checkbox>
 
     <div class="text-right text-sm text-gray-800 mt-4">
-      <a class="no-underline border-b border-grey-dark text-gray-700" href="../forgotPassword">
+      <a class="hover:no-underline underline text-gray-700" href="../forgotPassword">
         Forgot Password?
       </a>
     </div>
 
     <div class="text-gray-700 mt-6 text-sm">
       Doesn't have an account?
-      <a class="no-underline border-b border-grey-dark text-gray-700" href="../signup">
+      <a class="hover:no-underline underline text-gray-700" href="../signup">
         Sign up today!
       </a>.
     </div>

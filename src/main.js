@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './assets/style.css'
 import VueScrollTo from 'vue-scrollto'
 import { router } from '@/router'
 import { library } from '@fortawesome/fontawesome-svg-core'

@@ -1,7 +1,7 @@
 <template>
   <div>
     <input
-        class="block border border-gray-300 p-4 rounded mb-4 w-full"
+        class="transition-all block border border-gray-300 p-4 rounded mb-5 w-full"
         :name="name"
         :placeholder="name"
         :type="type"
@@ -19,5 +19,12 @@ export default {
 </script>
 
 <style scoped>
+  input {
+    box-sizing: border-box;
+    border-width: 1px;
+  }
 
+  input:focus {
+    outline: none;
+  }
 </style>

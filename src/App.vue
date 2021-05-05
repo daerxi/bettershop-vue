@@ -5,7 +5,7 @@
       <div :class="{'p-12': !$isMobile(), 'p-2': $isMobile()}">
         <a>
           <h1 v-on:click="reload"
-              class="cursor-pointer"
+              class="cursor-pointer font-bold"
               v-bind:class="{'text-3xl': $isMobile(),
                            'text-2xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-3xl': !$isMobile()}">
             BetterShop</h1>
@@ -58,7 +58,34 @@ export default {
   color: #2c3e50;
 }
 
+a {
+  box-sizing: border-box;
+  border-width: 0;
+}
+
+#readmore {
+  color: #5379b5;
+}
+
 html {
   background: #f2f2f2;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
+
+h1, h2, h3, h4 {
+  color: #2c3e50
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+textarea {
+  overflow: auto;
+  margin: 10px;
+}
+
 </style>

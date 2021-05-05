@@ -1,7 +1,7 @@
 <template>
   <div class="h-16">
     <select :value="value" @input="$emit('input', $event.target.value)"
-        class="block border border-gray-300 p-4 rounded mb-4 w-full" :name="id" :id="id" required>
+        class="transition-all block border border-gray-300 p-3.5 rounded mb-4 w-full text-sm" :name="id" :id="id" required>
       <option disabled class="rounded bg-transparent text-gray-300 p-2 w-full h-6 mb-4"
               value="">{{
           placeholder

@@ -6,7 +6,7 @@
             v-on:click="toggleTabs(i, category.type)">
           <a
               class="text-xs font-bold uppercase px-1 py-3 shadow-lg rounded block leading-normal cursor-pointer"
-              v-bind:class="{'text-blueGray-600 bg-gray-100': openTab === i, 'text-white bg-gray-600': openTab !== i}">
+              v-bind:class="{'text-blueGray-600 bg-gray-100': openTab === i, 'bg-gray-600 text-white': openTab !== i}">
             {{ category.type }}
           </a>
         </li>

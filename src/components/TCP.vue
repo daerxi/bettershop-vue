@@ -3,10 +3,10 @@
     <hr>
     <div class="py-3"></div>
     By signing up, you agree to the
-    <a class="no-underline border-b border-grey-dark text-gray-600" href="#">
+    <a class="hover:no-underline underline text-gray-600" href="#">
       Terms of Service
     </a> and
-    <a class="no-underline border-b border-grey-dark text-gray-600" href="#">
+    <a class="hover:no-underline underline text-gray-600" href="#">
       Privacy Policy
     </a>
   </div>
