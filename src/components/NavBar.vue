@@ -33,6 +33,8 @@
 import ProfileComponent from "@/components/Profile";
 import UsersService from "@/api/UsersService";
 import { clearCookies } from "@/utils/validation";
+import { router } from "@/router";
+import { avoidDuplicatedNavigation } from "@/utils/helper";
 
 export default {
   name: "NavBar",
@@ -52,6 +54,7 @@ export default {
     async logout() {
       await UsersService.logoutUser().then(async () => {
         await clearCookies()
+        await router.push("/").catch(e => avoidDuplicatedNavigation(e))
         window.location.reload()
       }).catch(e => console.log(e))
     }

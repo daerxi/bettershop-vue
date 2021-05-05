@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       redirectLink: '',
-      authenticated: this.$cookies.isKey('authenticated'),
+      authenticated: this.$cookies.get('authenticated') === 'true',
       photo: String,
       user: {
         id: 0,
@@ -31,14 +31,17 @@ export default {
   },
   async created() {
     await verifyAuth()
-    await UsersService.getMe()
-        .then(async res => {
-          this.user = res.data
-          this.authenticated = this.$cookies.isKey('authenticated')
-          this.photo = userAvatar()
-          this.user.id = this.$cookies.get('user-id')
-          this.redirectLink = "/profile/" + this.user.id
-        }).catch(e => console.warn(e))
+    if (this.authenticated)
+      await UsersService.getMe()
+          .then(async res => {
+            this.user = res.data
+            this.authenticated = this.$cookies.isKey('authenticated')
+            this.photo = userAvatar()
+            this.user.id = this.$cookies.get('user-id')
+            this.redirectLink = "/profile/" + this.user.id
+          }).catch(e => console.warn(e))
+    else
+      this.redirectLink = "/login"
   }
 }
 </script>
