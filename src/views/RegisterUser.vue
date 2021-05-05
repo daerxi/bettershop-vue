@@ -28,8 +28,10 @@
          v-model.trim="password2"/>
 
     <checkbox v-bind:check="check" label="Are you signing up as a business?"></checkbox>
-
+    <div class="p-2"></div>
     <submit-button v-bind:fn="createUser" title="Create Account"></submit-button>
+
+    <div class="p-2"></div>
 
     <div class="text-gray-700 mt-6 text-sm">
       Already have an account?

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <hr class="mb-6 border-b-1 border-gray-100"/>
+      <hr class="p-3">
       <p>Hey! The world has an end!</p>
       <div class="py-4"></div>
     </div>

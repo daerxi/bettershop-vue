@@ -8,10 +8,8 @@
 
 <script>
 import RoundImage from "@/components/RoundImage";
-import { clearCookies, userAvatar, verifyAuth } from "@/utils/validation";
+import { userAvatar, verifyAuth } from "@/utils/validation";
 import UsersService from "@/api/UsersService";
-import { router } from "@/router";
-import { avoidDuplicatedNavigation } from "@/utils/helper";
 
 export default {
   name: "ProfileComponent",
@@ -36,30 +34,11 @@ export default {
     await UsersService.getMe()
         .then(async res => {
           this.user = res.data
-          await this.getAuth()
-        })
-        .catch(e => console.warn(e))
-        await this.getAuth()
-  },
-  methods: {
-    async logout() {
-      await UsersService.logoutUser().then(async () => {
-        await clearCookies()
-        await router.push('/').then(window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
-      }).catch(e => console.log(e))
-    },
-    async getAuth() {
-      this.authenticated = this.$cookies.isKey('authenticated')
-      this.photo = userAvatar()
-      this.user.id = this.$cookies.get('user-id')
-      this.redirectLink = "/profile/" + this.user.id
-    },
-    async edit() {
-      await router.push('/business/edit').then().catch(e => avoidDuplicatedNavigation(e))
-    },
-    async login() {
-      await router.push('/login').then().catch(e => avoidDuplicatedNavigation(e))
-    }
+          this.authenticated = this.$cookies.isKey('authenticated')
+          this.photo = userAvatar()
+          this.user.id = this.$cookies.get('user-id')
+          this.redirectLink = "/profile/" + this.user.id
+        }).catch(e => console.warn(e))
   }
 }
 </script>

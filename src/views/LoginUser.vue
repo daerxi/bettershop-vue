@@ -3,22 +3,24 @@
     <input-component
         type="email"
         name="Email"
-         v-model.trim="email"/>
+        v-model.trim="email"/>
 
     <input-component
         type="password"
         name="Password"
-         v-model.trim="password"/>
-    <submit-button title="Login" :fn="login">Login</submit-button>
+        v-model.trim="password"/>
+    <submit-button title="Submit" :fn="login"></submit-button>
 
-    <checkbox v-bind:check="()=>{}" label="Remember me"></checkbox>
+    <div class="p-2"></div>
+    <checkbox v-bind:check="check" label="Remember me"></checkbox>
 
     <div class="text-right text-sm text-gray-800 mt-4">
       <a class="hover:no-underline underline text-gray-700" href="../forgotPassword">
         Forgot Password?
       </a>
     </div>
-
+    <div class="p-2"></div>
+    <hr>
     <div class="text-gray-700 mt-6 text-sm">
       Doesn't have an account?
       <a class="hover:no-underline underline text-gray-700" href="../signup">
@@ -62,8 +64,9 @@ export default {
     async login() {
       if (this.rememberMe)
         this.$cookies.set("user-email", this.email, Infinity)
+      else this.$cookies.remove("user-email")
       await UsersService.loginUser(this.email, this.password).then(res => {
-        this.userToken = res.data;
+        this.userToken = res.data
         saveAuth(this.userToken)
       }).catch(e => {
         openAlert(this, "error", e.response.data.error)
