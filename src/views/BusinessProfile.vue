@@ -1,6 +1,5 @@
 <template>
   <div>
-    <profile-component/>
     <div class="py-6 px-8">
       <business v-if="business.id" v-bind:business="business"/>
     </div>
@@ -18,7 +17,6 @@
 </template>
 
 <script>
-import ProfileComponent from "@/components/Profile";
 import Business from "@/components/Business";
 import BusinessService from "@/api/BusinessService";
 import TextArea from "@/components/TextArea";
@@ -30,7 +28,7 @@ import { isNullOrEmpty, openAlert } from "@/utils/helper";
 
 export default {
   name: "BusinessProfile",
-  components: {AlertComponent, ReviewList, SubmitButton, TextArea, Business, ProfileComponent, Rate},
+  components: {AlertComponent, ReviewList, SubmitButton, TextArea, Business, Rate},
   data() {
     return {
       business: {},

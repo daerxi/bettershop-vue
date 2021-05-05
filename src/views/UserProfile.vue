@@ -1,10 +1,9 @@
 <template>
   <div>
-    <profile-component/>
     <div class="grid grid-cols-1 p-10">
       <div class="flex flex-wrap content-start px-12">
         <button class="bg-transparent" @click="showInput = true">
-          <h2 class="py-4 text-3xl">
+          <h2 class="py-4 font-bold text-3xl">
             <span v-if="isMe">Hi, </span>
             <span v-if="!isMe">User: </span>
             <span v-if="true">{{ user.userName }}!</span>
@@ -22,14 +21,13 @@
 </template>
 
 <script>
-import ProfileComponent from "@/components/Profile";
 import UsersService from "@/api/UsersService";
 import ReviewList from "@/components/ReviewList";
 import InputComponent from "@/components/Input";
 
 export default {
   name: "UserProfile",
-  components: {InputComponent, ReviewList, ProfileComponent},
+  components: {InputComponent, ReviewList},
   data() {
     return {
       reviews: [],

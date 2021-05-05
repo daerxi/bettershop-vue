@@ -2,17 +2,14 @@
   <div>
     <cookie-banner :fn="enableCookie" v-if="!cookie"/>
     <div id="app">
-      <div :class="{'p-12': !$isMobile(), 'p-2': $isMobile()}">
-        <a>
-          <h1 v-on:click="reload"
-              class="cursor-pointer font-bold"
-              v-bind:class="{'text-3xl': $isMobile(),
-                           'text-2xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-3xl': !$isMobile()}">
-            BetterShop</h1>
-        </a>
-        <router-view></router-view>
+      <div>
+        <div :class="{'px-12': !$isMobile(), 'px-2': $isMobile()}"/>
+        <nav-bar/>
+        <div>
+          <router-view class="p-6"/>
+        </div>
       </div>
-      <footer-component></footer-component>
+      <footer-component/>
     </div>
   </div>
 </template>
@@ -22,10 +19,11 @@ import { router } from "@/router";
 import { avoidDuplicatedNavigation } from "@/utils/helper";
 import FooterComponent from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import NavBar from "@/components/NavBar";
 
 export default {
   name: 'App',
-  components: {CookieBanner, FooterComponent},
+  components: {NavBar, CookieBanner, FooterComponent},
   data() {
     return {
       cookie: this.$cookies.get("acceptCookie")
@@ -64,7 +62,8 @@ a {
 }
 
 #readmore {
-  color: #5379b5;
+  color: #5b8aa6;
+  text-decoration: underline;
 }
 
 html {
@@ -86,6 +85,18 @@ button {
 textarea {
   overflow: auto;
   margin: 10px;
+}
+
+.bg-bs-blue {
+  background-color: #5b8aa6;
+}
+
+button:hover {
+  background-color: #5c798a;
+}
+
+.text-bs-blue {
+  color: #5b8aa6;
 }
 
 </style>

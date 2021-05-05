@@ -1,22 +1,20 @@
 <template>
   <div>
-    <profile-component/>
     <div class="h-5"/>
     <form @submit.prevent="onSubmit">
       <search-bar v-model.trim="keyword"/>
     </form>
     <categories :fn="getBusiness" :key="$route.fullPath"/>
     <div class="py-10"></div>
-    <h2 v-if="$route.query.keyword" class="text-left">Search Results:</h2>
-    <h2 v-else-if="$route.query.type" class="text-left">Category: {{$route.query.type}}</h2>
-    <h2 v-else class="text-left">Hot Businesses:</h2>
+    <h2 v-if="$route.query.keyword" class="text-left font-semibold text-2xl">Search Results:</h2>
+    <h2 v-else-if="$route.query.type" class="text-left font-semibold text-2xl">Category: {{$route.query.type}}</h2>
+    <h2 v-else class="text-left font-semibold text-2xl">Hot Businesses:</h2>
     <business-list v-bind:businesses="businesses"/>
   </div>
 </template>
 
 <script>
 import SearchBar from "@/components/SearchBar";
-import ProfileComponent from "@/components/Profile";
 import Categories from "@/components/Categories";
 import BusinessService from "@/api/BusinessService";
 import BusinessList from "@/components/BusinessList";
@@ -28,8 +26,7 @@ export default {
   components: {
     BusinessList,
     Categories,
-    SearchBar,
-    ProfileComponent
+    SearchBar
   },
   data() {
     return {

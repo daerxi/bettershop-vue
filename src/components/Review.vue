@@ -5,18 +5,17 @@
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
       'grid-cols-6': $isMobile()}">
         <div class="col-span-1 w-24">
-          <round-image :redirect="redirectLink" :user="user"/>
+          <round-image :redirect="redirectLink" :user="user" :is-nav="false"/>
           <rate :editable="editable" v-bind:rateValue="review.rate"/>
         </div>
         <div class="col-span-1"/>
         <div class="text-left py-1"
              :class="{'col-span-3': $isMobile(), 'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
           <router-link style="text-decoration: none" :to="businessRedirect">
-            <h3 v-if="showBusinessName" class="">{{ business.name }} - {{ business.category }}</h3>
+            <h3 v-if="showBusinessName" class="font-semibold text-xl">{{ business.name }} - {{ business.category }}</h3>
           </router-link>
-          <read-more class="text-gray-700 whitespace-pre-line" more-str="read more" :text="review.content" link="#"
-                     less-str="hide" :max-chars="350"></read-more>
-
+          <read-more class="text-gray-700 whitespace-pre-line" more-str="Read more" :text="review.content" link="#"
+                     less-str="Hide" :max-chars="350"></read-more>
         </div>
       </div>
     </section>

@@ -1,9 +1,9 @@
 <template>
-  <router-link :to="redirect" class="bg-transparent border-none">
+  <router-link :to="redirect" class="bg-transparent border-none p-2">
     <img v-if="user.avatar" :src=user.avatar
-         class="inline border-none w-16 h-16 mr-2 rounded-full" alt="user profile"/>
+         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt="user profile"/>
     <img v-else :src="emptyAvatar"
-         class="inline border-none w-16 h-16 mr-2 rounded-full" alt="user profile"/>
+         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt="user profile"/>
   </router-link>
 </template>
 
@@ -12,7 +12,7 @@ import { emptyAvatar } from "@/utils/validation";
 
 export default {
   name: "RoundImage",
-  props: ['user', 'redirect'],
+  props: ['user', 'redirect', 'isNav'],
   data() {
     return {
       business: {},

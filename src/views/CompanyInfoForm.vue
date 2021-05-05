@@ -1,6 +1,5 @@
 <template>
   <div>
-    <profile-component />
     <form-component :alert-open="alertOpen" title="Edit Company Info" :type="type" :message="message">
       <input-component type="text" name="Company Name"  v-model.trim="business.name"></input-component>
       <dropdown-component class="h-6"  v-model.trim="business.category" :options="categories"
@@ -25,11 +24,10 @@ import CategoriesService from "@/api/CategoriesService";
 import SubmitButton from "@/components/SubmitButton";
 import BusinessService from "@/api/BusinessService";
 import { openAlert } from "@/utils/helper";
-import ProfileComponent from "@/components/Profile";
 
 export default {
   name: "CompanyInfoForm",
-  components: {ProfileComponent, SubmitButton, DropdownComponent, InputComponent, FormComponent},
+  components: {SubmitButton, DropdownComponent, InputComponent, FormComponent},
   data() {
     return {
       alertOpen: false,

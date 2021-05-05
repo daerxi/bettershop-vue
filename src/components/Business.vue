@@ -5,18 +5,18 @@
       'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
         <div @click="updateClick">
-          <round-image :redirect="redirectLink" :user="user"/>
+          <round-image :redirect="redirectLink" :user="user" :is-nav="false"/>
         </div>
         <rate :key="rateValue" :editable="editable" :rateValue="rateValue"/>
       </div>
       <div class="col-span-1"/>
       <div class="text-left py-1" :class="{'col-span-3': $isMobile(),
                                            'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
-        <h3 class="text-xl font-semibold">{{ business.name }}</h3>
+        <h3 class="text-base font-medium">{{ business.name }}</h3>
         <p class="text-sm italic">{{ business.category }}</p>
-        <p class="text-gray-600">{{ business.description }}</p>
-        <a class="no-underline" :href="website"><p class="text-gray-600">{{ business.website }}</p></a>
-        <p class="text-gray-600"
+        <p class="text-sm text-gray-600">{{ business.description }}</p>
+        <a class="text-sm no-underline" :href="website"><p class="text-gray-600">{{ business.website }}</p></a>
+        <p class="text-sm text-gray-600"
            v-if="business.address && business.city && business.province && business.country">
           {{business.address}}, {{business.city}}, {{business.province}}, {{ business.country }}
         </p>

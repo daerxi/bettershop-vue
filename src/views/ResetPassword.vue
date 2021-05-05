@@ -1,6 +1,5 @@
 <template>
   <div>
-    <profile-component />
     <form-component title="Reset your password" :type="type" :message="message" :alert-open="alertOpen">
       <input-component
           type="password"
@@ -18,7 +17,6 @@
 <script>
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
-import ProfileComponent from "@/components/Profile";
 import SubmitButton from "@/components/SubmitButton";
 import UsersService from "@/api/UsersService";
 import { avoidDuplicatedNavigation, isNullOrEmpty, openAlert } from "@/utils/helper";
@@ -26,7 +24,7 @@ import { router } from "@/router";
 
 export default {
   name: "ResetPassword",
-  components: {SubmitButton, ProfileComponent, InputComponent, FormComponent},
+  components: {SubmitButton, InputComponent, FormComponent},
   data() {
     return {
       alertOpen: false,
