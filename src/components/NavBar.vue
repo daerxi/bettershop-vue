@@ -4,21 +4,24 @@
       <div class="flex flex-no-shrink items-stretch h-12">
         <a href="/"
            class="font-semibold text-xl flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center">BetterShop</a>
-        <button class="block lg:hidden cursor-pointer ml-auto relative w-14 h-14 p-4">
+        <a v-if="showMenu" @click="showMenu = !showMenu" class="block xl:hidden lg:hidden cursor-pointer ml-auto relative w-14 h-14 p-3">
           <font-awesome-icon class="text-xl text-gray-300" :icon="['fas', 'times']"></font-awesome-icon>
-        </button>
+        </a>
+        <a v-if="!showMenu" @click="showMenu = !showMenu" class="block xl:hidden lg:hidden cursor-pointer ml-auto relative w-14 h-14 p-3">
+          <font-awesome-icon class="text-xl text-gray-300" :icon="['fas', 'ellipsis-v']"></font-awesome-icon>
+        </a>
       </div>
-      <div class="lg:flex lg:items-stretch lg:flex-no-shrink lg:flex-grow">
-        <div class="lg:flex lg:items-stretch lg:justify-end ml-auto">
+      <div v-if="showMenu" class="flex items-stretch flex-no-shrink py-2 flex-grow">
+        <div class="flex items-stretch ustify-end ml-auto">
           <a href="/login" v-if="!authenticated"
-             class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">Login</a>
+             class="inline-block  flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">Login</a>
           <a @click="logout" v-if="authenticated"
-             class="cursor-pointer flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">Logout</a>
+             class="cursor-pointer flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">Logout</a>
           <a href="/business/edit" v-if="authenticated && isBusiness"
-             class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">Edit
+             class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">Edit
             Profile</a>
+          <profile-component></profile-component>
         </div>
-        <profile-component></profile-component>
       </div>
     </nav>
   </div>
@@ -35,7 +38,8 @@ export default {
   data() {
     return {
       authenticated: false,
-      isBusiness: false
+      isBusiness: false,
+      showMenu: true
     }
   },
   async beforeMount() {
