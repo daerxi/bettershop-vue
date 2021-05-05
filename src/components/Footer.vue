@@ -2,7 +2,7 @@
   <div>
     <div>
       <hr class="p-3">
-      <p>Hey! The world has an end!</p>
+      <p v-if="showEnd">Hey! The world has an end!</p>
       <div class="py-4"></div>
     </div>
     <footer class="flex flex-wrap items-center justify-between p-4">
@@ -88,8 +88,12 @@ export default {
       currentURL: '',
       type: '',
       message: '',
-      alertOpen: false
+      alertOpen: false,
+      showEnd: false
     }
+  },
+  async created() {
+    this.showEnd = this.$route.name === 'Home'
   },
   methods: {
     async showModal() {
