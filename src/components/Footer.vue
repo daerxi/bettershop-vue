@@ -10,10 +10,11 @@
       </div>
       <div class="flex flex-col lg:flex-row items-center w-full lg:w-auto">
         <div class="mx-auto lg:mx-0 lg:ml-auto">
-          <a class="inline-block mt-0 ml-8 text-gray-700 underline" href="/donate">Donate</a>
-          <a class="inline-block mt-0 ml-8 text-gray-700 underline"
-             href="https://github.com/daerxi/bettershop-vue">Github
-<!--            <span><font-awesome-icon :icon="['fab','github']"></font-awesome-icon></span>-->
+          <a class="inline-block mt-0 ml-8 text-gray-700" href="/donate">
+            <span><font-awesome-icon :icon="['fa','donate']"></font-awesome-icon></span> Donate</a>
+          <a class="inline-block mt-0 ml-8 text-gray-700"
+             href="https://github.com/daerxi/bettershop-vue">
+            <span><font-awesome-icon :icon="['fab','github']"></font-awesome-icon></span> Github
           </a>
         </div>
         <div class="flex justify-center space-x-6 mt-4 lg:mt-0 lg:ml-8">
