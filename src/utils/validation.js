@@ -6,7 +6,7 @@ import Vue from "vue";
 Vue.use(require('vue-cookies'))
 Vue.$cookies.config('1d', '', '', false, 'Strict')
 
-export const setCookies = async(r) => {
+export const setCookies = async (r) => {
     Vue.$cookies.set('authenticated', true, '30min')
     Vue.$cookies.set('user-id', r.data.id, '30min')
     Vue.$cookies.set('is-business', r.data.isBusiness, '30min')
@@ -19,8 +19,9 @@ export const verifyAuth = async () => {
         await UsersService.getMe().then(async r => {
             await setCookies(r)
             if (!r.data.active) {
-                await router.push('/verifyCode').then().catch(e => avoidDuplicatedNavigation(e))
-                Vue.$cookies.remove('reset-password')
+                await router.push('/verifyCode')
+                    .then(() => Vue.$cookies.remove('reset-password'))
+                    .catch(e => avoidDuplicatedNavigation(e))
             }
         }).catch(() => {
             clearCookies()
@@ -48,7 +49,7 @@ export const saveAuth = async userToken => {
     if (Vue.$cookies.get('reset-password')) {
         Vue.$cookies.remove('reset-password')
         return router.push('/resetPassword').catch(e => avoidDuplicatedNavigation(e))
-    } else return router.push('/').then(async ()=> window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
+    } else return router.push('/').then(async () => window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
 }
 
 export const userAvatar = () => {
