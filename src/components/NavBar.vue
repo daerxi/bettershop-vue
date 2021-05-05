@@ -14,7 +14,7 @@
              class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">Login</a>
           <a @click="logout" v-if="authenticated"
              class="cursor-pointer flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">Logout</a>
-          <a href="/business/edit" v-if="authenticated"
+          <a href="/business/edit" v-if="authenticated && isBusiness"
              class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">Edit
             Profile</a>
         </div>
@@ -36,8 +36,8 @@ export default {
   components: {ProfileComponent},
   data() {
     return {
-      authenticated: this.$cookies.isKey('authenticated'),
-      isBusiness: this.$cookies.isKey('is-business')
+      authenticated: this.$cookies.get('authenticated') === 'true',
+      isBusiness: this.$cookies.get('is-business') === 'true'
     }
   },
   methods: {
