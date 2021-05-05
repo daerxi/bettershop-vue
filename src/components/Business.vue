@@ -12,7 +12,7 @@
       <div class="col-span-1"/>
       <div class="text-left py-1" :class="{'col-span-3': $isMobile(),
                                            'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
-        <h3 class="text-base font-medium">{{ business.name }}</h3>
+        <a :href="redirectLink" class="text-base font-semibold">{{ business.name }}</a>
         <p class="text-sm italic">{{ business.category }}</p>
         <p class="text-sm text-gray-600">{{ business.description }}</p>
         <a class="text-sm no-underline" :href="website"><p class="text-gray-600">{{ business.website }}</p></a>
@@ -45,7 +45,7 @@ export default {
       website: ''
     }
   },
-  async mounted() {
+  async beforeMount() {
     if (this.business !== {}) {
       await this.getBusinessUser()
       await this.getRate()

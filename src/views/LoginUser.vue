@@ -37,7 +37,7 @@ import InputComponent from "@/components/Input";
 import { openAlert } from "@/utils/helper";
 import SubmitButton from "@/components/SubmitButton";
 import Checkbox from "@/components/Checkbox";
-import { saveAuth } from "@/utils/validation";
+import { clearCookies, saveAuth } from "@/utils/validation";
 
 export default {
   name: 'LoginUser',
@@ -56,6 +56,9 @@ export default {
       alertOpen: false,
       rememberMe: true
     }
+  },
+  async created() {
+    await clearCookies()
   },
   methods: {
     async check() {

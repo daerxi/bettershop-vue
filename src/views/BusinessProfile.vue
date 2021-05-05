@@ -4,11 +4,11 @@
       <business v-if="business.id" v-bind:business="business"/>
     </div>
     <div v-if="showTextArea" class="content-center lg:px-12 xl:px-24">
-      <alert-component v-if="alertOpen" :type="type" :message="message"/>
+      <alert-component class="px-2" v-if="alertOpen" :type="type" :message="message"/>
       <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
       <text-area v-model.trim="content"/>
-      <div class="text-right">
-        <submit-button title="Submit" :fn="onSubmit"/>
+      <div class="inline-block">
+        <submit-button :not-full="true" title="Submit" :fn="onSubmit"/>
       </div>
       <div class="py-4"></div>
     </div>

@@ -46,7 +46,10 @@ export default {
       let query
       if (this.openTab !== -1) query = "/categories?type=" + type
       else query = "/"
-      await router.push(query).then(async ()=> await this.fn()).catch(e => avoidDuplicatedNavigation(e))
+      await router.push(query).then(async ()=> {
+        await this.fn()
+      }).catch(e => avoidDuplicatedNavigation(e))
+      window.location.reload()
     }
   }
 }

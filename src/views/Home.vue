@@ -4,7 +4,7 @@
     <form @submit.prevent="onSubmit">
       <search-bar v-model.trim="keyword"/>
     </form>
-    <categories :fn="getBusiness" :key="$route.fullPath"/>
+    <categories :fn="getBusiness"/>
     <div class="py-10"></div>
     <h2 v-if="$route.query.keyword" class="text-left font-semibold text-2xl">Search Results:</h2>
     <h2 v-else-if="$route.query.type" class="text-left font-semibold text-2xl">Category: {{$route.query.type}}</h2>
@@ -38,10 +38,12 @@ export default {
       toProfile: ''
     }
   },
+  async mounted() {
+    await this.getBusiness()
+  },
   async created() {
     if (this.$route.query.keyword)
       await this.search()
-    await this.getBusiness()
   },
   methods: {
     async search() {

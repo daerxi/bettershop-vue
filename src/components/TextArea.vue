@@ -34,5 +34,7 @@ export default {
 </script>
 
 <style scoped>
-
+textarea {
+  padding: 12px;
+}
 </style>

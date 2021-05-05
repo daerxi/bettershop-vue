@@ -20,7 +20,7 @@ export default new Vuex.Store({
         getCurrentUser({commit}) {
             UsersService.getMe()
                 .then(async r => {
-                    await setCookies(r)
+                    await setCookies(r.data)
                     commit('SET_USER', r.data)
                 })
         }

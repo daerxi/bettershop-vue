@@ -2,7 +2,7 @@
   <div>
     <div class="grid grid-cols-1 p-10">
       <div class="flex flex-wrap content-start px-12">
-        <button class="bg-transparent" @click="showInput = true">
+        <a class="bg-transparent" @click="showInput = true">
           <h2 class="py-4 font-bold text-3xl">
             <span v-if="isMe">Hi, </span>
             <span v-if="!isMe">User: </span>
@@ -13,7 +13,7 @@
               </form>
             </span>
           </h2>
-        </button>
+        </a>
       </div>
       <review-list :reviews="reviews"></review-list>
     </div>

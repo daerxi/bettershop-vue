@@ -1,15 +1,14 @@
 <template>
   <div class="flex flex-wrap">
     <div>
-      <round-image :is-nav="true" class="w-full" :user="user" :redirect="redirectLink"></round-image>
+      <round-image :is-nav="true" class="w-full" :user="user" :redirect="redirectLink"/>
     </div>
   </div>
 </template>
 
 <script>
 import RoundImage from "@/components/RoundImage";
-import { userAvatar, verifyAuth } from "@/utils/validation";
-import UsersService from "@/api/UsersService";
+import { verifyAuth } from "@/utils/validation";
 
 export default {
   name: "ProfileComponent",
@@ -18,7 +17,6 @@ export default {
     return {
       redirectLink: '',
       authenticated: this.$cookies.get('authenticated') === 'true',
-      photo: String,
       user: {
         id: 0,
         avatar: '',
@@ -32,14 +30,7 @@ export default {
   async created() {
     await verifyAuth()
     if (this.authenticated)
-      await UsersService.getMe()
-          .then(async res => {
-            this.user = res.data
-            this.authenticated = this.$cookies.isKey('authenticated')
-            this.photo = userAvatar()
-            this.user.id = this.$cookies.get('user-id')
-            this.redirectLink = "/profile/" + this.user.id
-          }).catch(e => console.warn(e))
+      this.redirectLink = "/profile/" + this.$cookies.get('user-id')
     else
       this.redirectLink = "/login"
   }

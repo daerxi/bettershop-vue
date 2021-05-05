@@ -5,15 +5,16 @@
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
       'grid-cols-6': $isMobile()}">
         <div class="col-span-1 w-24">
-          <round-image :redirect="redirectLink" :user="user" :is-nav="false"/>
+          <round-image :redirect="redirectLink" :user="reviewer" :is-nav="false"/>
           <rate :editable="editable" v-bind:rateValue="review.rate"/>
         </div>
         <div class="col-span-1"/>
         <div class="text-left py-1"
              :class="{'col-span-3': $isMobile(), 'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
-          <router-link style="text-decoration: none" :to="businessRedirect">
-            <h3 v-if="showBusinessName" class="font-semibold text-xl">{{ business.name }} - {{ business.category }}</h3>
-          </router-link>
+          <a :href="businessRedirect" v-if="showBusinessName" class="font-semibold text-xl">{{ business.name }} -
+            {{ business.category }}</a>
+          <a :href="redirectLink" v-if="!showBusinessName" class="font-medium text-lg">Author: {{ reviewer.userName }}</a>
+          <div class="p-2"></div>
           <read-more class="text-gray-700 whitespace-pre-line" more-str="Read more" :text="review.content" link="#"
                      less-str="Hide" :max-chars="350"></read-more>
         </div>
@@ -37,10 +38,7 @@ export default {
   props: ['review'],
   data() {
     return {
-      user: {
-        id: 0,
-        avatar: ''
-      },
+      reviewer: {},
       editable: false,
       redirectLink: '',
       business: {},
@@ -53,9 +51,8 @@ export default {
     this.businessRedirect = '/businesses/' + this.review.businessId
     this.redirectLink = "/profile/" + this.review.userId
     await UsersService.getUser(this.review.userId)
-        .then(async res => {
-          this.user = res.data
-        }).catch(e => console.error(e))
+        .then(async res => this.reviewer = res.data)
+        .catch(e => console.error(e))
     await BusinessService.getBusiness(this.review.businessId)
         .then(async res => {
           this.business = res.data
