@@ -43,7 +43,7 @@ export default {
       } else {
         await UsersService.updatePassword(this.password).then(async () => {
           openAlert(this, "success", "Updated successfully.")
-          await router.push("/").catch(e => avoidDuplicatedNavigation(e))
+          await router.push("/").then(async() => window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
         })
       }
     }
