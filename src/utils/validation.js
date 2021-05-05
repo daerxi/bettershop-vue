@@ -48,7 +48,7 @@ export const saveAuth = async userToken => {
     if (Vue.$cookies.get('reset-password')) {
         Vue.$cookies.remove('reset-password')
         return router.push('/resetPassword').catch(e => avoidDuplicatedNavigation(e))
-    } else return router.push('/').catch(e => avoidDuplicatedNavigation(e))
+    } else return router.push('/').then(async ()=> window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
 }
 
 export const userAvatar = () => {

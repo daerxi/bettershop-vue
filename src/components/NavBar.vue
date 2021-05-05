@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <nav :key="authenticated" class="relative select-none bg-bs-blue p-3 lg:flex lg:items-stretch w-full">
+    <nav class="relative select-none bg-bs-blue p-3 lg:flex lg:items-stretch w-full">
       <div class="flex flex-no-shrink items-stretch h-12">
         <a href="/"
            class="font-semibold text-xl flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center">BetterShop</a>
@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import { router } from "@/router";
-import { avoidDuplicatedNavigation } from "@/utils/helper";
 import ProfileComponent from "@/components/Profile";
 import UsersService from "@/api/UsersService";
 import { clearCookies } from "@/utils/validation";
@@ -36,20 +34,19 @@ export default {
   components: {ProfileComponent},
   data() {
     return {
-      authenticated: this.$cookies.get('authenticated') === 'true',
-      isBusiness: this.$cookies.get('is-business') === 'true'
+      authenticated: false,
+      isBusiness: false
     }
   },
+  async beforeMount() {
+    this.authenticated = this.$cookies.get('authenticated') === 'true'
+    this.isBusiness = this.$cookies.get('is-business') === 'true'
+  },
   methods: {
-    async reload() {
-      await router.push("/").then(() => {
-        window.location.reload()
-      }).catch(e => avoidDuplicatedNavigation(e))
-    },
     async logout() {
       await UsersService.logoutUser().then(async () => {
         await clearCookies()
-        await router.push('/').then(window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
+        window.location.reload()
       }).catch(e => console.log(e))
     }
   }
