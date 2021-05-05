@@ -38,10 +38,8 @@ export default {
       toProfile: ''
     }
   },
-  async mounted() {
-    await this.getBusiness()
-  },
   async created() {
+    await this.getBusiness()
     if (this.$route.query.keyword)
       await this.search()
   },
