@@ -114,7 +114,7 @@ export default {
       stripeToken, name, email, amount, currency
     }).then(async () =>
         openAlert(this, "success", "Thank your for your support. Your payment has been processed."))
-        .catch(e => openAlert(this, "error", e.response.error))
+        .catch(e => openAlert(this, "error", e.response.data.error.toString()))
   }
 }
 </script>
