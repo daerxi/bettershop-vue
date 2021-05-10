@@ -15,7 +15,8 @@
           </h2>
         </a>
       </div>
-      <review-list :reviews="reviews"></review-list>
+      <review-list :reviews="reviews"/>
+      <wishlist-items/>
     </div>
   </div>
 </template>
@@ -24,10 +25,11 @@
 import UsersService from "@/api/UsersService";
 import ReviewList from "@/components/ReviewList";
 import InputComponent from "@/components/Input";
+import WishlistItems from "@/components/WishlistItems";
 
 export default {
   name: "UserProfile",
-  components: {InputComponent, ReviewList},
+  components: {WishlistItems, InputComponent, ReviewList},
   data() {
     return {
       reviews: [],
