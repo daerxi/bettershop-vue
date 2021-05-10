@@ -27,9 +27,11 @@ export const verifyAuth = async () => {
 export const setCookies = async (user) => {
     Vue.$cookies.set('authenticated', true, '30min')
     Vue.$cookies.set('user-id', user.id, '30min')
-    Vue.$cookies.set('is-business',user.isBusiness, '30min')
+    Vue.$cookies.set('is-business', user.isBusiness, '30min')
     Vue.$cookies.set('user-avatar', user.avatar, '30min')
     Vue.$cookies.set('forgot-password-email', user.email, '30min')
+    if (user.isBusiness) Vue.$cookies.set('business-id', user.business.id, '30min')
+    else Vue.$cookies.remove('business-id')
 }
 
 export const clearCookies = async () => {

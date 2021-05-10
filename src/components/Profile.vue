@@ -8,7 +8,7 @@
 
 <script>
 import RoundImage from "@/components/RoundImage";
-import { verifyAuth } from "@/utils/validation";
+import UsersService from "@/api/UsersService";
 
 export default {
   name: "ProfileComponent",
@@ -16,23 +16,17 @@ export default {
   data() {
     return {
       redirectLink: '',
-      authenticated: this.$cookies.get('authenticated') === 'true',
-      user: {
-        id: 0,
-        avatar: '',
-        userName: '',
-        active: 0,
-        email: '',
-        isBusiness: false
-      }
+      user: {}
     }
   },
   async created() {
-    await verifyAuth()
-    if (this.authenticated)
-      this.redirectLink = "/profile/" + this.$cookies.get('user-id')
-    else
-      this.redirectLink = "/login"
+    await UsersService.getMe().then(async r => {
+      this.user = r.data
+      if (!this.user.isBusiness)
+        this.redirectLink = "/profile/" + this.user.id
+      else
+        this.redirectLink = "/businesses/" + this.user.business.id
+    }).catch(() => this.redirectLink = "/login")
   }
 }
 </script>

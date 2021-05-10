@@ -76,12 +76,6 @@ export const router = new VueRouter({
             beforeEnter: requireAuth
         },
         {
-            path: '/business/profile',
-            name: 'Business Profile',
-            component: BusinessProfile,
-            beforeEnter: requireBusiness
-        },
-        {
             path: '/business/edit',
             name: 'Edit Profile',
             component: CompanyInfoForm,
