@@ -33,11 +33,6 @@ export default {
 
   },
   methods: {
-    async reload() {
-      await router.push("/").then(() => {
-        window.location.reload()
-      }).catch(e => avoidDuplicatedNavigation(e))
-    },
     async enableCookie() {
       if (navigator.cookieEnabled)
         this.$cookies.set("acceptCookie", true, Infinity)

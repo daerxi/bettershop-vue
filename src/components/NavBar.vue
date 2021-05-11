@@ -55,7 +55,6 @@ export default {
       await UsersService.logoutUser().then(async () => {
         await clearCookies()
         await router.push("/").catch(e => avoidDuplicatedNavigation(e))
-        window.location.reload()
       }).catch(e => console.log(e))
     }
   }
