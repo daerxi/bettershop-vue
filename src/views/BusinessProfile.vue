@@ -15,7 +15,7 @@
       </div>
       <div class="py-4"></div>
     </div>
-    <review-list :number="max" :reviews="business.reviews"/>
+    <review-list :number="max" :reviews="reviews"/>
     <popup-modal :show="showModal" title="Do you want to add this business to your wishlist?">
       <action-button :fn="addWishlistItem" :block="false" title="Yes"></action-button>
       <action-button :fn="changeShowModel" :block="false" title="No"></action-button>
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       business: {},
+      reviews: [],
       content: '',
       rateValue: 0,
       alertOpen: false,
@@ -63,14 +64,15 @@ export default {
       inWishlist: false
     }
   },
-  async created() {
+  async mounted() {
+    await this.checkInWishlist()
     if (this.$cookies.get('is-business') === 'true') this.showTextArea = false
     await this.getBusinessById().then(async () => {
-      for (const review of this.business.reviews) {
+      this.reviews = this.business.reviews
+      for (const review of this.reviews) {
         if (review.userId === parseInt(this.$cookies.get('user-id'))) this.showTextArea = false
       }
     })
-    await this.checkInWishlist().catch(e => console.error(e))
   },
   methods: {
     async changeShowModel() {
@@ -94,7 +96,12 @@ export default {
       }).catch(e => console.log(e.response.data))
     },
     async checkInWishlist() {
-      await WishlistService.checkWishlist(this.$route.params.businessId).then(async res => this.inWishlist = res.data.success)
+      await WishlistService.checkWishlist(this.$route.params.businessId)
+          .then(async res => {
+            console.log("**", res.data)
+            this.inWishlist = res.data.success
+          })
+          .catch(e => console.log(e.response.data))
     },
     async onSubmit() {
       this.rateValue = localStorage.getItem('rate-value')

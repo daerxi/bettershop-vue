@@ -45,15 +45,16 @@ export default {
       editable: false,
       rateValue: 0,
       website: '',
-      avatar: this.business.avatar || emptyAvatar
+      avatar: null
     }
   },
   async created() {
-    if (this.business !== {}) {
+    if (this.business.id) {
       if (this.business && this.business.website && !this.business.website.includes("http"))
         this.website = "https://" + this.business.website
       else this.website = this.business.website
       this.redirectLink = "/businesses/" + this.business.id
+      this.avatar = this.business.avatar || emptyAvatar
     }
   },
   methods: {

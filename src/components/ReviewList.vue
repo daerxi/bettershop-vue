@@ -22,9 +22,6 @@ export default {
     async showNumberOfReviews(i) {
       return this.number > i || !this.number
     }
-  },
-  async created() {
-    console.log("***", this.reviews);
   }
 }
 </script>

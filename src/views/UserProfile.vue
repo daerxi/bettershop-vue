@@ -15,7 +15,7 @@
           </h2>
         </a>
       </div>
-      <review-list v-if="!user.isBusiness" :reviews="user.reviews"/>
+      <review-list v-if="!user.isBusiness" :reviews="reviews"/>
       <wishlist-items v-if="isMe && !user.isBusiness"/>
     </div>
   </div>
@@ -34,13 +34,18 @@ export default {
     return {
       user: {},
       isMe: false,
-      showInput: false
+      showInput: false,
+      reviews: []
     }
   },
   async created() {
     const id = parseInt(this.$route.params.userId)
     this.isMe = id === parseInt(this.$cookies.get('user-id'))
-    await UsersService.getUser(id).then(async res => this.user = res.data)
+    await UsersService.getUser(id)
+        .then(async res => {
+          this.user = res.data
+          this.reviews = this.user.reviews
+        }).catch(e => console.error(e))
   },
   methods: {}
 }

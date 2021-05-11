@@ -6,10 +6,12 @@
            class="ml-auto mt-3 font-semibold text-3xl flex-no-grow flex-no-shrink relative p-5 leading-normal text-white no-underline flex items-center">
           BetterShop
         </a>
-        <a v-if="showMenu" @click="showMenu = !showMenu" class="block xl:hidden lg:hidden cursor-pointer ml-auto relative w-14 h-14 p-3">
+        <a v-if="showMenu" @click="showMenu = !showMenu"
+           class="block xl:hidden lg:hidden cursor-pointer ml-auto relative w-14 h-14 p-3">
           <font-awesome-icon class="text-xl text-gray-300" :icon="['fas', 'times']"></font-awesome-icon>
         </a>
-        <a v-if="!showMenu" @click="showMenu = !showMenu" class="block xl:hidden lg:hidden cursor-pointer ml-auto relative w-14 h-14 p-3">
+        <a v-if="!showMenu" @click="showMenu = !showMenu"
+           class="block xl:hidden lg:hidden cursor-pointer ml-auto relative w-14 h-14 p-3">
           <font-awesome-icon class="text-xl text-gray-300" :icon="['fas', 'ellipsis-v']"></font-awesome-icon>
         </a>
       </div>
@@ -54,7 +56,7 @@ export default {
     async logout() {
       await UsersService.logoutUser().then(async () => {
         await clearCookies()
-        await router.push("/").catch(e => avoidDuplicatedNavigation(e))
+        await router.push("/").then(() => window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
       }).catch(e => console.log(e))
     }
   }
