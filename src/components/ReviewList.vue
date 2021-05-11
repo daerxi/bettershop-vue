@@ -23,7 +23,7 @@ import ReviewComponent from "@/components/Review";
 export default {
   name: "ReviewList",
   components: {ReviewComponent},
-  props: ['reviews'],
+  props: ['reviews', 'noMax'],
   data() {
     return {
       showReviews: [],
@@ -36,8 +36,11 @@ export default {
   },
   async updated() {
     if (this.updateResult && (this.reviews === [] || this.reviews.length > 0)) {
+      if (!this.noMax) this.max = this.reviews.length + 1
+      this.number = this.max
       await this.assignArray().then(async () => this.updateResult = false)
-      if (this.reviews.length <= this.max) {
+      console.log(this.reviews)
+      if (this.reviews.length <= this.max || this.reviews === []) {
         this.showLoadMore = false
         this.showLoadLess = false
       }
@@ -47,13 +50,13 @@ export default {
     async assignArray() {
       this.showReviews = []
       for (const i in this.reviews) {
-        this.showReviews.push(parseInt(i) < parseInt(this.number) || !this.number)
+        this.showReviews.push(parseInt(i) < parseInt(this.number))
       }
     },
     async loadMore() {
       this.number = this.reviews.length
       this.showLoadMore = false
-      this.showLoadMore = true
+      this.showLoadLess = true
       await this.assignArray()
     },
     async loadLess() {

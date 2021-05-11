@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap content-start px-12">
     <h2 class="py-4 font-semibold text-xl">Wishlist - {{ businesses.length }}</h2>
-    <business-list :businesses="businesses"/>
+    <business-list :max-items="3" :businesses="businesses"/>
   </div>
 </template>
 

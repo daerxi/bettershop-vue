@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="nav">
     <nav class="relative select-none bg-bs-blue p-3 lg:flex lg:items-stretch w-full">
       <div class="flex flex-no-shrink items-stretch h-12">
         <a href="/"
