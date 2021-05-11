@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="py-6 px-8 flex flex-wrap">
-      <business v-if="business.id" v-bind:business="business"/>
+      <business v-if="business.id" :business="business"/>
       <div v-if="!inWishlist" class="content-left">
         <a class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
       </div>
@@ -19,7 +19,7 @@
       </div>
       <div class="py-4"></div>
     </div>
-    <review-list :number="max" :reviews="reviews"/>
+    <review-list :number="max" :reviews="business.reviews"/>
   </div>
 </template>
 
@@ -44,7 +44,6 @@ export default {
       business: {},
       content: '',
       rateValue: 0,
-      reviews: [],
       alertOpen: false,
       message: '',
       type: '',
@@ -58,14 +57,9 @@ export default {
   async created() {
     if (this.$cookies.get('is-business') === 'true') this.showTextArea = false
     await this.getBusinessById().then(async () => {
-      await BusinessService.getReviewsByBusinessId(this.$route.params.businessId)
-          .then(async res => {
-            this.reviews = res.data.reviews
-            for (const review of this.reviews) {
-              if (review.userId === parseInt(this.$cookies.get('user-id'))) this.showTextArea = false
-            }
-          })
-          .catch(e => console.error(e))
+      for (const review of this.business.reviews) {
+        if (review.userId === parseInt(this.$cookies.get('user-id'))) this.showTextArea = false
+      }
     })
     await this.checkInWishlist().catch(e => console.error(e))
   },

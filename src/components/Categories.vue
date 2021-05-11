@@ -49,7 +49,6 @@ export default {
       await router.push(query).then(async ()=> {
         await this.fn()
       }).catch(e => avoidDuplicatedNavigation(e))
-      window.location.reload()
     }
   }
 }

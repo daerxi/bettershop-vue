@@ -7,7 +7,7 @@
         <div @click="updateClick">
           <round-image :redirect="redirectLink" :user="user" :is-nav="false"/>
         </div>
-        <rate :key="rateValue" :editable="editable" :rateValue="rateValue"/>
+        <rate :key="business.rate" :editable="editable" :rateValue="business.rate"/>
       </div>
       <div class="col-span-1"/>
       <div class="text-left py-1" :class="{'col-span-3': $isMobile(),
@@ -48,7 +48,6 @@ export default {
   async beforeMount() {
     if (this.business !== {}) {
       await this.getBusinessUser()
-      await this.getRate()
       if (this.business && this.business.website && !this.business.website.includes("http"))
         this.website = "https://" + this.business.website
       else this.website = this.business.website
@@ -63,11 +62,6 @@ export default {
             this.user = res.data
             await this.getRate()
           })
-          .catch(e => console.error(e))
-    },
-    async getRate() {
-      await BusinessService.getReviewsByBusinessId(this.business.id)
-          .then(async res => this.rateValue = res.data.rate)
           .catch(e => console.error(e))
     },
     async updateClick() {

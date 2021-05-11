@@ -4,7 +4,7 @@
     <form @submit.prevent="onSubmit">
       <search-bar v-model.trim="keyword"/>
     </form>
-    <categories :fn="getBusiness"/>
+    <categories :key="openTab" :fn="getBusiness"/>
     <div class="py-10"></div>
     <h2 v-if="$route.query.keyword" class="text-left font-semibold text-2xl">Search Results:</h2>
     <h2 v-else-if="$route.query.type" class="text-left font-semibold text-2xl">Category: {{$route.query.type}}</h2>
@@ -35,11 +35,13 @@ export default {
       user: {},
       businesses: [],
       keyword: '',
-      toProfile: ''
+      toProfile: '',
+      openTab: -1
     }
   },
   async created() {
     await this.getBusiness()
+    this.openTab = localStorage.getItem('open-tab')
     if (this.$route.query.keyword)
       await this.search()
   },
@@ -47,12 +49,12 @@ export default {
     async search() {
       this.businesses = await BusinessService.searchKeyword(this.$route.query.keyword)
       localStorage.setItem('open-tab', -1)
+      this.openTab = -1
     },
     async onSubmit() {
       const path = '/?keyword=' + this.keyword
       await router.push(path).then(async () => {
         await this.search()
-        window.location.reload()
       }).catch(e => avoidDuplicatedNavigation(e))
     },
     async getBusiness() {
