@@ -12,13 +12,15 @@
       <div class="col-span-1"/>
       <div class="text-left py-1" :class="{'col-span-3': $isMobile(),
                                            'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
-        <a :href="redirectLink" class="text-base font-semibold">{{ business.name }}</a>
+        <div @click="updateClick">
+          <a :href="redirectLink" class="text-base font-semibold">{{ business.name }}</a>
+        </div>
         <p class="text-sm italic">{{ business.category }}</p>
         <p class="text-sm text-gray-600">{{ business.description }}</p>
         <a class="text-sm no-underline" :href="website"><p class="text-gray-600">{{ business.website }}</p></a>
         <p class="text-sm text-gray-600"
            v-if="business.address && business.city && business.province && business.country">
-          {{business.address}}, {{business.city}}, {{business.province}}, {{ business.country }}
+          {{ business.address }}, {{ business.city }}, {{ business.province }}, {{ business.country }}
         </p>
 
       </div>
@@ -28,9 +30,9 @@
 
 <script>
 import Rate from "@/components/Rate";
-import RoundImage from "@/components/RoundImage";
 import UsersService from "@/api/UsersService";
 import BusinessService from "@/api/BusinessService";
+import RoundImage from "@/components/RoundImage";
 
 export default {
   name: "Business",

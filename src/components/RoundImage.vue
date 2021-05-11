@@ -1,9 +1,9 @@
 <template>
   <router-link :to="redirect" class="bg-transparent border-none p-2">
     <img v-if="user.avatar" :src=user.avatar
-         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt="user profile"/>
+         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt=""/>
     <img v-else :src="emptyAvatar"
-         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt="user profile"/>
+         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt=""/>
   </router-link>
 </template>
 
