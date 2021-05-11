@@ -32,10 +32,8 @@ export default {
   },
   async updated() {
     if (this.updateResult && (this.businesses === [] || this.businesses.length > 0)) {
-      console.log(this.maxItems)
       if (!this.maxItems) this.max = this.businesses.length
       else this.max = parseInt(this.maxItems)
-      console.log(this.max)
       this.number = this.max
       await this.assignArray().then(async () => this.updateResult = false)
       console.log(this.businesses)

@@ -9,7 +9,7 @@
     <h2 v-if="$route.query.keyword" class="text-left font-semibold text-2xl">Search Results:</h2>
     <h2 v-else-if="$route.query.type" class="text-left font-semibold text-2xl">Category: {{$route.query.type}}</h2>
     <h2 v-else class="text-left font-semibold text-2xl">Hot Businesses:</h2>
-    <business-list :max-items="10" v-bind:businesses="businesses"/>
+    <business-list :businesses="businesses"/>
   </div>
 </template>
 
