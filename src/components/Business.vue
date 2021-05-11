@@ -5,7 +5,9 @@
       'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
         <div @click="updateClick">
-          <round-image :redirect="redirectLink" :user="business.user" :is-nav="false"/>
+          <router-link :to="redirectLink" class="bg-transparent border-none p-2">
+            <img :src="avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
+          </router-link>
         </div>
         <rate :key="business.rate" :editable="editable" :rateValue="business.rate"/>
       </div>
@@ -31,18 +33,19 @@
 <script>
 import Rate from "@/components/Rate";
 import BusinessService from "@/api/BusinessService";
-import RoundImage from "@/components/RoundImage";
+import { emptyAvatar } from "@/utils/validation";
 
 export default {
   name: "BusinessComponent",
-  components: {RoundImage, Rate},
+  components: {Rate},
   props: ['business'],
   data() {
     return {
       redirectLink: "/",
       editable: false,
       rateValue: 0,
-      website: ''
+      website: '',
+      avatar: this.business.avatar || emptyAvatar
     }
   },
   async created() {
@@ -51,7 +54,6 @@ export default {
         this.website = "https://" + this.business.website
       else this.website = this.business.website
       this.redirectLink = "/businesses/" + this.business.id
-      console.log("haha", this.business.user)
     }
   },
   methods: {
