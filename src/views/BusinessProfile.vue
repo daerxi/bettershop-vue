@@ -6,10 +6,6 @@
         <a class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
       </div>
     </div>
-    <popup-modal :show="showModal" title="Do you want to add this business to your wishlist?">
-      <action-button :fn="addWishlistItem" :block="false" title="Yes"></action-button>
-      <action-button :fn="changeShowModel" :block="false" title="No"></action-button>
-    </popup-modal>
     <div v-if="showTextArea" class="content-center lg:px-12 xl:px-24">
       <alert-component class="px-2" v-if="alertOpen" :type="type" :message="message"/>
       <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
@@ -20,6 +16,10 @@
       <div class="py-4"></div>
     </div>
     <review-list :number="max" :reviews="business.reviews"/>
+    <popup-modal :show="showModal" title="Do you want to add this business to your wishlist?">
+      <action-button :fn="addWishlistItem" :block="false" title="Yes"></action-button>
+      <action-button :fn="changeShowModel" :block="false" title="No"></action-button>
+    </popup-modal>
   </div>
 </template>
 
@@ -79,9 +79,7 @@ export default {
     async getBusinessById() {
       if (this.$route.params.businessId)
         await BusinessService.getBusiness(this.$route.params.businessId)
-            .then(async res => {
-              this.business = res.data
-            })
+            .then(async res => this.business = res.data)
             .catch(e => console.error(e))
       else
         await BusinessService.getInfo()
@@ -93,9 +91,7 @@ export default {
         console.log(res.data)
         this.showModal = false
         this.inWishlist = true
-      }).catch(e => {
-        console.log(e.response.data)
-      })
+      }).catch(e => console.log(e.response.data))
     },
     async checkInWishlist() {
       await WishlistService.checkWishlist(this.$route.params.businessId).then(async res => this.inWishlist = res.data.success)

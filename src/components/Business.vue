@@ -5,7 +5,7 @@
       'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
         <div @click="updateClick">
-          <RoundImage :redirect="redirectLink" :user="user" :is-nav="false"/>
+          <round-image :redirect="redirectLink" :user="user" :is-nav="false"/>
         </div>
         <rate :key="business.rate" :editable="editable" :rateValue="business.rate"/>
       </div>
@@ -47,7 +47,7 @@ export default {
       website: ''
     }
   },
-  async beforeMount() {
+  async mounted() {
     if (this.business !== {}) {
       await this.getBusinessUser()
       if (this.business && this.business.website && !this.business.website.includes("http"))
