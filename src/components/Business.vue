@@ -5,7 +5,7 @@
       'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
         <div @click="updateClick">
-          <round-image :redirect="redirectLink" :user="user" :is-nav="false"/>
+          <RoundImage :redirect="redirectLink" :user="user" :is-nav="false"/>
         </div>
         <rate :key="business.rate" :editable="editable" :rateValue="business.rate"/>
       </div>
@@ -35,7 +35,7 @@ import BusinessService from "@/api/BusinessService";
 import RoundImage from "@/components/RoundImage";
 
 export default {
-  name: "Business",
+  name: "BusinessComponent",
   components: {RoundImage, Rate},
   props: ['business'],
   data() {
@@ -47,7 +47,7 @@ export default {
       website: ''
     }
   },
-  async beforeMount() {
+  async mounted() {
     if (this.business !== {}) {
       await this.getBusinessUser()
       if (this.business && this.business.website && !this.business.website.includes("http"))
@@ -62,7 +62,6 @@ export default {
       await UsersService.getUser(this.business.userId)
           .then(async res => {
             this.user = res.data
-            await this.getRate()
           })
           .catch(e => console.error(e))
     },

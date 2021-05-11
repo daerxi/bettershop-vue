@@ -28,9 +28,9 @@
 
 <script>
 import Rate from "@/components/Rate";
-import RoundImage from "@/components/RoundImage";
 import UsersService from "@/api/UsersService";
 import BusinessService from "@/api/BusinessService";
+import RoundImage from "@/components/RoundImage";
 
 export default {
   name: "ReviewComponent",

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="py-6 px-8 flex flex-wrap">
-      <business v-if="business.id" :business="business"/>
+      <business-component v-if="business.id" :business="business"/>
       <div v-if="!inWishlist" class="content-left">
         <a class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
       </div>
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import Business from "@/components/Business";
 import BusinessService from "@/api/BusinessService";
 import TextArea from "@/components/TextArea";
 import SubmitButton from "@/components/SubmitButton";
@@ -35,10 +34,20 @@ import { isNullOrEmpty, openAlert } from "@/utils/helper";
 import PopupModal from "@/components/PopupModal";
 import ActionButton from "@/components/ActionButton";
 import WishlistService from "@/api/WishlistService";
+import BusinessComponent from "@/components/Business";
 
 export default {
   name: "BusinessProfile",
-  components: {ActionButton, PopupModal, AlertComponent, ReviewList, SubmitButton, TextArea, Business, Rate},
+  components: {
+    BusinessComponent,
+    ActionButton,
+    PopupModal,
+    AlertComponent,
+    ReviewList,
+    SubmitButton,
+    TextArea,
+    Rate
+  },
   data() {
     return {
       business: {},
