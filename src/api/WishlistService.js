@@ -8,6 +8,7 @@ class WishlistService {
     static getWishlists(token = Vue.$cookies.get('user-token')) {
         return new Promise((resolve, reject) => {
             try {
+                console.log(token)
                 instance.get('/', {
                     headers: {
                         'Authorization': 'Bearer ' + token
@@ -28,6 +29,16 @@ class WishlistService {
 
     static addToWishList(businessId, token = Vue.$cookies.get('user-token')) {
         return instance.post('/', {
+            businessId
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
+    static checkWishlist(businessId, token = Vue.$cookies.get('user-token')) {
+        return instance.get('/', {
             businessId
         }, {
             headers: {

@@ -67,6 +67,7 @@ export default {
           })
           .catch(e => console.error(e))
     })
+    await this.checkInWishlist().catch(e => console.error(e))
   },
   methods: {
     async changeShowModel() {
@@ -92,6 +93,9 @@ export default {
       }).catch(e => {
         console.log(e.response.data)
       })
+    },
+    async checkInWishlist() {
+      await WishlistService.checkWishlist(this.$route.params.businessId).then(async res => this.inWishlist = res.data.success)
     },
     async onSubmit() {
       this.rateValue = localStorage.getItem('rate-value')
