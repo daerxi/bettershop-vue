@@ -93,10 +93,6 @@ class BusinessService {
         })
     }
 
-    static getReviewsByBusinessId(businessId) {
-        return instance.get(businessId + '/reviews')
-    }
-
     static postReview(content, rate, businessId, token = Vue.$cookies.get('user-token')) {
         return instance.post(businessId + '/reviews', {
             content,
