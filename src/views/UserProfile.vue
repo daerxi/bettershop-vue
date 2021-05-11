@@ -16,7 +16,7 @@
         </a>
       </div>
       <review-list :reviews="reviews"/>
-      <wishlist-items/>
+      <wishlist-items :businesses="wishlist"/>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ import UsersService from "@/api/UsersService";
 import ReviewList from "@/components/ReviewList";
 import InputComponent from "@/components/Input";
 import WishlistItems from "@/components/WishlistItems";
+import WishlistService from "@/api/WishlistService";
 
 export default {
   name: "UserProfile",
@@ -35,7 +36,8 @@ export default {
       reviews: [],
       user: {},
       isMe: false,
-      showInput: false
+      showInput: false,
+      wishlist: []
     }
   },
   async created() {
@@ -43,6 +45,7 @@ export default {
     this.isMe = id === parseInt(this.$cookies.get('user-id'))
     await UsersService.getUser(id).then(async res => this.user = res.data)
     this.reviews = await UsersService.getReviewsByUserId(id)
+    this.wishlist = await WishlistService.getWishlists()
   },
   methods: {}
 }

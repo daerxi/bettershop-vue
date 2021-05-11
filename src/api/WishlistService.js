@@ -26,7 +26,7 @@ class WishlistService {
         })
     }
 
-    static createUser(businessId, token = Vue.$cookies.get('user-token')) {
+    static addToWishList(businessId, token = Vue.$cookies.get('user-token')) {
         return instance.post('/', {
             businessId
         }, {
