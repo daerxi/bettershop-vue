@@ -5,7 +5,7 @@
       'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
         <div @click="updateClick">
-          <round-image :redirect="redirectLink" :user="user" :is-nav="false"/>
+          <round-image :redirect="redirectLink" :user="business.user" :is-nav="false"/>
         </div>
         <rate :key="business.rate" :editable="editable" :rateValue="business.rate"/>
       </div>
@@ -30,7 +30,6 @@
 
 <script>
 import Rate from "@/components/Rate";
-import UsersService from "@/api/UsersService";
 import BusinessService from "@/api/BusinessService";
 import RoundImage from "@/components/RoundImage";
 
@@ -41,29 +40,21 @@ export default {
   data() {
     return {
       redirectLink: "/",
-      user: {},
       editable: false,
       rateValue: 0,
       website: ''
     }
   },
-  async mounted() {
+  async created() {
     if (this.business !== {}) {
-      await this.getBusinessUser()
       if (this.business && this.business.website && !this.business.website.includes("http"))
         this.website = "https://" + this.business.website
       else this.website = this.business.website
       this.redirectLink = "/businesses/" + this.business.id
+      console.log("haha", this.business.user)
     }
   },
   methods: {
-    async getBusinessUser() {
-      await UsersService.getUser(this.business.userId)
-          .then(async res => {
-            this.user = res.data
-          })
-          .catch(e => console.error(e))
-    },
     async updateClick() {
       await BusinessService.updateClickTrack(this.business.id)
           .then(async res => console.log(res.data))
