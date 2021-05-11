@@ -12,7 +12,11 @@ import WishlistService from "@/api/WishlistService";
 export default {
   name: "WishlistItems",
   components: {BusinessList},
-  props: ['businesses'],
+  data() {
+    return {
+      businesses: []
+    }
+  },
   async created() {
     this.businesses = await WishlistService.getWishlists()
   }

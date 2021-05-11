@@ -16,7 +16,7 @@
         </a>
       </div>
       <review-list v-if="!user.isBusiness" :reviews="reviews"/>
-      <wishlist-items v-if="!user.isBusiness" :businesses="wishlist"/>
+      <wishlist-items v-if="!user.isBusiness"/>
     </div>
   </div>
 </template>
@@ -26,7 +26,6 @@ import UsersService from "@/api/UsersService";
 import ReviewList from "@/components/ReviewList";
 import InputComponent from "@/components/Input";
 import WishlistItems from "@/components/WishlistItems";
-import WishlistService from "@/api/WishlistService";
 
 export default {
   name: "UserProfile",
@@ -36,8 +35,7 @@ export default {
       reviews: [],
       user: {},
       isMe: false,
-      showInput: false,
-      wishlist: []
+      showInput: false
     }
   },
   async created() {
@@ -45,7 +43,6 @@ export default {
     this.isMe = id === parseInt(this.$cookies.get('user-id'))
     await UsersService.getUser(id).then(async res => this.user = res.data)
     this.reviews = await UsersService.getReviewsByUserId(id)
-    this.wishlist = await WishlistService.getWishlists()
   },
   methods: {}
 }

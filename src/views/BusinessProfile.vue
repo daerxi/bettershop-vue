@@ -2,7 +2,7 @@
   <div>
     <div class="py-6 px-8 flex flex-wrap">
       <business v-if="business.id" v-bind:business="business"/>
-      <div v-if="inWishlist" class="content-left">
+      <div v-if="!inWishlist" class="content-left">
         <a class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
       </div>
     </div>
@@ -52,7 +52,7 @@ export default {
       max: 2,
       showTextArea: true,
       showModal: false,
-      inWishlist: true
+      inWishlist: false
     }
   },
   async created() {
@@ -89,7 +89,7 @@ export default {
       await WishlistService.addToWishList(this.business.id).then(async res => {
         console.log(res.data)
         this.showModal = false
-        this.inWishlist = false
+        this.inWishlist = true
       }).catch(e => {
         console.log(e.response.data)
       })
