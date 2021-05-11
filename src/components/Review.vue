@@ -5,7 +5,9 @@
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
       'grid-cols-6': $isMobile()}">
         <div class="col-span-1 w-24">
-          <round-image :redirect="redirectLink" :user="reviewer" :is-nav="false"/>
+          <router-link :to="redirectLink" class="bg-transparent border-none p-2">
+            <img :src="avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
+          </router-link>
           <rate :editable="editable" v-bind:rateValue="review.rate"/>
         </div>
         <div class="col-span-1"/>
@@ -30,11 +32,11 @@
 import Rate from "@/components/Rate";
 import UsersService from "@/api/UsersService";
 import BusinessService from "@/api/BusinessService";
-import RoundImage from "@/components/RoundImage";
+import { emptyAvatar } from "@/utils/validation";
 
 export default {
   name: "ReviewComponent",
-  components: {RoundImage, Rate},
+  components: {Rate},
   props: ['review'],
   data() {
     return {
@@ -43,7 +45,8 @@ export default {
       redirectLink: '',
       business: {},
       businessRedirect: '',
-      showBusinessName: false
+      showBusinessName: false,
+      avatar: null
     }
   },
   async created() {
@@ -51,8 +54,10 @@ export default {
     this.businessRedirect = '/businesses/' + this.review.businessId
     this.redirectLink = "/profile/" + this.review.userId
     await UsersService.getUser(this.review.userId)
-        .then(async res => this.reviewer = res.data)
-        .catch(e => console.error(e))
+        .then(async res => {
+          this.reviewer = res.data
+          this.avatar = this.reviewer.avatar || emptyAvatar
+        }).catch(e => console.error(e))
     await BusinessService.getBusiness(this.review.businessId)
         .then(async res => {
           this.business = res.data

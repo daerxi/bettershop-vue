@@ -97,10 +97,7 @@ export default {
     },
     async checkInWishlist() {
       await WishlistService.checkWishlist(this.$route.params.businessId)
-          .then(async res => {
-            console.log("**", res.data)
-            this.inWishlist = res.data.success
-          })
+          .then(async res => this.inWishlist = res.data.success)
           .catch(e => console.log(e.response.data))
     },
     async onSubmit() {
