@@ -15,7 +15,6 @@ export default {
   props: ['user', 'redirect', 'isNav'],
   data() {
     return {
-      business: {},
       emptyAvatar: emptyAvatar
     }
   }

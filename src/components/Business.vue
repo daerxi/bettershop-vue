@@ -47,13 +47,12 @@ export default {
       website: ''
     }
   },
-  async mounted() {
+  async beforeMount() {
     if (this.business !== {}) {
       await this.getBusinessUser()
       if (this.business && this.business.website && !this.business.website.includes("http"))
         this.website = "https://" + this.business.website
       else this.website = this.business.website
-
       this.redirectLink = "/businesses/" + this.business.id
     }
   },
