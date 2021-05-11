@@ -7,6 +7,12 @@
       <div v-for="(review,i) in reviews" :key="i">
         <review-component v-if="showReviews[i]" :review="review"></review-component>
       </div>
+      <a v-if="showLoadMore" class="cursor-pointer" @click="loadMore">
+        <font-awesome-icon class="text-2xl" :icon="['fas', 'angle-double-down']"></font-awesome-icon>
+      </a>
+      <a v-if="showLoadLess" class="cursor-pointer" @click="loadLess">
+        <font-awesome-icon class="text-2xl" :icon="['fas', 'angle-double-up']"></font-awesome-icon>
+      </a>
     </div>
   </div>
 </template>
@@ -17,20 +23,44 @@ import ReviewComponent from "@/components/Review";
 export default {
   name: "ReviewList",
   components: {ReviewComponent},
-  props: ['reviews', 'number'],
+  props: ['reviews'],
   data() {
     return {
       showReviews: [],
-      updateResult: true
+      updateResult: true,
+      max: 3,
+      number: 3,
+      showLoadMore: true,
+      showLoadLess: false
     }
   },
   async updated() {
     if (this.updateResult && (this.reviews === [] || this.reviews.length > 0)) {
+      await this.assignArray().then(async () => this.updateResult = false)
+      if (this.reviews.length <= this.max) {
+        this.showLoadMore = false
+        this.showLoadLess = false
+      }
+    }
+  },
+  methods: {
+    async assignArray() {
+      this.showReviews = []
       for (const i in this.reviews) {
-        console.log(this.number, parseInt(i), parseInt(i) < parseInt(this.number) || !this.number)
         this.showReviews.push(parseInt(i) < parseInt(this.number) || !this.number)
       }
-      this.updateResult = false
+    },
+    async loadMore() {
+      this.number = this.reviews.length
+      this.showLoadMore = false
+      this.showLoadMore = true
+      await this.assignArray()
+    },
+    async loadLess() {
+      this.number = this.max
+      this.showLoadMore = true
+      this.showLoadLess = false
+      await this.assignArray()
     }
   }
 }
