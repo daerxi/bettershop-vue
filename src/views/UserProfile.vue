@@ -16,7 +16,7 @@
         </a>
       </div>
       <review-list v-if="!user.isBusiness" :reviews="reviews"/>
-      <wishlist-items v-if="!user.isBusiness"/>
+      <wishlist-items v-if="isMe && !user.isBusiness"/>
     </div>
   </div>
 </template>
