@@ -37,7 +37,7 @@ class WishlistService {
     }
 
     static checkWishlist(businessId, token = Vue.$cookies.get('user-token')) {
-        return instance.get(`/${businessId}`, {
+        return instance.get('/' + businessId, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
