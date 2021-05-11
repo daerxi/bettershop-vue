@@ -15,7 +15,7 @@
           </h2>
         </a>
       </div>
-      <review-list v-if="!user.isBusiness" :reviews="reviews"/>
+      <review-list v-if="!user.isBusiness" :reviews="user.reviews"/>
       <wishlist-items v-if="isMe && !user.isBusiness"/>
     </div>
   </div>
@@ -32,7 +32,6 @@ export default {
   components: {WishlistItems, InputComponent, ReviewList},
   data() {
     return {
-      reviews: [],
       user: {},
       isMe: false,
       showInput: false
@@ -42,7 +41,6 @@ export default {
     const id = parseInt(this.$route.params.userId)
     this.isMe = id === parseInt(this.$cookies.get('user-id'))
     await UsersService.getUser(id).then(async res => this.user = res.data)
-    this.reviews = await UsersService.getReviewsByUserId(id)
   },
   methods: {}
 }
