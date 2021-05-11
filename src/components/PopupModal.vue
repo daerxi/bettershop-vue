@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <transition name="slide" appear>
       <div class="modal bg-gray-100 px-6 py-8 rounded shadow-lg border-gray-500" v-if="show">
         <h2>{{ title }}</h2>

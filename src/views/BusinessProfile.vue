@@ -1,8 +1,15 @@
 <template>
   <div>
-    <div class="py-6 px-8">
+    <div class="py-6 px-8 flex flex-wrap">
       <business v-if="business.id" v-bind:business="business"/>
+      <div v-if="inWishlist" class="content-left">
+        <a class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
+      </div>
     </div>
+    <popup-modal :show="showModal" title="Do you want to add this business to your wishlist?">
+      <action-button :fn="addWishlistItem" :block="false" title="Yes"></action-button>
+      <action-button :fn="changeShowModel" :block="false" title="No"></action-button>
+    </popup-modal>
     <div v-if="showTextArea" class="content-center lg:px-12 xl:px-24">
       <alert-component class="px-2" v-if="alertOpen" :type="type" :message="message"/>
       <rate class="text-right text-5xl" :rate-value="rateValue" :editable="editable"/>
@@ -25,10 +32,13 @@ import ReviewList from "@/components/ReviewList";
 import Rate from "@/components/Rate"
 import AlertComponent from "@/components/Alert";
 import { isNullOrEmpty, openAlert } from "@/utils/helper";
+import PopupModal from "@/components/PopupModal";
+import ActionButton from "@/components/ActionButton";
+import WishlistService from "@/api/WishlistService";
 
 export default {
   name: "BusinessProfile",
-  components: {AlertComponent, ReviewList, SubmitButton, TextArea, Business, Rate},
+  components: {ActionButton, PopupModal, AlertComponent, ReviewList, SubmitButton, TextArea, Business, Rate},
   data() {
     return {
       business: {},
@@ -40,7 +50,9 @@ export default {
       type: '',
       editable: true,
       max: 2,
-      showTextArea: true
+      showTextArea: true,
+      showModal: false,
+      inWishlist: true
     }
   },
   async created() {
@@ -57,6 +69,9 @@ export default {
     })
   },
   methods: {
+    async changeShowModel() {
+      this.showModal = !this.showModal
+    },
     async getBusinessById() {
       if (this.$route.params.businessId)
         await BusinessService.getBusiness(this.$route.params.businessId)
@@ -64,24 +79,33 @@ export default {
               this.business = res.data
             })
             .catch(e => console.error(e))
-    else
-    await BusinessService.getInfo()
-        .then(async res => this.business = res.data)
-        .catch(e => console.error(e))
-  },
-  async onSubmit() {
-    this.rateValue = localStorage.getItem('rate-value')
-    if (isNullOrEmpty(this.content)) {
-      openAlert(this, "error", "The content of the review cannot be empty.")
-    } else if (parseInt(this.rateValue) === 0) {
-      openAlert(this, "error", "The rate cannot be empty.")
-    } else {
-      await BusinessService.postReview(this.content, parseInt(this.rateValue), this.business.id).then(async review => {
-        console.log(review)
-        window.location.reload()
+      else
+        await BusinessService.getInfo()
+            .then(async res => this.business = res.data)
+            .catch(e => console.error(e))
+    },
+    async addWishlistItem() {
+      await WishlistService.addToWishList(this.business.id).then(async res => {
+        console.log(res.data)
+        this.showModal = false
+        this.inWishlist = false
+      }).catch(e => {
+        console.log(e.response.data)
       })
+    },
+    async onSubmit() {
+      this.rateValue = localStorage.getItem('rate-value')
+      if (isNullOrEmpty(this.content)) {
+        openAlert(this, "error", "The content of the review cannot be empty.")
+      } else if (parseInt(this.rateValue) === 0) {
+        openAlert(this, "error", "The rate cannot be empty.")
+      } else {
+        await BusinessService.postReview(this.content, parseInt(this.rateValue), this.business.id).then(async review => {
+          console.log(review)
+          window.location.reload()
+        })
+      }
     }
   }
-}
 }
 </script>
