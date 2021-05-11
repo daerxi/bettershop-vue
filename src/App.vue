@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import { router } from "@/router";
-import { avoidDuplicatedNavigation } from "@/utils/helper";
 import FooterComponent from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import NavBar from "@/components/NavBar";
@@ -28,9 +26,6 @@ export default {
     return {
       cookie: this.$cookies.get("acceptCookie")
     }
-  },
-  created() {
-
   },
   methods: {
     async enableCookie() {
