@@ -5,7 +5,7 @@
     </div>
     <div class="w-full block flex-wrap p-4">
       <div v-for="(review,i) in reviews" :key="i">
-        <review-component v-if="showNumberOfReviews(i)" :review="review"></review-component>
+        <review-component v-if="showReviews[i]" :review="review"></review-component>
       </div>
     </div>
   </div>
@@ -18,9 +18,19 @@ export default {
   name: "ReviewList",
   components: {ReviewComponent},
   props: ['reviews', 'number'],
-  methods: {
-    async showNumberOfReviews(i) {
-      return this.number > i || !this.number
+  data() {
+    return {
+      showReviews: [],
+      updateResult: true
+    }
+  },
+  async updated() {
+    if (this.updateResult && (this.reviews === [] || this.reviews.length > 0)) {
+      for (const i in this.reviews) {
+        console.log(this.number, parseInt(i), parseInt(i) < parseInt(this.number) || !this.number)
+        this.showReviews.push(parseInt(i) < parseInt(this.number) || !this.number)
+      }
+      this.updateResult = false
     }
   }
 }

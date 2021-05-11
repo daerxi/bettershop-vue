@@ -15,7 +15,7 @@
           </h2>
         </a>
       </div>
-      <review-list v-if="!user.isBusiness" :reviews="reviews"/>
+      <review-list v-if="!user.isBusiness" :reviews="reviews" :number="3"/>
       <wishlist-items v-if="isMe && !user.isBusiness"/>
     </div>
   </div>
