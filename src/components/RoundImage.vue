@@ -1,9 +1,7 @@
 <template>
   <router-link :to="redirect" class="bg-transparent border-none p-2">
-    <img v-if="avatar !== null" :src=avatar
-         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt=""/>
-    <img v-else :src="emptyAvatar"
-         class="inline border-none mr-2 rounded-full" :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt=""/>
+    <img :src=avatar class="inline border-none mr-2 rounded-full"
+         :class="{'w-12 h-12': isNav, 'w-16 h-16': !isNav}" alt=""/>
   </router-link>
 </template>
 
@@ -15,14 +13,15 @@ export default {
   props: ['user', 'redirect', 'isNav'],
   data() {
     return {
-      emptyAvatar: emptyAvatar,
       avatar: null
     }
   },
   async created() {
+    console.log("xixi")
     if (this.user.avatar) {
       this.avatar = this.user.avatar
-      console.log("avatar", this.avatar)
+    } else {
+      this.avatar = emptyAvatar
     }
   }
 }
