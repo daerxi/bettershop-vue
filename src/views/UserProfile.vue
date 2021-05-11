@@ -15,8 +15,8 @@
           </h2>
         </a>
       </div>
-      <review-list :reviews="reviews"/>
-      <wishlist-items :businesses="wishlist"/>
+      <review-list v-if="!user.isBusiness" :reviews="reviews"/>
+      <wishlist-items v-if="!user.isBusiness" :businesses="wishlist"/>
     </div>
   </div>
 </template>
