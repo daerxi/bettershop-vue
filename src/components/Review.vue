@@ -5,9 +5,7 @@
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
       'grid-cols-6': $isMobile()}">
         <div class="col-span-1 w-24">
-          <router-link :to="redirectLink" class="bg-transparent border-none p-2">
-            <img :src="avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
-          </router-link>
+          <large-round-image v-if="reviewer.id" :redirect="redirectLink" :user="reviewer"></large-round-image>
           <rate :editable="editable" v-bind:rateValue="review.rate"/>
         </div>
         <div class="col-span-1"/>
@@ -32,11 +30,11 @@
 import Rate from "@/components/Rate";
 import UsersService from "@/api/UsersService";
 import BusinessService from "@/api/BusinessService";
-import { emptyAvatar } from "@/utils/validation";
+import LargeRoundImage from "@/components/LargeRoundImage";
 
 export default {
   name: "ReviewComponent",
-  components: {Rate},
+  components: {LargeRoundImage, Rate},
   props: ['review'],
   data() {
     return {
@@ -45,8 +43,7 @@ export default {
       redirectLink: '',
       business: {},
       businessRedirect: '',
-      showBusinessName: false,
-      avatar: null
+      showBusinessName: false
     }
   },
   async created() {
@@ -56,7 +53,6 @@ export default {
     await UsersService.getUser(this.review.userId)
         .then(async res => {
           this.reviewer = res.data
-          this.avatar = this.reviewer.avatar || emptyAvatar
         }).catch(e => console.error(e))
     await BusinessService.getBusiness(this.review.businessId)
         .then(async res => {

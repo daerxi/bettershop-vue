@@ -5,9 +5,7 @@
       'grid-cols-6': $isMobile()}">
       <div class="col-span-1 w-24">
         <div @click="updateClick">
-          <router-link :to="redirectLink" class="bg-transparent border-none p-2">
-            <img :src="avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
-          </router-link>
+          <large-round-image :redirect="redirectLink" :user="this.business.user"/>
         </div>
         <rate :key="business.rate" :editable="editable" :rateValue="business.rate"/>
       </div>
@@ -24,7 +22,6 @@
            v-if="business.address && business.city && business.province && business.country">
           {{ business.address }}, {{ business.city }}, {{ business.province }}, {{ business.country }}
         </p>
-
       </div>
     </div>
   </section>
@@ -33,11 +30,11 @@
 <script>
 import Rate from "@/components/Rate";
 import BusinessService from "@/api/BusinessService";
-import { emptyAvatar } from "@/utils/validation";
+import LargeRoundImage from "@/components/LargeRoundImage";
 
 export default {
   name: "BusinessComponent",
-  components: {Rate},
+  components: {LargeRoundImage, Rate},
   props: ['business'],
   data() {
     return {
@@ -54,7 +51,6 @@ export default {
         this.website = "https://" + this.business.website
       else this.website = this.business.website
       this.redirectLink = "/businesses/" + this.business.id
-      this.avatar = this.business.avatar || emptyAvatar
     }
   },
   methods: {

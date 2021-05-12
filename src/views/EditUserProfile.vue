@@ -9,7 +9,7 @@
 <!--      TODO: POPUP-->
       <image-uploader
           :preview="false"
-          :className="['fileinput']"
+          :className="['fileInput']"
           capture="environment"
           :debug="1"
           :autoRotate="true"
