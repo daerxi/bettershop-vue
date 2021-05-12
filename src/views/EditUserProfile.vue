@@ -18,6 +18,11 @@
       ></image-uploader>
       <div class="p-3"></div>
       <submit-button title="Submit" :fn="updateInfo"></submit-button>
+      <div v-if="user.isBusiness" class="text-gray-700 mt-6 text-sm">
+        Update your
+        <a class="hover:no-underline underline text-gray-700" href="../business/edit">company info</a>
+        here
+      </div>
     </form-component>
   </div>
 </template>
