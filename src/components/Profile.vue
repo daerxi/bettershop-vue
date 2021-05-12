@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap">
     <div>
-      <round-image :is-nav="true" class="w-full" :user="user" :redirect="redirectLink"/>
+      <round-image class="w-full" :user="user" :redirect="redirectLink"/>
     </div>
   </div>
 </template>

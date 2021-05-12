@@ -54,10 +54,11 @@ export default {
   },
   methods: {
     async logout() {
+      await clearCookies()
       await UsersService.logoutUser().then(async () => {
-        await clearCookies()
-        await router.push("/").then(() => window.location.reload()).catch(e => avoidDuplicatedNavigation(e))
+        await router.push("/").then().catch(e => avoidDuplicatedNavigation(e))
       }).catch(e => console.log(e))
+      window.location.reload()
     }
   }
 }

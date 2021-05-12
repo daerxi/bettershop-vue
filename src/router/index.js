@@ -12,6 +12,7 @@ import { verifyAuth} from "@/utils/validation";
 import ResetPassword from "@/views/ResetPassword";
 import VerifyCode from "@/views/VerifyCode";
 import DonatePage from "@/views/DonatePage";
+import EditUserProfile from "@/views/EditUserProfile";
 
 Vue.use(VueRouter)
 Vue.use(require('vue-cookies'))
@@ -76,8 +77,14 @@ export const router = new VueRouter({
             beforeEnter: requireAuth
         },
         {
+            path: '/user/edit',
+            name: 'Edit User Profile',
+            component: EditUserProfile,
+            beforeEnter: requireAuth
+        },
+        {
             path: '/business/edit',
-            name: 'Edit Profile',
+            name: 'Edit Business Profile',
             component: CompanyInfoForm,
             beforeEnter: requireBusiness
         },

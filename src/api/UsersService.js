@@ -43,6 +43,18 @@ class UsersService {
         })
     }
 
+    static updateProfile(email, userName, avatar, token = Vue.$cookies.get('user-token')) {
+        return instance.put('/profile', {
+            email,
+            userName,
+            avatar
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
     static getMe(token = Vue.$cookies.get('user-token')) {
         return instance.get('/me', {
             headers: {
