@@ -1,5 +1,5 @@
 <template>
-  <section :key="business.id" class="py-4">
+  <section v-if="business.id" class="py-4">
     <div class="grid w-full" :class="{
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
       'grid-cols-6': $isMobile()}">

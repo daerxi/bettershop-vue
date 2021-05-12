@@ -2,7 +2,7 @@
   <div class="py-12">
     <div v-for="(business,i) in businesses" :key="i" class="flex">
       <div v-if="business">
-        <business-component v-if="showBusiness[i]" v-bind:business="business"/>
+        <business-component v-if="showBusiness[i]" :business="business"/>
       </div>
     </div>
     <a v-if="showLoadMore" class="cursor-pointer" @click="loadMore">

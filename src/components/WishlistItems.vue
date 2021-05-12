@@ -17,7 +17,7 @@ export default {
       businesses: []
     }
   },
-  async created() {
+  async mounted() {
     this.businesses = await WishlistService.getWishlists()
   }
 }
