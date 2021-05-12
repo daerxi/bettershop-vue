@@ -10,6 +10,8 @@
         <image-uploader
             :preview="true"
             capture="environment"
+            :maxWidth="1024"
+            :quality="0.7"
             :debug="1"
             :autoRotate="true"
             outputFormat="verbose"
