@@ -62,7 +62,10 @@ export default {
   methods: {
     async updateInfo() {
       UsersService.updateProfile(this.user.email, this.user.userName, this.user.avatar)
-          .then(async () => openAlert(this, "success", "Updated successfully."))
+          .then(async () => {
+            openAlert(this, "success", "Updated successfully.")
+            window.location.reload()
+          })
           .catch(e => {
             console.error(e)
             openAlert(this, "error", "Updated failed. Your file might be too large.")

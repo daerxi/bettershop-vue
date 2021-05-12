@@ -1,7 +1,12 @@
 <template>
-  <router-link :to="redirect" class="bg-transparent border-none p-2">
-    <img v-if="user.id" :src="user.avatar || avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
-  </router-link>
+  <div class="p-2">
+    <router-link :to="redirect" class="bg-transparent border-none container">
+      <img v-if="user.id" :src="user.avatar || avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
+      <div class="overlay">
+        <div class="text-center text text-xs text-gray-500">Upload Photo</div>
+      </div>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -19,5 +24,35 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  position: relative;
+  width: 50%;
+}
 
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: transparent;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
 </style>
