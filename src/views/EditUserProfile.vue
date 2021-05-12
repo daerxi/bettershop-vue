@@ -2,7 +2,7 @@
   <div>
     <form-component :alert-open="alertOpen" title="Edit User Info" :type="type" :message="message">
       <div class="p-3" @click="showModal">
-        <large-round-image :key="user.avatar" :user="user" redirect=""></large-round-image>
+        <large-round-image :overlay="true" :key="user.avatar" :user="user" redirect=""></large-round-image>
       </div>
       <div class="p-3"></div>
       <input-component type="text" name="User Name" v-model.trim="user.userName"></input-component>

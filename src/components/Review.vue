@@ -5,7 +5,7 @@
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),
       'grid-cols-6': $isMobile()}">
         <div class="col-span-1 w-24">
-          <large-round-image v-if="reviewer.id" :redirect="redirectLink" :user="reviewer"></large-round-image>
+          <large-round-image v-if="reviewer" :redirect="redirectLink" :user="reviewer"></large-round-image>
           <rate :editable="editable" v-bind:rateValue="review.rate"/>
         </div>
         <div class="col-span-1"/>
@@ -51,9 +51,8 @@ export default {
     this.businessRedirect = '/businesses/' + this.review.businessId
     this.redirectLink = "/profile/" + this.review.userId
     await UsersService.getUser(this.review.userId)
-        .then(async res => {
-          this.reviewer = res.data
-        }).catch(e => console.error(e))
+        .then(async res => this.reviewer = res.data)
+        .catch(e => console.error(e))
     await BusinessService.getBusiness(this.review.businessId)
         .then(async res => {
           this.business = res.data

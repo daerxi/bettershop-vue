@@ -5,7 +5,9 @@
     </div>
     <div class="w-full block flex-wrap p-4">
       <div v-for="(review,i) in reviews" :key="i">
-        <review-component v-if="showReviews[i]" :review="review"></review-component>
+        <div v-if="review">
+          <review-component v-if="showReviews[i]" :review="review"></review-component>
+        </div>
       </div>
       <a v-if="showLoadMore" class="cursor-pointer" @click="loadMore">
         <font-awesome-icon class="text-2xl" :icon="['fas', 'angle-double-down']"></font-awesome-icon>
@@ -35,12 +37,12 @@ export default {
     }
   },
   async updated() {
-    if (this.updateResult && (this.reviews === [] || this.reviews.length > 0)) {
-      if (!this.noMax) this.max = this.reviews.length + 1
+    if (this.updateResult && this.reviews) {
+      if (!this.noMax) this.max = this.reviews.length
       this.number = this.max
       await this.assignArray().then(async () => this.updateResult = false)
-      console.log(this.reviews)
-      if (this.reviews.length <= this.max || this.reviews === []) {
+      console.log("haha", this.reviews)
+      if (this.reviews.length <= this.max || this.reviews.length === 0) {
         this.showLoadMore = false
         this.showLoadLess = false
       }

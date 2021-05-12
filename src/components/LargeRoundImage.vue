@@ -1,8 +1,8 @@
 <template>
   <div class="p-2">
     <router-link :to="redirect" class="bg-transparent border-none container">
-      <img v-if="user.id" :src="user.avatar || avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
-      <div class="overlay">
+      <img v-if="user" :src="user.avatar || avatar" class="inline border-none mr-2 rounded-full w-16 h-16" alt=""/>
+      <div v-if="showOverlay" class="overlay">
         <div class="text-center text text-xs text-gray-500">Upload Photo</div>
       </div>
     </router-link>
@@ -14,10 +14,11 @@ import { emptyAvatar } from "@/utils/validation";
 
 export default {
   name: "LargeRoundImage",
-  props: ['user', 'redirect'],
+  props: ['user', 'redirect', 'overlay'],
   data() {
     return {
-      avatar: emptyAvatar
+      avatar: emptyAvatar,
+      showOverlay: this.overlay || false
     }
   }
 }

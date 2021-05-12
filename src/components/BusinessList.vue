@@ -1,7 +1,9 @@
 <template>
   <div class="py-12">
     <div v-for="(business,i) in businesses" :key="i" class="flex">
-      <business-component v-if="showBusiness[i]" v-bind:business="business"/>
+      <div v-if="business">
+        <business-component v-if="showBusiness[i]" v-bind:business="business"/>
+      </div>
     </div>
     <a v-if="showLoadMore" class="cursor-pointer" @click="loadMore">
       <font-awesome-icon class="text-2xl" :icon="['fas', 'angle-double-down']"></font-awesome-icon>
