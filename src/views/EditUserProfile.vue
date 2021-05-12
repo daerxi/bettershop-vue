@@ -63,7 +63,10 @@ export default {
     async updateInfo() {
       UsersService.updateProfile(this.user.email, this.user.userName, this.user.avatar)
           .then(async () => openAlert(this, "success", "Updated successfully."))
-          .catch(e => openAlert(this, "error", e.response.data.error))
+          .catch(e => {
+            console.error(e)
+            openAlert(this, "error", "Updated failed. Your file might be too large.")
+          })
     },
     setImage: function (output) {
       this.tempAvatar = output.dataUrl
