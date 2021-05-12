@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="flex flex-wrap h-17">
+    <label :for="name" class="md-5 text-sm">{{ name }}</label>
     <input
         class="transition-all block border border-gray-300 p-4 rounded mb-5 w-full"
         :name="name"

@@ -1,15 +1,14 @@
 <template>
   <div>
     <form-component :alert-open="alertOpen" title="Edit User Info" :type="type" :message="message">
-      <div class="p-3 fileInput" @click="showModal">
+      <div class="p-3" @click="showModal">
         <large-round-image :key="user.avatar" :user="user" redirect=""></large-round-image>
       </div>
       <div class="p-3"></div>
-      <input-component type="text" name="User name" v-model.trim="user.userName"></input-component>
+      <input-component type="text" name="User Name" v-model.trim="user.userName"></input-component>
       <popup-modal :show="show" title="Upload your profile photo">
         <image-uploader
             :preview="true"
-            :className="['fileInput']"
             capture="environment"
             :debug="1"
             :autoRotate="true"
@@ -78,7 +77,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
