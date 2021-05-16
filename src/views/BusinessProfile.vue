@@ -2,8 +2,9 @@
   <div>
     <div class="py-6 px-8 flex flex-wrap">
       <business-component v-if="business.id" :business="business"/>
-      <div v-if="!inWishlist" class="content-left">
-        <a class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
+      <div class="content-left">
+        <a v-if="!inWishlist" class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
+        <a v-else class="cursor-pointer underline text-gray-500 text-sm" @click="changeDeleteModel">Remove from wishlist</a>
       </div>
     </div>
     <div v-if="showTextArea" class="content-center lg:px-12 xl:px-24">
@@ -18,6 +19,10 @@
     <review-list :number="max" :reviews="reviews"/>
     <popup-modal :show="showModal" title="Do you want to add this business to your wishlist?">
       <action-button :fn="addWishlistItem" :block="false" title="Yes"></action-button>
+      <action-button :fn="changeShowModel" :block="false" title="No"></action-button>
+    </popup-modal>
+    <popup-modal :show="showDeleteModal" title="Do you want to remove this business from your wishlist?">
+      <action-button :fn="removeWishListItem" :block="false" title="Yes"></action-button>
       <action-button :fn="changeShowModel" :block="false" title="No"></action-button>
     </popup-modal>
   </div>
@@ -61,7 +66,8 @@ export default {
       max: 2,
       showTextArea: true,
       showModal: false,
-      inWishlist: false
+      inWishlist: false,
+      showDeleteModal: false
     }
   },
   async mounted() {
@@ -78,6 +84,9 @@ export default {
     async changeShowModel() {
       this.showModal = !this.showModal
     },
+    async changeDeleteModel() {
+      this.showDeleteModal = !this.showDeleteModal
+    },
     async getBusinessById() {
       if (this.$route.params.businessId)
         await BusinessService.getBusiness(this.$route.params.businessId)
@@ -93,6 +102,13 @@ export default {
         console.log(res.data)
         this.showModal = false
         this.inWishlist = true
+      }).catch(e => console.log(e.response.data))
+    },
+    async removeWishListItem() {
+      await WishlistService.removeFromWishList(this.business.id).then(async res => {
+        console.log(res.data.success)
+        this.showDeleteModal = false
+        this.inWishlist = !res.data.success
       }).catch(e => console.log(e.response.data))
     },
     async checkInWishlist() {

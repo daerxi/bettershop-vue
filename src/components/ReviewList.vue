@@ -41,7 +41,6 @@ export default {
       if (!this.noMax) this.max = this.reviews.length
       this.number = this.max
       await this.assignArray().then(async () => this.updateResult = false)
-      console.log("haha", this.reviews)
       if (this.reviews.length <= this.max || this.reviews.length === 0) {
         this.showLoadMore = false
         this.showLoadLess = false

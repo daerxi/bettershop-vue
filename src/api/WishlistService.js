@@ -36,6 +36,14 @@ class WishlistService {
         })
     }
 
+    static removeFromWishList(businessId, token = Vue.$cookies.get('user-token')) {
+        return instance.delete('/' + businessId, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
     static checkWishlist(businessId, token = Vue.$cookies.get('user-token')) {
         return instance.get('/' + businessId, {
             headers: {
