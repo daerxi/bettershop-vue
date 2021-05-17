@@ -3,7 +3,7 @@
     <div class="flex flex-wrap content-start px-6">
       <h2 class="py-4 font-semibold text-xl">Review - {{ reviews.length }}</h2>
     </div>
-    <div class="w-full block flex-wrap p-4">
+    <div class="w-full block flex-wrap py-4 px-8">
       <div v-for="(review,i) in reviews" :key="i">
         <div v-if="review">
           <review-component v-if="showReviews[i]" :review="review"></review-component>

@@ -3,7 +3,7 @@
     <div class="flex flex-wrap content-left px-6">
       <h2 class="font-semibold text-xl">Wishlist - {{ businesses.length }}</h2>
     </div>
-    <div class="p-4">
+    <div class="py-4 px-8">
       <business-list v-if="businesses" :max-items="3" :businesses="businesses"/>
     </div>
   </div>
