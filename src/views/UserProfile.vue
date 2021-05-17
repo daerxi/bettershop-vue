@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid grid-cols-1 p-10">
-      <div class="flex flex-wrap content-start px-12">
+      <div class="flex flex-wrap content-start px-6">
         <a class="bg-transparent" @click="showInput = true">
           <h2 class="py-4 font-bold text-3xl">
             <span v-if="isMe">Hi, </span>

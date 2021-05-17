@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div class="py-4">
     <section>
       <div class="grid w-full" :class="{
       'xl:grid-cols-12 lg:grid-cols-10 md:grid-cols-9 sm:grid-cols-6': !$isMobile(),

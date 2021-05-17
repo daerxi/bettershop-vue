@@ -1,7 +1,11 @@
 <template>
-  <div class="flex flex-wrap content-start px-12">
-    <h2 class="py-4 font-semibold text-xl">Wishlist - {{ businesses.length }}</h2>
-    <business-list v-if="businesses" :max-items="3" :businesses="businesses"/>
+  <div>
+    <div class="flex flex-wrap content-left px-6">
+      <h2 class="font-semibold text-xl">Wishlist - {{ businesses.length }}</h2>
+    </div>
+    <div class="p-4">
+      <business-list v-if="businesses" :max-items="3" :businesses="businesses"/>
+    </div>
   </div>
 </template>
 

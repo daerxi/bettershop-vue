@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-wrap content-start px-12">
+    <div class="flex flex-wrap content-start px-6">
       <h2 class="py-4 font-semibold text-xl">Review - {{ reviews.length }}</h2>
     </div>
     <div class="w-full block flex-wrap p-4">
