@@ -17,12 +17,26 @@
           <div class="p-2"></div>
           <read-more class="text-gray-700 whitespace-pre-line" more-str="Read more" :text="review.content" link="#"
                      less-str="Hide" :max-chars="350"></read-more>
+          <div v-if="isBusiness" class="cursor-pointer py-4 text-sm underline text-gray-500" @click="showModal">Reply here</div>
+          <div v-else class="cursor-pointer py-4 text-sm underline" @click="showEditModal">Edit here</div>
         </div>
       </div>
     </section>
     <div class="p-2"></div>
     <hr>
     <div class="p-2"></div>
+    <popup-modal :show="show" title="Reply">
+      <text-area v-model="content"></text-area>
+      <div class="py-2"></div>
+      <action-button :fn="showModal" :block="false" title="Submit"></action-button>
+      <action-button :fn="showModal" :block="false" title="Close"></action-button>
+    </popup-modal>
+    <popup-modal :show="showEdit" title="Edit your review">
+      <text-area v-model="content"></text-area>
+      <div class="py-2"></div>
+      <action-button :fn="showEditModal" :block="false" title="Submit"></action-button>
+      <action-button :fn="showEditModal" :block="false" title="Close"></action-button>
+    </popup-modal>
   </div>
 </template>
 
@@ -31,10 +45,13 @@ import Rate from "@/components/Rate";
 import UsersService from "@/api/UsersService";
 import BusinessService from "@/api/BusinessService";
 import LargeRoundImage from "@/components/LargeRoundImage";
+import PopupModal from "@/components/PopupModal";
+import TextArea from "@/components/TextArea";
+import ActionButton from "@/components/ActionButton";
 
 export default {
   name: "ReviewComponent",
-  components: {LargeRoundImage, Rate},
+  components: {ActionButton, TextArea, PopupModal, LargeRoundImage, Rate},
   props: ['review'],
   data() {
     return {
@@ -43,7 +60,11 @@ export default {
       redirectLink: '',
       business: {},
       businessRedirect: '',
-      showBusinessName: false
+      showBusinessName: false,
+      isBusiness: this.$cookies.get('is-business'),
+      content: '',
+      show: false,
+      showEdit: false
     }
   },
   async created() {
@@ -58,6 +79,14 @@ export default {
           this.business = res.data
           if (this.business.category === null) this.business.category = "Not categorized"
         }).catch(e => console.error(e))
+  },
+  methods: {
+    async showModal() {
+      this.show = !this.show
+    },
+    async showEditModal() {
+      this.showEdit = !this.showEdit
+    }
   }
 }
 </script>
