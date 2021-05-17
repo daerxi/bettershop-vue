@@ -38,7 +38,6 @@ export default {
       else this.max = parseInt(this.maxItems)
       this.number = this.max
       await this.assignArray().then(async () => this.updateResult = false)
-      console.log(this.businesses)
       if (this.businesses.length <= this.max || this.businesses === []) {
         this.showLoadMore = false
         this.showLoadLess = false

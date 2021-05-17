@@ -13,11 +13,15 @@
              :class="{'col-span-3': $isMobile(), 'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
           <a :href="businessRedirect" v-if="showBusinessName" class="font-semibold text-xl">{{ business.name }} -
             {{ business.category }}</a>
-          <a :href="redirectLink" v-if="!showBusinessName" class="font-medium text-lg">Author: {{ reviewer.userName }}</a>
+          <a :href="redirectLink" v-if="!showBusinessName" class="font-medium text-lg">Author: {{
+              reviewer.userName
+            }}</a>
           <div class="p-2"></div>
           <read-more class="text-gray-700 whitespace-pre-line" more-str="Read more" :text="review.content" link="#"
                      less-str="Hide" :max-chars="350"></read-more>
-          <div v-if="isBusiness" class="cursor-pointer py-4 text-sm underline text-gray-500" @click="showModal">Reply here</div>
+          <div v-if="isBusiness" class="cursor-pointer py-4 text-sm underline text-gray-500" @click="showModal">Reply
+            here
+          </div>
           <div v-else class="cursor-pointer py-4 text-sm underline" @click="showEditModal">Edit here</div>
         </div>
       </div>
@@ -26,16 +30,17 @@
     <hr>
     <div class="p-2"></div>
     <popup-modal :show="show" title="Reply">
-      <text-area v-model="content"></text-area>
+      <alert-component v-if="alertOpen" type="error" :message="message"/>
+      <text-area v-model="content"/>
       <div class="py-2"></div>
-      <action-button :fn="showModal" :block="false" title="Submit"></action-button>
-      <action-button :fn="showModal" :block="false" title="Close"></action-button>
+      <action-button :fn="submitReply" :block="false" title="Submit"/>
+      <action-button :fn="showModal" :block="false" title="Close"/>
     </popup-modal>
     <popup-modal :show="showEdit" title="Edit your review">
-      <text-area v-model="content"></text-area>
+      <text-area v-model="content"/>
       <div class="py-2"></div>
-      <action-button :fn="showEditModal" :block="false" title="Submit"></action-button>
-      <action-button :fn="showEditModal" :block="false" title="Close"></action-button>
+      <action-button :fn="showEditModal" :block="false" title="Submit"/>
+      <action-button :fn="showEditModal" :block="false" title="Close"/>
     </popup-modal>
   </div>
 </template>
@@ -48,10 +53,11 @@ import LargeRoundImage from "@/components/LargeRoundImage";
 import PopupModal from "@/components/PopupModal";
 import TextArea from "@/components/TextArea";
 import ActionButton from "@/components/ActionButton";
+import AlertComponent from "@/components/Alert";
 
 export default {
   name: "ReviewComponent",
-  components: {ActionButton, TextArea, PopupModal, LargeRoundImage, Rate},
+  components: {AlertComponent, ActionButton, TextArea, PopupModal, LargeRoundImage, Rate},
   props: ['review'],
   data() {
     return {
@@ -64,7 +70,10 @@ export default {
       isBusiness: this.$cookies.get('is-business'),
       content: '',
       show: false,
-      showEdit: false
+      showEdit: false,
+      reply: {},
+      alertOpen: false,
+      message: ''
     }
   },
   async created() {
@@ -86,6 +95,13 @@ export default {
     },
     async showEditModal() {
       this.showEdit = !this.showEdit
+    },
+    async submitReply() {
+      await BusinessService.postReplies(this.content, this.business.id, this.review.id)
+          .then(async res => {
+            this.reply = res.data
+            this.show = false
+          }).catch(e => console.error(e))
     }
   }
 }
