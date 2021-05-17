@@ -19,10 +19,11 @@
           <div class="p-2"></div>
           <read-more class="text-gray-700 whitespace-pre-line" more-str="Read more" :text="review.content" link="#"
                      less-str="Hide" :max-chars="350"></read-more>
-          <div v-if="isBusiness" class="cursor-pointer py-4 text-sm underline text-gray-500" @click="showModal">Reply
-            here
+          <div v-if="isBusiness" class="cursor-pointer py-4 text-sm underline text-gray-500" @click="showModal">Reply here</div>
+          <div v-else>
+            <reply reply-content="haha"></reply>
           </div>
-          <div v-else class="cursor-pointer py-4 text-sm underline" @click="showEditModal">Edit here</div>
+          <div v-if="!isBusiness" class="cursor-pointer py-4 text-sm underline" @click="showEditModal">Edit here</div>
         </div>
       </div>
     </section>
