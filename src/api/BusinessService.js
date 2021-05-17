@@ -104,6 +104,16 @@ class BusinessService {
         })
     }
 
+    static updateReview(content, businessId, reviewId, token = Vue.$cookies.get('user-token')) {
+        return instance.put(businessId + '/reviews/' + reviewId, {
+            content
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+    }
+
     static postReplies(content, businessId, reviewId, token = Vue.$cookies.get('user-token')) {
         return instance.post(businessId + '/reviews/' + reviewId + '/replies', {
             content,

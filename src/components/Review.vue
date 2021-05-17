@@ -19,10 +19,13 @@
           <div class="p-2"></div>
           <read-more class="text-gray-700 whitespace-pre-line" more-str="Read more" :text="review.content" link="#"
                      less-str="Hide" :max-chars="350"></read-more>
-          <div v-if="isBusiness && !review.reply && business.id === parseInt($cookies.get('business-id'))" class="cursor-pointer py-4 text-sm underline text-gray-500"
-               @click="showModal">Reply here
+          <div v-if="isBusiness && !review.reply && business.id === parseInt($cookies.get('business-id'))"
+               class="cursor-pointer py-4 text-sm underline text-gray-500"
+               @click="showReplyModal">Reply here
           </div>
-          <div v-if="!isBusiness" class="cursor-pointer py-4 text-sm underline" @click="showEditModal">Edit here</div>
+          <div v-if="reviewer.id === parseInt($cookies.get('user-id'))" class="cursor-pointer py-4 text-sm underline"
+               @click="showUpdateModal">Edit here
+          </div>
           <reply v-if="review.reply" :reply-content="review.reply.content"></reply>
         </div>
       </div>
@@ -30,18 +33,19 @@
     <div class="p-2"></div>
     <hr>
     <div class="p-2"></div>
-    <popup-modal :show="show" title="Reply">
-      <alert-component v-if="alertOpen" type="error" :message="message"/>
+    <popup-modal :show="replyModal.show" title="Reply">
+      <alert-component v-if="replyModal.alertOpen" :type="replyModal.type" :message="replyModal.message"/>
       <text-area v-model="content"/>
       <div class="py-2"></div>
       <action-button :fn="submitReply" :block="false" title="Submit"/>
-      <action-button :fn="showModal" :block="false" title="Close"/>
+      <action-button :fn="showReplyModal" :block="false" title="Close"/>
     </popup-modal>
-    <popup-modal :show="showEdit" title="Edit your review">
-      <text-area v-model="content"/>
+    <popup-modal :show="updateModal.show" title="Edit your review">
+      <alert-component v-if="updateModal.alertOpen" :type="updateModal.type" :message="updateModal.message"/>
+      <text-area v-model="review.content"/>
       <div class="py-2"></div>
-      <action-button :fn="showEditModal" :block="false" title="Submit"/>
-      <action-button :fn="showEditModal" :block="false" title="Close"/>
+      <action-button :fn="updateReview" :block="false" title="Submit"/>
+      <action-button :fn="showUpdateModal" :block="false" title="Close"/>
     </popup-modal>
   </div>
 </template>
@@ -56,6 +60,7 @@ import TextArea from "@/components/TextArea";
 import ActionButton from "@/components/ActionButton";
 import AlertComponent from "@/components/Alert";
 import Reply from "@/components/Reply";
+import { openAlert } from "@/utils/helper";
 
 export default {
   name: "ReviewComponent",
@@ -71,11 +76,19 @@ export default {
       showBusinessName: false,
       isBusiness: this.$cookies.get('is-business'),
       content: '',
-      show: false,
-      showEdit: false,
       reply: {},
-      alertOpen: false,
-      message: ''
+      replyModal: {
+        alertOpen: false,
+        type: '',
+        message: '',
+        show: false
+      },
+      updateModal: {
+        alertOpen: false,
+        type: '',
+        message: '',
+        show: false
+      }
     }
   },
   async created() {
@@ -92,18 +105,22 @@ export default {
         }).catch(e => console.error(e))
   },
   methods: {
-    async showModal() {
-      this.show = !this.show
+    async showReplyModal() {
+      this.replyModal.show = !this.replyModal.show;
     },
-    async showEditModal() {
-      this.showEdit = !this.showEdit
+    async showUpdateModal() {
+      this.updateModal.show = !this.updateModal.show;
     },
     async submitReply() {
       await BusinessService.postReplies(this.content, this.business.id, this.review.id)
           .then(async res => {
             this.reply = res.data
             this.show = false
-          }).catch(e => console.error(e))
+          }).catch(e => openAlert(this.replyModal, 'error', e.response.data.error))
+    },
+    async updateReview() {
+      await BusinessService.updateReview(this.review.content, this.business.id, this.review.id)
+          .then(async () => this.showEdit = false).catch(e => openAlert(this.updateModal, 'error', e.response.data.error))
     }
   }
 }
