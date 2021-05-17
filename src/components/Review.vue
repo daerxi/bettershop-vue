@@ -74,7 +74,7 @@ export default {
       business: {},
       businessRedirect: '',
       showBusinessName: false,
-      isBusiness: this.$cookies.get('is-business'),
+      isBusiness: this.$cookies.get('is-business') === "true",
       content: '',
       reply: {},
       replyModal: {

@@ -2,7 +2,7 @@
   <div>
     <div class="py-6 px-8 flex flex-wrap">
       <business-component v-if="business.id" :business="business"/>
-      <div class="content-left">
+      <div v-if="!isBusiness" class="content-left">
         <a v-if="!inWishlist" class="cursor-pointer underline text-gray-500 text-sm" @click="changeShowModel">Add to wishlist</a>
         <a v-else class="cursor-pointer underline text-gray-500 text-sm" @click="changeDeleteModel">Remove from wishlist</a>
       </div>
@@ -67,7 +67,8 @@ export default {
       showTextArea: true,
       showModal: false,
       inWishlist: false,
-      showDeleteModal: false
+      showDeleteModal: false,
+      isBusiness: this.$cookies.get('is-business') === "true"
     }
   },
   async mounted() {
