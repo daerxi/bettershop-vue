@@ -19,11 +19,11 @@
           <div class="p-2"></div>
           <read-more class="text-gray-700 whitespace-pre-line" more-str="Read more" :text="review.content" link="#"
                      less-str="Hide" :max-chars="350"></read-more>
-          <div v-if="isBusiness" class="cursor-pointer py-4 text-sm underline text-gray-500" @click="showModal">Reply here</div>
-          <div v-else>
-            <reply reply-content="haha"></reply>
+          <div v-if="isBusiness && !review.reply && business.id === parseInt($cookies.get('business-id'))" class="cursor-pointer py-4 text-sm underline text-gray-500"
+               @click="showModal">Reply here
           </div>
           <div v-if="!isBusiness" class="cursor-pointer py-4 text-sm underline" @click="showEditModal">Edit here</div>
+          <reply v-if="review.reply" :reply-content="review.reply.content"></reply>
         </div>
       </div>
     </section>
@@ -55,10 +55,11 @@ import PopupModal from "@/components/PopupModal";
 import TextArea from "@/components/TextArea";
 import ActionButton from "@/components/ActionButton";
 import AlertComponent from "@/components/Alert";
+import Reply from "@/components/Reply";
 
 export default {
   name: "ReviewComponent",
-  components: {AlertComponent, ActionButton, TextArea, PopupModal, LargeRoundImage, Rate},
+  components: {Reply, AlertComponent, ActionButton, TextArea, PopupModal, LargeRoundImage, Rate},
   props: ['review'],
   data() {
     return {
