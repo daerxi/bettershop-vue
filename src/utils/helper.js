@@ -13,9 +13,8 @@ export const isNullOrEmpty = (element) => {
 }
 
 export const avoidDuplicatedNavigation = (e) => {
-    if (e.name !== "NavigationDuplicated") {
+    if (e.name !== "NavigationDuplicated")
         console.error(e)
-    }
 }
 
 export function googleSignIn(it) {
@@ -27,7 +26,6 @@ export function googleSignIn(it) {
             let token = result.credential.accessToken
             let user = result.user
             if (token) {
-                console.log(user)
                 await UsersService.loginUser2(user.za).then(res => {
                     it.userToken = res.data
                     saveAuth(it.userToken)

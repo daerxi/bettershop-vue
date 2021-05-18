@@ -22,7 +22,8 @@
           <a @click="logout" v-if="authenticated"
              class="cursor-pointer flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">Logout</a>
           <a href="/user/edit" v-if="authenticated"
-             class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">Edit Profile</a>
+             class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">Edit
+            Profile</a>
           <profile-component></profile-component>
         </div>
       </div>
@@ -53,11 +54,11 @@ export default {
   },
   methods: {
     async logout() {
-      await clearCookies()
+      this.authenticated = false
+      this.$cookies.remove('authenticated')
       await UsersService.logoutUser().then(async () => {
-        await router.push("/").then().catch(e => avoidDuplicatedNavigation(e))
+        await router.push("/").then(async () => await clearCookies()).catch(e => avoidDuplicatedNavigation(e))
       }).catch(e => console.log(e))
-      window.location.reload()
     }
   }
 }
