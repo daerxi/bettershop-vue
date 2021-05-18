@@ -1,7 +1,11 @@
-import { API } from "@/utils/helper";
 import { BASE_URL } from "@/utils/config";
 import Vue from "vue";
-const instance = API(BASE_URL + '/users')
+import axios from "axios";
+
+const instance = axios.create({
+    baseURL: BASE_URL + '/users',
+    timeout: 5000
+})
 
 Vue.use(require('vue-cookies'))
 
@@ -30,6 +34,12 @@ class UsersService {
     static loginUser(email, password) {
         return instance.post('/login', {
             email, password
+        })
+    }
+
+    static loginUser2(token) {
+        return instance.post('/login2', {
+            token
         })
     }
 

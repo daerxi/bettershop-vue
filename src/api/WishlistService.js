@@ -1,8 +1,11 @@
-import { API } from "@/utils/helper";
 import { BASE_URL } from "@/utils/config";
 import Vue from "vue";
+import axios from "axios";
 
-const instance = API(BASE_URL + '/wishlist')
+const instance = axios.create({
+    baseURL: BASE_URL + '/wishlist',
+    timeout: 5000
+})
 
 class WishlistService {
     static getWishlists(token = Vue.$cookies.get('user-token')) {

@@ -1,7 +1,11 @@
-import { API } from "@/utils/helper";
 import { BASE_URL } from "@/utils/config";
-import Vue from 'vue'
-const instance = API(BASE_URL + '/business')
+import Vue from 'vue';
+import axios from "axios";
+
+const instance = axios.create({
+    baseURL: BASE_URL + '/business',
+    timeout: 5000
+})
 
 Vue.use(require('vue-cookies'))
 

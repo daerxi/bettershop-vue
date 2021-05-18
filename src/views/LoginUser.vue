@@ -20,6 +20,10 @@
       </a>
     </div>
     <div class="p-2"></div>
+    <button class="" @click="googleSignInClick">
+      Sign In with Google
+    </button>
+    <div class="p-2"></div>
     <hr>
     <div class="text-gray-700 mt-6 text-sm">
       Doesn't have an account?
@@ -34,7 +38,7 @@
 import UsersService from '../api/UsersService'
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
-import { openAlert } from "@/utils/helper";
+import { googleSignIn, openAlert } from "@/utils/helper";
 import SubmitButton from "@/components/SubmitButton";
 import Checkbox from "@/components/Checkbox";
 import { clearCookies, saveAuth } from "@/utils/validation";
@@ -49,6 +53,9 @@ export default {
         id: Number,
         userId: Number,
         token: String
+      },
+      params: {
+        client_id: "838137419342-el4ct8dnouhol7ls1uqettqgva7q21vc.apps.googleusercontent.com"
       },
       message: '',
       email: this.$cookies.get("user-email"),
@@ -74,6 +81,9 @@ export default {
       }).catch(e => {
         openAlert(this, "error", e.response.data.error)
       })
+    },
+    async googleSignInClick() {
+      await googleSignIn(this);
     }
   }
 }

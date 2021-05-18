@@ -1,7 +1,10 @@
-import {API} from "@/utils/helper";
 import { BASE_URL } from "@/utils/config";
+import axios from "axios";
 
-const instance = API(BASE_URL + '/categories')
+const instance = axios.create({
+    baseURL: BASE_URL + '/categories',
+    timeout: 5000
+})
 
 class CategoriesService {
     static getCategories() {

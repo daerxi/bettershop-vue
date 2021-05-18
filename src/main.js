@@ -10,6 +10,21 @@ import VueMobileDetection from 'vue-mobile-detection'
 import VueSocialSharing from 'vue-social-sharing'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ReadMore from 'vue-read-more'
+import firebase from "firebase";
+
+Vue.config.productionTip = false;
+
+const configOptions = {
+    apiKey: "AIzaSyC5NyKzQj6kOf7hu0qLcaTDSVVcZN9RVBg",
+    authDomain: "bettershop-62b68.firebaseapp.com",
+    projectId: "bettershop-62b68",
+    storageBucket: "bettershop-62b68.appspot.com",
+    messagingSenderId: "838137419342",
+    appId: "1:838137419342:web:583885021ff92ae090951f",
+    measurementId: "G-CEC1ZV94TE"
+};
+
+firebase.initializeApp(configOptions);
 
 Vue.use(ReadMore)
 
