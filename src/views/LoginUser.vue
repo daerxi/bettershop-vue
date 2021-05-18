@@ -20,11 +20,12 @@
       </a>
     </div>
     <div class="p-2"></div>
-    <button class="" @click="googleSignInClick">
+    <hr>
+    <div class="p-2"></div>
+    <button class="bg-gray-200 p-3 w-full rounded text-center hover:bg-gray-300 focus:outline-none" @click="googleSignInClick">
+      <font-awesome-icon :icon="['fab','google']"></font-awesome-icon>
       Sign In with Google
     </button>
-    <div class="p-2"></div>
-    <hr>
     <div class="text-gray-700 mt-6 text-sm">
       Doesn't have an account?
       <a class="hover:no-underline underline text-gray-700" href="../signup">
