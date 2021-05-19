@@ -5,6 +5,8 @@
     <line-chart :chart-data="chartData" :fn="lineStyle"></line-chart>
     <div class="p-10"></div>
     <bar-chart :chart-data="chartData" :fn="barStyle"></bar-chart>
+    <div class="p-10"></div>
+    <pie-chart :chart-data="chartData" :fn="barStyle"></pie-chart>
   </div>
 </template>
 
@@ -13,10 +15,11 @@
 import BarChart from "@/components/BarChart";
 import LineChart from "@/components/LineChart";
 import CategoriesService from "@/api/CategoriesService";
+import PieChart from "@/components/PieChart";
 
 export default {
   name: "AdminPage",
-  components: {LineChart, BarChart},
+  components: {PieChart, LineChart, BarChart},
   data() {
     return {
       categories: [],
