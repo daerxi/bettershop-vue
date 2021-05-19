@@ -13,7 +13,9 @@
       <div class="text-left py-1" :class="{'col-span-3': $isMobile(),
                                            'xl:col-span-10 lg:col-span-8 md:col-span-7 sm:col-span-4': !$isMobile()}">
         <div @click="updateClick">
-          <a :href="redirectLink" class="text-base font-semibold">{{ business.name }}</a>
+          <router-link :to="redirectLink">
+            <a class="text-base font-semibold">{{ business.name }}</a>
+          </router-link>
         </div>
         <p class="text-sm italic">{{ business.category }}</p>
         <p class="text-sm text-gray-600">{{ business.description }}</p>
@@ -41,8 +43,7 @@ export default {
       redirectLink: "/",
       editable: false,
       rateValue: 0,
-      website: '',
-      avatar: null
+      website: ''
     }
   },
   async created() {
