@@ -1,7 +1,7 @@
 <template>
   <div class="h-16 flex flex-wrap">
     <label :for="placeholder" class="md-5 text-sm">{{ placeholder }}</label>
-    <select :value="value" @input="$emit('input', $event.target.value)"
+    <select @change="func" :value="value" @input="$emit('input', $event.target.value)"
         class="transition-all block border border-gray-300 p-3.5 rounded mb-4 w-full text-sm" :name="placeholder" :id="placeholder" required>
       <option disabled class="rounded bg-transparent text-gray-300 p-2 w-full h-6 mb-4"
               value="">{{
@@ -22,7 +22,16 @@ export default {
   props: {
     options: Array,
     placeholder: String,
-    value: String
+    value: String,
+    fn: Function
+  },
+  data() {
+    return {
+      func: function() {}
+    }
+  },
+  async mounted() {
+    if (this.fn) this.func = this.fn
   }
 }
 </script>
