@@ -24,6 +24,9 @@ class CategoriesService {
         })
     }
 
+    static getBusiness() {
+        return instance.get('/business')
+    }
 }
 
 export default CategoriesService;

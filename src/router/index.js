@@ -14,6 +14,7 @@ import VerifyCode from "@/views/VerifyCode";
 import DonatePage from "@/views/DonatePage";
 import EditUserProfile from "@/views/EditUserProfile";
 import PageNotFound from "@/components/PageNotFound";
+import AdminPage from "@/views/AdminPage";
 
 Vue.use(VueRouter)
 Vue.use(require('vue-cookies'))
@@ -110,6 +111,12 @@ export const router = new VueRouter({
             path: '/donate',
             name: 'Donate',
             component: DonatePage
+        },
+        {
+            path: '/admin',
+            name: 'Admin',
+            component: AdminPage,
+            beforeEnter: requireAuth
         },
         {
             path: "*",
