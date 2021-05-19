@@ -29,9 +29,10 @@
 import FormComponent from "@/components/Form";
 import InputComponent from "@/components/Input";
 import SubmitButton from "@/components/SubmitButton";
-import { API, isNullOrEmpty, openAlert } from "@/utils/helper";
+import { isNullOrEmpty, openAlert } from "@/utils/helper";
 import DropdownComponent from "@/components/Dropdown";
 import { BASE_URL } from "@/utils/config";
+import axios from "axios";
 
 // eslint-disable-next-line no-undef
 const stripe = Stripe('pk_test_51I6OndA35cjOkMayVB9T8NZMMccYvOvuPkdOIAqyA4hWFqmYJYe1D96rqUFM68TKg6rrhisM9opX3CWkv5jjngce00ta64l2xz');
@@ -109,7 +110,10 @@ export default {
   async donateAPI() {
     const name = this.customer.name
     const {stripeToken, email, amount, currency} = this
-    const instance = API(BASE_URL + '/donate')
+    const instance = axios.create({
+      baseURL: BASE_URL + '/donate',
+      timeout: 5000
+    })
     await instance.post('/', {
       stripeToken, name, email, amount, currency
     }).then(async () =>
