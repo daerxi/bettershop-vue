@@ -8,17 +8,18 @@ import BusinessProfile from "@/views/BusinessProfile";
 import UserProfile from "@/views/UserProfile";
 import CompanyInfoForm from "@/views/CompanyInfoForm";
 
-import { verifyAuth} from "@/utils/validation";
+import { verifyAuth } from "@/utils/validation";
 import ResetPassword from "@/views/ResetPassword";
 import VerifyCode from "@/views/VerifyCode";
 import DonatePage from "@/views/DonatePage";
 import EditUserProfile from "@/views/EditUserProfile";
+import PageNotFound from "@/components/PageNotFound";
 
 Vue.use(VueRouter)
 Vue.use(require('vue-cookies'))
 
 function requireAuth(to, from, next) {
-    verifyAuth().then( async () => {
+    verifyAuth().then(async () => {
         if (!Vue.$cookies.isKey('authenticated')) {
             next({
                 path: '/login',
@@ -109,6 +110,10 @@ export const router = new VueRouter({
             path: '/donate',
             name: 'Donate',
             component: DonatePage
+        },
+        {
+            path: "*",
+            component: PageNotFound
         }
     ]
 })
