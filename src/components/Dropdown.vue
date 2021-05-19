@@ -22,8 +22,7 @@ export default {
   props: {
     options: Array,
     placeholder: String,
-    value: String,
-    fullLength: Boolean
+    value: String
   }
 }
 </script>
