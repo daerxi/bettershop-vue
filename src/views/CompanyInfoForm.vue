@@ -4,6 +4,7 @@
       <input-component type="text" name="Company Name"  v-model.trim="business.name"></input-component>
       <dropdown-component class="h-6"  v-model.trim="business.category" :options="categories"
                           placeholder="Please select your category"></dropdown-component>
+      <div class="p-2"></div>
       <input-component type="text" name="Description"  v-model.trim="business.description"></input-component>
       <input-component type="text" name="Website"  v-model.trim="business.website"></input-component>
       <input-component type="text" name="Country"  v-model.trim="business.country"></input-component>
