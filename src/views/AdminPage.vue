@@ -7,6 +7,10 @@
     <bar-chart :chart-data="chartData" :fn="barStyle"></bar-chart>
     <div class="p-10"></div>
     <pie-chart :chart-data="chartData" :fn="barStyle"></pie-chart>
+    <div class="p-10"></div>
+    <doughnut-chart :chart-data="chartData" :fn="barStyle"></doughnut-chart>
+    <div class="p-10"></div>
+    <polar-area-chart :chart-data="chartData" :fn="barStyle"></polar-area-chart>
   </div>
 </template>
 
@@ -16,10 +20,12 @@ import BarChart from "@/components/BarChart";
 import LineChart from "@/components/LineChart";
 import CategoriesService from "@/api/CategoriesService";
 import PieChart from "@/components/PieChart";
+import DoughnutChart from "@/components/DoughnutChart";
+import PolarAreaChart from "@/components/PolarAreaChart";
 
 export default {
   name: "AdminPage",
-  components: {PieChart, LineChart, BarChart},
+  components: {PolarAreaChart, DoughnutChart, PieChart, LineChart, BarChart},
   data() {
     return {
       categories: [],
@@ -47,7 +53,7 @@ export default {
   },
   methods: {
     async lineStyle() {
-      this.chartData.datasets[0].backgroundColor = "#ffa500";
+      this.chartData.datasets[0].backgroundColor = "#c7d69a";
       this.chartData.datasets[0].borderColor = "#e6e6fa";
       this.chartData.datasets[0].pointBackgroundColor = "#40e0d0";
     },
