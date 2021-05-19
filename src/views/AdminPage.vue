@@ -49,8 +49,8 @@ export default {
       this.chartData.datasets[0].pointBackgroundColor = "#40e0d0";
     },
     async barStyle() {
-      this.chartData.datasets[0].backgroundColor = ["#a9def2", "#6082b6", "#b4d2d8", "#82aaaa", "#69869c",
-                                                    "#80ddb8", "#ccbaba", "#c9def2", "#a6e7cd", "#98aba7"]
+      this.chartData.datasets[0].backgroundColor = ["#98dfed", "#6082b6", "#ffc559", "#82aaaa", "#69869c",
+                                                    "#c7d69a", "#ccbaba", "#c9def2", "#9ad6a1", "#daabdb"]
     }
   }
 }
