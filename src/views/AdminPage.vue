@@ -1,6 +1,9 @@
 <template>
   <div v-if="chartData.labels[0]">
+    <p>Charts for number of businesses per category</p>
+    <div class="p-10"></div>
     <line-chart :chart-data="chartData" :fn="lineStyle"></line-chart>
+    <div class="p-10"></div>
     <bar-chart :chart-data="chartData" :fn="barStyle"></bar-chart>
   </div>
 </template>
@@ -42,11 +45,12 @@ export default {
   methods: {
     async lineStyle() {
       this.chartData.datasets[0].backgroundColor = "#ffa500";
-      this.chartData.datasets[0].backgroundColor = "#e6e6fa";
-      this.chartData.datasets[0].backgroundColor = "#40e0d0";
+      this.chartData.datasets[0].borderColor = "#e6e6fa";
+      this.chartData.datasets[0].pointBackgroundColor = "#40e0d0";
     },
     async barStyle() {
-      this.chartData.datasets[0].backgroundColor = "#ffa500";
+      this.chartData.datasets[0].backgroundColor = ["#a9def2", "#6082b6", "#b4d2d8", "#82aaaa", "#69869c",
+                                                    "#80ddb8", "#ccbaba", "#c9def2", "#a6e7cd", "#98aba7"]
     }
   }
 }

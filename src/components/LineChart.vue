@@ -10,11 +10,7 @@ export default {
         this.chartData,
         {
           responsive: true,
-          maintainAspectRatio: false,
-          title: {
-            display: true,
-            text: "My Data"
-          }
+          maintainAspectRatio: false
         }
     );
   }
