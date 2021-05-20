@@ -3,7 +3,7 @@
       v-on:click="fn"
       type="submit"
       :class="{'w-full': fullWidth}"
-      class="text-center bg-bs-blue hover:bg-bs-light-blue text-white font-bold py-2 px-4 h-12 border-none rounded"
+      class="text-center bg-bs-blue hover:bg-bs-light-blue text-white focus:outline-none font-bold py-2 px-4 h-12 border-none rounded"
   >{{ title }}
   </button>
 </template>

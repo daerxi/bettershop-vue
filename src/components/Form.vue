@@ -4,7 +4,7 @@
       <div class="bg-white px-6 py-8 rounded shadow-md w-full">
         <h2 class="mb-10 text-3xl font-semibold text-center">{{ title }}</h2>
         <form @submit.prevent="scroll">
-          <alert-component v-if="alertOpen" id="alert" :type="type" :message="message"></alert-component>
+          <alert-component v-if="alertOpen" :type="type" :message="message"></alert-component>
           <slot></slot>
         </form>
       </div>
@@ -23,7 +23,7 @@ export default {
   props: ['title', 'type', 'message', 'alertOpen'],
   methods: {
     scroll() {
-      if (this.alertOpen) scrollTo("#alert")
+      if (this.alertOpen) scrollTo("#app")
     }
   }
 }
