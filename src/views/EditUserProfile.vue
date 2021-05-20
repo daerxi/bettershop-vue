@@ -64,7 +64,6 @@ export default {
       UsersService.updateProfile(this.user.email, this.user.userName, this.user.avatar)
           .then(async () => {
             openAlert(this, "success", "Updated successfully.")
-            window.location.reload()
           })
           .catch(e => {
             console.error(e)
