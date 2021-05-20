@@ -24,6 +24,9 @@
           <a href="/user/edit" v-if="authenticated"
              class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">Edit
             Profile</a>
+          <a href="/admin" v-if="isAdmin"
+             class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex hover:bg-grey-dark">
+            Admin</a>
           <profile-component></profile-component>
         </div>
       </div>
@@ -45,12 +48,14 @@ export default {
     return {
       authenticated: false,
       isBusiness: false,
-      showMenu: true
+      showMenu: true,
+      isAdmin: false
     }
   },
   async beforeMount() {
     this.authenticated = this.$cookies.get('authenticated') === 'true'
     this.isBusiness = this.$cookies.get('is-business') === 'true'
+    this.isAdmin = this.$cookies.get('is-admin') === 'true'
   },
   methods: {
     async logout() {

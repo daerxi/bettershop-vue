@@ -32,11 +32,22 @@ function requireAuth(to, from, next) {
     })
 }
 
+function requireAdmin(to, from, next) {
+    requireAuth(to, from, next);
+    if (Vue.$cookies.get('is-admin') !== "true" ||  !Vue.$cookies.isKey('is-admin')) {
+        next({
+            path: '/not-found'
+        })
+    } else {
+        next()
+    }
+}
+
 function requireBusiness(to, from, next) {
     requireAuth(to, from, next);
     if (!Vue.$cookies.isKey('is-business')) {
         next({
-            path: '/not-a-business'
+            path: '/not-found'
         })
     } else {
         next()
@@ -116,7 +127,7 @@ export const router = new VueRouter({
             path: '/admin',
             name: 'Admin',
             component: AdminPage,
-            beforeEnter: requireAuth
+            beforeEnter: requireAdmin
         },
         {
             path: "*",

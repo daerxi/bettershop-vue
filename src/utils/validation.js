@@ -30,6 +30,8 @@ export const setCookies = async (user) => {
     Vue.$cookies.set('is-business', user.isBusiness, '30min')
     Vue.$cookies.set('user-avatar', user.avatar, '30min')
     Vue.$cookies.set('forgot-password-email', user.email, '30min')
+    if (user.admin) Vue.$cookies.set('is-admin', true, '30min')
+    else Vue.$cookies.set('is-admin', false, '30min')
     if (user.isBusiness) Vue.$cookies.set('business-id', user.business.id, '30min')
     else Vue.$cookies.remove('business-id')
 }
