@@ -5,12 +5,12 @@
       <dropdown-component class="h-6"  v-model.trim="business.category" :options="categories"
                           placeholder="Please select your category"></dropdown-component>
       <div class="p-2"></div>
-      <input-component type="text" name="Description"  v-model.trim="business.description"></input-component>
+      <input-component type="text" name="Description"  v-model="business.description"></input-component>
       <input-component type="text" name="Website"  v-model.trim="business.website"></input-component>
       <input-component type="text" name="Country"  v-model.trim="business.country"></input-component>
       <input-component type="text" name="Province"  v-model.trim="business.province"></input-component>
-      <input-component type="text" name="City"  v-model.trim="business.city"></input-component>
-      <input-component type="text" name="Address"  v-model.trim="business.address"></input-component>
+      <input-component type="text" name="City"  v-model="business.city"></input-component>
+      <input-component type="text" name="Address"  v-model="business.address"></input-component>
 <!--      TODO: Verify firstName, lastName, business license, phone number - to active-->
       <submit-button title="Submit" :fn="updateInfo"></submit-button>
     </form-component>
