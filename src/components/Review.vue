@@ -116,6 +116,7 @@ export default {
           .then(async res => {
             this.reply = res.data
             this.replyModal.show = false
+            window.location.reload()
           }).catch(e => openAlert(this.replyModal, 'error', e.response.data.error))
     },
     async updateReview() {
