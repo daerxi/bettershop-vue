@@ -42,6 +42,8 @@ export const clearCookies = async () => {
     Vue.$cookies.remove('user-token')
     Vue.$cookies.remove('refresh-token')
     Vue.$cookies.remove('forgot-password-email')
+    Vue.$cookies.remove('is-admin')
+    Vue.$cookies.remove('is-business')
 }
 
 export const saveAuth = async (userToken) => {
