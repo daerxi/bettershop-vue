@@ -115,12 +115,12 @@ export default {
       await BusinessService.postReplies(this.content, this.business.id, this.review.id)
           .then(async res => {
             this.reply = res.data
-            this.show = false
+            this.replyModal.show = false
           }).catch(e => openAlert(this.replyModal, 'error', e.response.data.error))
     },
     async updateReview() {
       await BusinessService.updateReview(this.review.content, this.business.id, this.review.id)
-          .then(async () => this.showEdit = false).catch(e => openAlert(this.updateModal, 'error', e.response.data.error))
+          .then(async () => this.updateModal.show = false).catch(e => openAlert(this.updateModal, 'error', e.response.data.error))
     }
   }
 }
