@@ -7,7 +7,7 @@
     <categories :key="openTab" :fn="getBusiness"/>
     <div class="py-10"></div>
     <h2 v-if="$route.query.keyword" class="text-left font-semibold text-2xl">Search Results:</h2>
-    <h2 v-else-if="$route.query.type" class="text-left font-semibold text-2xl">Category: {{$route.query.type}}</h2>
+    <h2 v-else-if="$route.query.type" class="text-left font-semibold text-2xl">Category: {{ $route.query.type }}</h2>
     <h2 v-else class="text-left font-semibold text-2xl">Hot Businesses:</h2>
     <business-list :businesses="businesses"/>
   </div>
@@ -34,16 +34,15 @@ export default {
       authenticated: false,
       user: {},
       businesses: [],
-      keyword: '',
+      keyword: this.$route.query.keyword,
       toProfile: '',
       openTab: -1
     }
   },
   async created() {
-    await this.getBusiness()
+    if (!this.$route.query.keyword) await this.getBusiness()
     this.openTab = localStorage.getItem('open-tab')
-    if (this.$route.query.keyword)
-      await this.search()
+    if (this.$route.query.keyword) await this.search()
   },
   methods: {
     async search() {
@@ -55,6 +54,7 @@ export default {
       const path = '/?keyword=' + this.keyword
       await router.push(path).then(async () => {
         await this.search()
+        window.location.reload()
       }).catch(e => avoidDuplicatedNavigation(e))
     },
     async getBusiness() {
